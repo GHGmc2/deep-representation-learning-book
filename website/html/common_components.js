@@ -117,7 +117,11 @@
       intro: 'Core authors and contributors of the book.',
       sections: {
         coreTeam: 'Core Editorial Team',
-        contributors: 'Contributors'
+        contributors: 'Contributors',
+        bookContributors: 'Book Contributors',
+        minorBookContributors: 'Minor Book Contributors',
+        infraContributors: 'Website/Infrastructure Contributors',
+        translationContributors: 'Translation Contributors'
       },
       badges: {
         author: 'Author',
@@ -126,7 +130,16 @@
         website: 'Website',
         chineseTranslation: 'Chinese Translation',
         aiHelper: 'AI Helper',
-        chapter4: 'Chapter 4'
+        chapter1: 'Chapter 1',
+        chapter2: 'Chapter 2',
+        chapter3: 'Chapter 3',
+        chapter4: 'Chapter 4',
+        chapter5: 'Chapter 5',
+        chapter6: 'Chapter 6',
+        chapter7: 'Chapter 7',
+        chapter8: 'Chapter 8',
+        appendixA: 'Appendix A',
+        appendixB: 'Appendix B'
       },
       footer: '© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. All rights reserved.'
     },

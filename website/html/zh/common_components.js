@@ -117,7 +117,11 @@
       intro: '本书的核心作者和参编者',
       sections: {
         coreTeam: '核心编辑团队',
-        contributors: '参编者'
+        contributors: '参编者',
+        bookContributors: '书籍贡献者',
+        minorBookContributors: '书籍小额贡献者',
+        infraContributors: '网站 / 基础设施 贡献者',
+        translationContributors: '翻译 贡献者'
       },
       badges: {
         author: '作者',
@@ -126,7 +130,16 @@
         website: '网站',
         chineseTranslation: '中文翻译',
         aiHelper: 'AI助手',
-        chapter4: '第四章'
+        chapter1: '第一章',
+        chapter2: '第二章',
+        chapter3: '第三章',
+        chapter4: '第四章',
+        chapter5: '第五章',
+        chapter6: '第六章',
+        chapter7: '第七章',
+        chapter8: '第八章',
+        appendixA: '附录A',
+        appendixB: '附录B'
       },
       footer: '© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. 保留所有权利。'
     },
