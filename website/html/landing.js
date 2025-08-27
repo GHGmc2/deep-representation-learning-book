@@ -55,11 +55,13 @@
             //   React.createElement('p', null, 'Placeholder: publication details (publisher, edition, ISBN, publication date) will go here.')
             // ),
             React.createElement('div', { className: 'citation-info' },
-              React.createElement('code', { style: { 'whiteSpace': 'pre-wrap' } }, String.raw`@book{ldrdd2025,
+              React.createElement('code', { style: { 'whiteSpace': 'pre-wrap' } }, String.raw` @book{ldrdd2025,
   title={Learning Deep Representations of Data Distributions},
   author={Buchanan, Sam and Pai, Druv and Wang, Peng and Ma, Yi},
+  month=aug,
   year={2025},
-  publisher={Online}
+  publisher={Online},
+  note={\url{https://ma-lab-berkeley.github.io/deep-representation-learning-book/}.}
 }`)
             ),
             React.createElement('div', { className: 'cta-row' },

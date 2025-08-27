@@ -121,9 +121,9 @@ Many thanks!
 @book{ldrdd2025,
   title={Learning Deep Representations of Data Distributions},
   author={Buchanan, Sam and Pai, Druv and Wang, Peng and Ma, Yi},
+  month=aug,
   year={2025},
   publisher={Online},
-  url={https://ma-lab-berkeley.github.io/deep-representation-learning-book/},
-  note={Available online}
+  note={\url{https://ma-lab-berkeley.github.io/deep-representation-learning-book/}.}
 }
 ```
