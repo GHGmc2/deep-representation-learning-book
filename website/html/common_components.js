@@ -116,30 +116,23 @@
       title: 'Contributors',
       intro: 'Core authors and contributors of the book.',
       sections: {
-        coreTeam: 'Core Editorial Team',
-        contributors: 'Contributors',
-        bookContributors: 'Book Contributors',
-        minorBookContributors: 'Minor Book Contributors',
-        infraContributors: 'Website/Infrastructure Contributors',
-        translationContributors: 'Translation Contributors'
+        authors: 'Authors',
+        editors: 'Editors',
+        contentContributors: 'Content Contributors',
+        infraContributors: 'Website/Infrastructure Contributors'
       },
-      badges: {
-        author: 'Author',
-        leadEditor: 'Lead Editor',
-        seniorAuthor: 'Senior Author',
-        website: 'Website',
-        chineseTranslation: 'Chinese Translation',
-        aiHelper: 'AI Helper',
-        chapter1: 'Chapter 1',
-        chapter2: 'Chapter 2',
-        chapter3: 'Chapter 3',
-        chapter4: 'Chapter 4',
-        chapter5: 'Chapter 5',
-        chapter6: 'Chapter 6',
-        chapter7: 'Chapter 7',
-        chapter8: 'Chapter 8',
-        appendixA: 'Appendix A',
-        appendixB: 'Appendix B'
+      
+      people: {
+        'sam-buchanan': { desc: 'Lead author.' },
+        'druv-pai': { desc: 'Lead author.' },
+        'peng-wang': { desc: 'Author, Chinese translation.' },
+        'yi-ma': { desc: 'Senior author.' },
+        'alan-lockett': { desc: 'PRs: <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14">#14</a>' },
+        'kerui-min': { desc: 'Chinese translation.' },
+        'kevin-murphy': { desc: 'Extensive feedback. Issues: <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3">#3</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4">#4</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5">#5</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/8">#8</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10">#10</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11">#11</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12">#12</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13">#13</a>' },
+        'yaodong-yu': { desc: 'Provided initial text for Chapter 4.' },
+        'tianzhe-chu': { desc: 'AI tooling.' },
+        'ziyang-wu': { desc: 'Website development.' },
       },
       footer: '© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. All rights reserved.'
     },
@@ -169,7 +162,7 @@
   window.BOOK_COMPONENTS.buildNavLinks = function() {
     return [
       { label: this.nav.contributors, href: 'contributors.html' },
-      { label: this.nav.howToContribute, href: 'https://github.com/Ma-Lab-Berkeley/ldrdd-book#making-a-contribution', external: true },
+      { label: this.nav.howToContribute, href: 'https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution', external: true },
       { label: this.nav.aiHelpers, href: 'ai_helpers.html' }
     ];
   };

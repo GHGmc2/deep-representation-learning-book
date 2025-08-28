@@ -19,7 +19,7 @@
     function getDefaultNavLinks() {
       return window.BOOK_COMPONENTS ? window.BOOK_COMPONENTS.buildNavLinks() : [
         { label: 'Contributors', href: 'contributors.html' },
-        { label: 'How to Contribute?', href: 'https://github.com/Ma-Lab-Berkeley/ldrdd-book#making-a-contribution', external: true }
+        { label: 'How to Contribute?', href: 'https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution', external: true }
       ];
     }
     var DEFAULT_NAV_LINKS = getDefaultNavLinks();
@@ -307,7 +307,7 @@
           search,
           langSelect,
           chatToggle,
-          h('a', { className:'gh-link', href:'https://github.com/Ma-Lab-Berkeley/ldrdd-book', target:'_blank', rel:'noopener noreferrer' }, ghIcon, h('span', { text: (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.ui.github) || 'GitHub' })),
+          h('a', { className:'gh-link', href:'https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book', target:'_blank', rel:'noopener noreferrer' }, ghIcon, h('span', { text: (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.ui.github) || 'GitHub' })),
           hamburgerToggle
         )
       );

@@ -14,76 +14,52 @@
     }
   }
 
+  // Helper to fetch per-person localized description by id
+  function getPersonDescription(personId) {
+    if (!personId) return '';
+    return getText('contributors.people.' + personId + '.desc', '');
+  }
+
   function formatFooter(template, year) {
     return template.replace('{year}', year);
   }
 
-  // Helper to get localized badge text
-  function getBadgeText(badgeKey) {
-    var badges = getText('contributors.badges', {});
-    var mapping = {
-      'Author': badges.author || 'Author',
-      'Lead Editor': badges.leadEditor || 'Lead Editor', 
-      'Senior Author': badges.seniorAuthor || 'Senior Author',
-      'Website': badges.website || 'Website',
-      'Chinese Translation': badges.chineseTranslation || 'Chinese Translation',
-      'AI Helper': badges.aiHelper || 'AI Helper',
-      'Chapter 1': badges.chapter1 || 'Chapter 1',
-      'Chapter 2': badges.chapter2 || 'Chapter 2',
-      'Chapter 3': badges.chapter3 || 'Chapter 3',
-      'Chapter 4': badges.chapter4 || 'Chapter 4',
-      'Chapter 5': badges.chapter5 || 'Chapter 5',
-      'Chapter 6': badges.chapter6 || 'Chapter 6',
-      'Chapter 7': badges.chapter7 || 'Chapter 7',
-      'Chapter 8': badges.chapter8 || 'Chapter 8',
-      'Appendix A': badges.appendixA || 'Appendix A',
-      'Appendix B': badges.appendixB || 'Appendix B'
-    };
-    return mapping[badgeKey] || badgeKey;
-  }
+  // Badges removed. All labeling handled via localized descriptions in common_components.
 
-  // Helper to map badge arrays to localized text
-  function mapBadges(badges) {
-    return badges.map(function(badge) { return getBadgeText(badge); });
-  }
-
+  // People data per category.
+  // Optional fields: url (personal site), id (for localized description lookup)
   const AUTHORS = [
-    { name: 'Sam Buchanan', affil: 'Toyota Technological Institute at Chicago', badges: mapBadges(['Author', 'Lead Editor']) },
-    { name: 'Druv Pai', affil: 'University of California, Berkeley', badges: mapBadges(['Author', 'Lead Editor', 'Website']) },
-    { name: 'Peng Wang', affil: 'University of Macau', badges: mapBadges(['Author', 'Lead Editor', 'Chinese Translation']) },
-    { name: 'Yi Ma', affil: 'University of Hong Kong', badges: mapBadges(['Senior Author', 'Lead Editor', 'Chinese Translation']) },
+    { id: 'sam-buchanan', name: 'Sam Buchanan', url: 'https://sdbuchanan.com/', affil: 'Toyota Technological Institute at Chicago' },
+    { id: 'druv-pai', name: 'Druv Pai', url: 'https://druvpai.github.io/', affil: 'University of California, Berkeley' },
+    { id: 'peng-wang', name: 'Peng Wang', url: 'https://peng8wang.github.io/', affil: 'University of Macau' },
+    { id: 'yi-ma', name: 'Yi Ma', url: 'https://people.eecs.berkeley.edu/~yima/', affil: 'University of Hong Kong' },
   ];
 
-  const BOOK_CONTRIBUTORS = [
-    { name: 'Yaodong Yu', affil: 'University of Maryland, College Park', badges: mapBadges(['Chapter 4']) }
-  ];
+  // const EDITORS = [
+  //   // Editors list intentionally left empty for now; will be populated soon.
+  // ];
 
-  const MINOR_BOOK_CONTRIBUTORS = [
-    { name: 'Alan Lockett', affil: '', badges: mapBadges(['Chapter 1'])}
+  const CONTENT_CONTRIBUTORS = [
+    { id: 'alan-lockett', name: 'Alan Lockett', url: '', affil: '' },
+    { id: 'kerui-min', name: 'Kerui Min', url: 'https://www.linkedin.com/in/kerui-min-b974b52a/', affil: 'MetaSOTA' },
+    { id: 'kevin-murphy', name: 'Kevin Murphy', url: 'https://www.linkedin.com/in/kevin-murphy-20684115/', affil: 'Google DeepMind' },
+    { id: 'yaodong-yu', name: 'Yaodong Yu', url: 'https://yaodongyu.github.io/', affil: 'University of Maryland, College Park' },
   ];
 
   const INFRA_CONTRIBUTORS = [
-    { name: 'Ziyang Wu', affil: 'University of California, Berkeley', badges: mapBadges(['Website']) },
-    { name: 'Tianzhe Chu', affil: 'University of Hong Kong', badges: mapBadges(['AI Helper', 'Chinese Translation']) }
-  ];
-
-  const TRANSLATION_CONTRIBUTORS = [
-    { name: 'Kerui Min', affil: 'MetaSOTA', badges: mapBadges(['Chinese Translation']) }
+    { id: 'tianzhe-chu', name: 'Tianzhe Chu', url: 'https://tianzhechu.com/', affil: 'University of Hong Kong' },
+    { id: 'ziyang-wu', name: 'Ziyang Wu', url: 'https://robinwu218.github.io/', affil: 'University of California, Berkeley' },
   ];
 
   // Top bar and sidebar are inserted by common.js
 
-  function Badges({ items }) {
-    if (!items || !items.length) return null;
-    return React.createElement('div', { className: 'badges' }, items.map((b, i) => React.createElement('span', { className: 'badge', key: i }, b)));
-  }
-
-  function Card({ name, affil, badges }) {
+  function Card({ id, name, url, affil }) {
+    var description = getPersonDescription(id);
     return (
       React.createElement('div', { className: 'card' },
-        React.createElement('div', { className: 'name' }, name),
+        React.createElement('div', { className: 'name' }, url ? React.createElement('a', { href: url, target: '_blank', rel: 'noopener noreferrer' }, name) : name),
         React.createElement('p', { className: 'affil' }, affil),
-        React.createElement(Badges, { items: badges })
+        description ? React.createElement('p', { className: 'desc', dangerouslySetInnerHTML: { __html: description } }) : null
       )
     );
   }
@@ -93,25 +69,21 @@
       React.createElement('main', { className: 'page' },
         React.createElement('h1', null, getText('contributors.title', 'Contributors')),
         React.createElement('p', { className: 'intro' }, getText('contributors.intro', 'Core authors and contributors of the book.')),
-        React.createElement('section', { 'aria-label': 'Core Team', className: 'authors-grid' },
-          React.createElement('h2', { style: { margin: '16px 0 8px', fontSize: '18px' } }, getText('contributors.sections.coreTeam', 'Core Editorial Team')),
+        React.createElement('section', { 'aria-label': 'Authors', className: 'authors-grid' },
+          React.createElement('h2', { style: { margin: '16px 0 8px', fontSize: '18px' } }, getText('contributors.sections.authors', 'Authors')),
           AUTHORS.map((p) => React.createElement(Card, { key: p.name, ...p }))
         ),
-        React.createElement('section', { 'aria-label': 'Book Contributors', className: 'authors-grid' },
-          React.createElement('h2', { style: { margin: '16px 0 8px', fontSize: '18px' } }, getText('contributors.sections.bookContributors', 'Book Contributors')),
-          BOOK_CONTRIBUTORS.map((p) => React.createElement(Card, { key: p.name, ...p }))
-        ),
-        React.createElement('section', { 'aria-label': 'Minor Book Contributors', className: 'authors-grid' },
-          React.createElement('h2', { style: { margin: '16px 0 8px', fontSize: '18px' } }, getText('contributors.sections.minorBookContributors', 'Minor Book Contributors')),
-          MINOR_BOOK_CONTRIBUTORS.map((p) => React.createElement(Card, { key: p.name, ...p }))
+        // React.createElement('section', { 'aria-label': 'Editors', className: 'authors-grid' },
+        //   React.createElement('h2', { style: { margin: '16px 0 8px', fontSize: '18px' } }, getText('contributors.sections.editors', 'Editors')),
+        //   EDITORS.map((p) => React.createElement(Card, { key: p.name, ...p }))
+        // ),
+        React.createElement('section', { 'aria-label': 'Content Contributors', className: 'authors-grid' },
+          React.createElement('h2', { style: { margin: '16px 0 8px', fontSize: '18px' } }, getText('contributors.sections.contentContributors', 'Content Contributors')),
+          CONTENT_CONTRIBUTORS.map((p) => React.createElement(Card, { key: p.name, ...p }))
         ),
         React.createElement('section', { 'aria-label': 'Website/Infrastructure Contributors', className: 'authors-grid' },
           React.createElement('h2', { style: { margin: '16px 0 8px', fontSize: '18px' } }, getText('contributors.sections.infraContributors', 'Website/Infrastructure Contributors')),
           INFRA_CONTRIBUTORS.map((p) => React.createElement(Card, { key: p.name, ...p }))
-        ),
-        React.createElement('section', { 'aria-label': 'Translation Contributors', className: 'authors-grid' },
-          React.createElement('h2', { style: { margin: '16px 0 8px', fontSize: '18px' } }, getText('contributors.sections.translationContributors', 'Translation Contributors')),
-          TRANSLATION_CONTRIBUTORS.map((p) => React.createElement(Card, { key: p.name, ...p }))
         ),
         React.createElement('div', { className: 'foot' }, formatFooter(getText('contributors.footer', '© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. All rights reserved.'), new Date().getFullYear()))
       )
