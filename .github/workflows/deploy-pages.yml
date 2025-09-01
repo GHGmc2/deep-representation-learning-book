@@ -125,6 +125,11 @@ jobs:
             echo "One or more builds failed"
             exit 1
           fi
+      
+      - name: Minify CSS/JS files
+        uses: nizarmah/auto-minify@v3
+        with:
+          overwrite: true
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
