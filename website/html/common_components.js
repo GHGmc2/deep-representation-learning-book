@@ -183,5 +183,6 @@
     ];
   };
 
-  window.BOOK_COMPONENTS.coverImagePath = "book-cover.png";
+  window.BOOK_COMPONENTS.coverImagePath = "assets/book-cover.png";
+  window.BOOK_COMPONENTS.bookPdfPath = "assets/book-main.pdf";
 })();

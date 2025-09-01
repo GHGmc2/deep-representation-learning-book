@@ -54,26 +54,77 @@ jobs:
                        imagemagick=${{ env.IMAGEMAGICK_APT_VERSION }} \
                        latexml=${{ env.LATEXML_APT_VERSION }}
 
-      - name: Build English PDF with latexmk (pdflatex)
+      - name: Build PDFs and HTML in parallel
         run: |
-          latexmk -pdf -interaction=nonstopmode -shell-escape book-main.tex
+          # Define functions for English and Chinese build sequences
+          build_english() {
+            echo "Starting English PDF build..."
+            latexmk -pdf -interaction=nonstopmode -shell-escape -f book-main.tex
+            EN_PDF_EXIT=$?
+            
+            if [ $EN_PDF_EXIT -eq 0 ]; then
+              echo "English PDF build successful, starting HTML conversion..."
+              (cd website/latex_to_html && uv run --no-project --with beautifulsoup4 latex_to_html_converter.py ../../book-main.tex ../html)
+              EN_HTML_EXIT=$?
 
-      - name: Build Chinese PDF with latexmk (pdflatex)
-        run: |
-          latexmk -pdf -interaction=nonstopmode -shell-escape -f book-main_zh.tex
-        continue-on-error: true
+              echo "English HTML conversion successful, moving PDF to assets..."
+              mv book-main.pdf website/html/assets/book-main.pdf
+            else
+              echo "English PDF build failed, skipping HTML conversion"
+              EN_HTML_EXIT=1
+            fi
+            
+            echo "English build complete: PDF=$EN_PDF_EXIT, HTML=$EN_HTML_EXIT"
+            return $((EN_PDF_EXIT + EN_HTML_EXIT))
+          }
+          
+          build_chinese() {
+            echo "Starting Chinese PDF build..."
+            latexmk -pdf -interaction=nonstopmode -shell-escape -f book-main_zh.tex
+            ZH_PDF_EXIT=$?
+            
+            if [ $ZH_PDF_EXIT -eq 0 ]; then
+              echo "Chinese PDF build successful, starting HTML conversion..."
+              (cd website/latex_to_html && uv run --no-project --with beautifulsoup4 latex_to_html_converter.py ../../book-main_zh.tex ../html/zh)
+              ZH_HTML_EXIT=$?
 
-      - name: Build HTML site using LaTeXML (via uv)
-        run: |
-          cd website/latex_to_html
-          uv run --no-project --with beautifulsoup4 latex_to_html_converter.py ../../book-main.tex ../html
-          uv run --no-project --with beautifulsoup4 latex_to_html_converter.py ../../book-main_zh.tex ../html/zh
-          cd ../..
-
-      - name: Copy generated PDF into site output
-        run: |
-          mv book-main.pdf website/html/book-main.pdf
-          mv book-main_zh.pdf website/html/zh/book-main.pdf
+              echo "Chinese HTML conversion successful, moving PDF to assets..."
+              mv book-main_zh.pdf website/html/assets/book-main_zh.pdf
+            else
+              echo "Chinese PDF build failed, skipping HTML conversion"
+              ZH_HTML_EXIT=1
+            fi
+            
+            echo "Chinese build complete: PDF=$ZH_PDF_EXIT, HTML=$ZH_HTML_EXIT"
+            return $((ZH_PDF_EXIT + ZH_HTML_EXIT))
+          }
+          
+          # Start both build sequences in parallel
+          build_english &
+          EN_PID=$!
+          
+          build_chinese &
+          ZH_PID=$!
+          
+          # Wait for English build (required)
+          echo "Waiting for English build sequence..."
+          wait $EN_PID
+          EN_TOTAL_EXIT=$?
+          
+          # Wait for Chinese build (required)
+          echo "Waiting for Chinese build sequence..."
+          wait $ZH_PID
+          ZH_TOTAL_EXIT=$?
+          
+          echo "Final build results:"
+          echo "  English: $([ $EN_TOTAL_EXIT -eq 0 ] && echo 'SUCCESS' || echo 'FAILED')"
+          echo "  Chinese: $([ $ZH_TOTAL_EXIT -eq 0 ] && echo 'SUCCESS' || echo 'FAILED')"
+          
+          # Fail the step if either build failed
+          if [ $EN_TOTAL_EXIT -ne 0 ] || [ $ZH_TOTAL_EXIT -ne 0 ]; then
+            echo "One or more builds failed"
+            exit 1
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
