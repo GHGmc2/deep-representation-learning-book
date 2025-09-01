@@ -31,22 +31,20 @@ html, body {
     margin: 0 0 18px;
 }
 
-.community-section {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: #fff;
-    padding: 14px 16px 14px;
-    margin-top: 14px;
+.text-section {
+    margin-top: 32px;
 }
 
-.community-section h2 {
-    margin: 6px 0 6px;
-    font-size: 18px;
+.text-section h2 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    font-weight: 600;
 }
 
-.pending {
+.text-section p {
     color: var(--muted);
-    margin: 0;
+    margin: 0 0 12px;
+    line-height: 1.6;
 }
 
 .foot {

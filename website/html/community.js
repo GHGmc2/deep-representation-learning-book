@@ -19,11 +19,11 @@
 
   function Section({ idKey }){
     var title = getText('community.sections.' + idKey, idKey);
-    var pending = getText('community.pending', 'Pending.');
+    var content = getText('community.content.' + idKey, getText('community.pending', 'Pending.'));
     return (
-      React.createElement('section', { className: 'community-section', 'aria-label': title },
+      React.createElement('section', { className: 'text-section', 'aria-label': title },
         React.createElement('h2', null, title),
-        React.createElement('p', { className: 'pending' }, pending)
+        React.createElement('p', null, content)
       )
     );
   }

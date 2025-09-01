@@ -141,13 +141,19 @@
     // Community page content
     community: {
       title: 'Community',
-      intro: 'Community resources (pending).',
-      pending: 'Pending.',
+      intro: 'Community resources and materials for learning deep representation theory.',
+      pending: 'Coming soon.',
       sections: {
         slides: 'Slides',
         talks: 'Talks',
         code: 'Code',
         translations: 'Community Translations'
+      },
+      content: {
+        slides: 'Lecture slides and presentation materials from courses and talks based on this book. These materials can help instructors teach the concepts and provide students with additional visual explanations of the key ideas.',
+        talks: 'Video recordings of talks and lectures covering the material in this book. Watch presentations by the authors and other experts discussing deep representation learning theory and applications.',
+        code: 'Code examples, implementations, and computational notebooks that demonstrate the concepts from each chapter. These resources help bridge the gap between theory and practice.',
+        translations: 'Community-contributed translations of the book into other languages. Help make this material accessible to a broader global audience by contributing translations or improvements.'
       },
       footer: '© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. All rights reserved.'
     },
