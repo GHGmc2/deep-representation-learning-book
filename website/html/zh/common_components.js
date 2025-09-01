@@ -132,12 +132,12 @@
         "druv-pai": { desc: "主笔作者。" },
         "peng-wang": { desc: "作者，中文翻译。" },
         "yi-ma": { desc: "资深作者。" },
-        "alan-lockett": {
-          desc: 'PR：<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14" target="_blank" rel="noopener noreferrer">#14</a>',
+        "stephen-butterfill": {
+          desc: 'PR：<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14">#14</a>',
         },
         "kerui-min": { desc: "中文翻译。" },
         "kevin-murphy": {
-          desc: '大量反馈。Issues：<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3" target="_blank" rel="noopener noreferrer">#3</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4" target="_blank" rel="noopener noreferrer">#4</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5" target="_blank" rel="noopener noreferrer">#5</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/8" target="_blank" rel="noopener noreferrer">#8</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10" target="_blank" rel="noopener noreferrer">#10</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11" target="_blank" rel="noopener noreferrer">#11</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12" target="_blank" rel="noopener noreferrer">#12</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13" target="_blank" rel="noopener noreferrer">#13</a>',
+          desc: '大量反馈。Issues：<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3">#3</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4">#4</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5">#5</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/8">#8</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10">#10</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11">#11</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12">#12</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13">#13</a>',
         },
         "yaodong-yu": { desc: "为第四章提供初始文本。" },
         "tianzhe-chu": { desc: "AI 工具。" },
@@ -164,7 +164,7 @@
       intro:
         "本页提供面向本书的简洁 AI 助手。可试用下方 BookQA，更多即将推出。",
       techDetails:
-        "BookQA 系列旨在帮助读者理解一本书的内容。它可以回答与材料相关的问题，并清晰解释关键概念与理论。为构建这些模型，我们首先使用 EntiGraph 通过链接从文本中抽样的实体来生成丰富的与书籍相关的数据。随后，我们在这些数据上对 Qwen2.5-7B/32B-Instruct 进行持续的自回归预训练。我们还在训练中加入了指令跟随数据，使模型在学习书中的新知识的同时，不会遗忘基本的对话能力。",
+        "BookQA 系列旨在帮助读者理解一本书的内容。它可以回答与材料相关的问题，并清晰解释关键概念与理论。为构建这些模型，我们首先使用 <a href=\"https://arxiv.org/pdf/2409.07431\">EntiGraph</a> 通过链接从文本中抽样的实体来生成丰富的与书籍相关的数据。随后，我们在这些数据上对 <a href=\"https://huggingface.co/Qwen/Qwen2.5-7B-Instruct\">Qwen2.5-7B/32B-Instruct</a> 进行持续的自回归预训练。我们还在训练中加入了指令跟随数据，使模型在学习书中的新知识的同时，不会遗忘基本的对话能力。",
       sections: {
         aiAssistants: "AI 助手",
         aiTools: "AI 工具",

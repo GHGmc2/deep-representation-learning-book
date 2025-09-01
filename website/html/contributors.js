@@ -51,7 +51,7 @@
   // ];
 
   const CONTENT_CONTRIBUTORS = [
-    { id: "alan-lockett", name: "Alan Lockett", url: "", affil: "" },
+    { id: "stephen-butterfill", name: "Stephen Butterfill", url: "https://www.butterfill.com/", affil: "University of Warwick" },
     {
       id: "kerui-min",
       name: "Kerui Min",

@@ -154,7 +154,7 @@
         "druv-pai": { desc: "Lead author." },
         "peng-wang": { desc: "Author, Chinese translation." },
         "yi-ma": { desc: "Senior author." },
-        "alan-lockett": {
+        "stephen-butterfill": {
           desc: 'PRs: <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14">#14</a>',
         },
         "kerui-min": { desc: "Chinese translation." },

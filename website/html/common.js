@@ -30,10 +30,7 @@
     }
     var DEFAULT_NAV_LINKS = getDefaultNavLinks();
     function getDefaultTOC() {
-      return window.BOOK_COMPONENTS
-        ? window.BOOK_COMPONENTS.buildTOC()
-        : [
-          ];
+      return window.BOOK_COMPONENTS ? window.BOOK_COMPONENTS.buildTOC() : [];
     }
     var DEFAULT_TOC = getDefaultTOC();
 
