@@ -51,7 +51,18 @@
   // ];
 
   const CONTENT_CONTRIBUTORS = [
-    { id: "stephen-butterfill", name: "Stephen Butterfill", url: "https://www.butterfill.com/", affil: "University of Warwick" },
+    {
+      id: "stephen-butterfill",
+      name: "Stephen Butterfill",
+      url: "https://www.butterfill.com/",
+      affil: "University of Warwick",
+    },
+    {
+      id: "jan-cavel",
+      name: "Jan Cavel",
+      url: "https://piatra.institute/",
+      affil: "Piatra Institute",
+    },
     {
       id: "kerui-min",
       name: "Kerui Min",
@@ -69,12 +80,6 @@
       name: "Yaodong Yu",
       url: "https://yaodongyu.github.io/",
       affil: "University of Maryland, College Park",
-    },
-    {
-      id: "jan-cavel",
-      name: "Jan Cavel",
-      url: "https://piatra.institute/",
-      affil: "Piatra Institute",
     },
   ];
 
