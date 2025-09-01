@@ -1,0 +1,59 @@
+/* Styles for Community page */
+:root {
+    --bg: #ffffff;
+    --text: #0b1020;
+    --muted: #475569;
+    --border: #e8edf6;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 24px 16px 56px;
+}
+
+.page h1 {
+    font-size: clamp(26px, 3.6vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 10px 0 6px;
+}
+
+.intro {
+    color: var(--muted);
+    margin: 0 0 18px;
+}
+
+.community-section {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    padding: 14px 16px 14px;
+    margin-top: 14px;
+}
+
+.community-section h2 {
+    margin: 6px 0 6px;
+    font-size: 18px;
+}
+
+.pending {
+    color: var(--muted);
+    margin: 0;
+}
+
+.foot {
+    margin-top: 28px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+

@@ -5,6 +5,7 @@
     nav: {
       aiTools: 'AI 工具',
       aiHelpers: 'AI 助手',
+      community: '社区',
       contributors: '编者 / 参编者',
       howToContribute: '如何贡献？'
     },
@@ -137,6 +138,20 @@
       footer: '© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. 保留所有权利。'
     },
 
+    // Community page content
+    community: {
+      title: '社区',
+      intro: '社区资源（建设中）。',
+      pending: '敬请期待。',
+      sections: {
+        slides: '幻灯片',
+        talks: '报告',
+        code: '代码',
+        translations: '社区翻译'
+      },
+      footer: '© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. 保留所有权利。'
+    },
+
     // AI Helpers page content
     aiHelpers: {
       title: 'AI 助手',
@@ -162,6 +177,7 @@
   window.BOOK_COMPONENTS.buildNavLinks = function() {
     return [
       { label: this.nav.contributors, href: 'contributors.html' },
+      { label: this.nav.community, href: 'community.html' },
       { label: this.nav.howToContribute, href: 'https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution', external: true },
       { label: this.nav.aiHelpers, href: 'ai_helpers.html' }
     ];
