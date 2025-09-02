@@ -56,10 +56,12 @@ jobs:
 
       - name: Build PDFs and HTML in parallel
         run: |
+          # Disable exit-on-error; we handle errors manually below
+          set +e
           # Define functions for English and Chinese build sequences
           build_english() {
             echo "Starting English PDF build..."
-            latexmk -pdf -interaction=nonstopmode -shell-escape -f book-main.tex
+            latexmk -pdf -interaction=nonstopmode -shell-escape -f book-main.tex || true
             if [ -f book-main.pdf ]; then
               EN_PDF_EXIT=0
             else
@@ -84,7 +86,7 @@ jobs:
           
           build_chinese() {
             echo "Starting Chinese PDF build..."
-            latexmk -pdf -interaction=nonstopmode -shell-escape -f book-main_zh.tex
+            latexmk -pdf -interaction=nonstopmode -shell-escape -f book-main_zh.tex || true
             if [ -f book-main_zh.pdf ]; then
               ZH_PDF_EXIT=0
             else
@@ -109,7 +111,7 @@ jobs:
 
           build_romanian() {
             echo "Starting Romanian PDF build..."
-            latexmk -lualatex -pdf -interaction=nonstopmode -shell-escape -f book-main_ro.tex
+            latexmk -lualatex -pdf -interaction=nonstopmode -shell-escape -f book-main_ro.tex || true
             if [ -f book-main_ro.pdf ]; then
               RO_PDF_EXIT=0
             else
