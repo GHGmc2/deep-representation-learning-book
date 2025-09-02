@@ -60,7 +60,11 @@ jobs:
           build_english() {
             echo "Starting English PDF build..."
             latexmk -pdf -interaction=nonstopmode -shell-escape -f book-main.tex
-            EN_PDF_EXIT=$?
+            if [ -f book-main.pdf ]; then
+              EN_PDF_EXIT=0
+            else
+              EN_PDF_EXIT=1
+            fi
             
             if [ $EN_PDF_EXIT -eq 0 ]; then
               echo "English PDF build successful, starting HTML conversion..."
@@ -81,7 +85,11 @@ jobs:
           build_chinese() {
             echo "Starting Chinese PDF build..."
             latexmk -pdf -interaction=nonstopmode -shell-escape -f book-main_zh.tex
-            ZH_PDF_EXIT=$?
+            if [ -f book-main_zh.pdf ]; then
+              ZH_PDF_EXIT=0
+            else
+              ZH_PDF_EXIT=1
+            fi
             
             if [ $ZH_PDF_EXIT -eq 0 ]; then
               echo "Chinese PDF build successful, starting HTML conversion..."
@@ -102,7 +110,11 @@ jobs:
           build_romanian() {
             echo "Starting Romanian PDF build..."
             latexmk -lualatex -pdf -interaction=nonstopmode -shell-escape -f book-main_ro.tex
-            RO_PDF_EXIT=$?
+            if [ -f book-main_ro.pdf ]; then
+              RO_PDF_EXIT=0
+            else
+              RO_PDF_EXIT=1
+            fi
           
             if [ $RO_PDF_EXIT -eq 0 ]; then
               echo "Romanian PDF build successful, moving PDF to assets..."
