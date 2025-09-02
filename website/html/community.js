@@ -37,10 +37,8 @@
             window.get_text_block(intro, "intro")) || null
         );
       })(),
-      React.createElement(Section, { idKey: "slides" }),
-      React.createElement(Section, { idKey: "talks" }),
-      React.createElement(Section, { idKey: "code" }),
       React.createElement(Section, { idKey: "translations" }),
+      React.createElement(Section, { idKey: "tutorials" }),
       React.createElement(
         "div",
         { className: "foot" },

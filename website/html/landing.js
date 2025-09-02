@@ -6,34 +6,37 @@
     return template.replace("{year}", year);
   }
 
-  // Helper to convert markdown-style links to React elements
-  function parseLinks(text) {
-    var parts = [];
-    var regex = /\[([^\]]+)\]\(([^)]+)\)/g;
-    var lastIndex = 0;
-    var match;
-
-    while ((match = regex.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(text.slice(lastIndex, match.index));
-      }
-      parts.push(
-        React.createElement(
-          "a",
-          { href: match[2], target: "_blank", rel: "noopener noreferrer" },
-          match[1]
-        )
-      );
-      lastIndex = regex.lastIndex;
+  function getLastUpdatedText() {
+    try {
+      var ui = (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.ui) || {};
+      var raw = document.lastModified || "";
+      var d = raw ? new Date(raw) : new Date();
+      if (isNaN(d.getTime())) d = new Date();
+      var locale = ui.dateLocale || "en-US";
+      var formatted = d.toLocaleDateString(locale, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      var template = ui.lastUpdatedTemplate || "Last Updated: {date}";
+      return String(template).replace("{date}", formatted);
+    } catch (e) {
+      return "Last Updated: " + new Date().toISOString().slice(0, 10);
     }
+  }
 
-    if (lastIndex < text.length) {
-      parts.push(text.slice(lastIndex));
+  function getVersionText() {
+    try {
+      var raw =
+        (window.get_text &&
+          window.get_text("landing.hero.cover.version")) || "";
+      if (Array.isArray(raw)) raw = raw.join(" ");
+      var str = String(raw || "");
+      var first = (str.split(/\r?\n/) || [""])[0] || "";
+      return first.trim();
+    } catch (e) {
+      return "";
     }
-
-    return parts.length === 1 && typeof parts[0] === "string"
-      ? parts[0]
-      : parts;
   }
 
   function Main() {
@@ -144,9 +147,11 @@
           React.createElement(
             "div",
             { className: "cover-version" },
-            (window.get_text_inline &&
-              window.get_text_inline("landing.hero.cover.version")) ||
-              ""
+            (function () {
+              var v = getVersionText();
+              var u = getLastUpdatedText();
+              return v ? v + "\n" + u : u;
+            })()
           )
         )
       ),

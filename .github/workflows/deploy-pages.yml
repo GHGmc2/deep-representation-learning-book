@@ -98,38 +98,59 @@ jobs:
             echo "Chinese build complete: PDF=$ZH_PDF_EXIT, HTML=$ZH_HTML_EXIT"
             return $((ZH_PDF_EXIT + ZH_HTML_EXIT))
           }
+
+          build_romanian() {
+            echo "Starting Romanian PDF build..."
+            latexmk -lualatex -pdf -interaction=nonstopmode -shell-escape -f book-main_ro.tex
+            RO_PDF_EXIT=$?
           
-          # Start both build sequences in parallel
+            if [ $RO_PDF_EXIT -eq 0 ]; then
+              echo "Romanian PDF build successful, moving PDF to assets..."
+              mv book-main_ro.pdf website/html/assets/book-main_ro.pdf
+            else
+              echo "Romanian PDF build failed"
+            fi
+            
+            echo "Romanian build complete: PDF=$RO_PDF_EXIT"
+            return $((RO_PDF_EXIT))
+          }
+            
+          
+          # Start build sequences in parallel
           build_english &
           EN_PID=$!
           
           build_chinese &
           ZH_PID=$!
+
+          build_romanian &
+          RO_PID=$!
           
-          # Wait for English build (required)
+          # Wait for English build
           echo "Waiting for English build sequence..."
           wait $EN_PID
           EN_TOTAL_EXIT=$?
           
-          # Wait for Chinese build (required)
+          # Wait for Chinese build
           echo "Waiting for Chinese build sequence..."
           wait $ZH_PID
           ZH_TOTAL_EXIT=$?
+
+          # Wait for Romanian build
+          echo "Waiting for Romanian build sequence..."
+          wait $RO_PID
+          RO_TOTAL_EXIT=$?
           
           echo "Final build results:"
           echo "  English: $([ $EN_TOTAL_EXIT -eq 0 ] && echo 'SUCCESS' || echo 'FAILED')"
           echo "  Chinese: $([ $ZH_TOTAL_EXIT -eq 0 ] && echo 'SUCCESS' || echo 'FAILED')"
-          
-          # Fail the step if either build failed
-          if [ $EN_TOTAL_EXIT -ne 0 ] || [ $ZH_TOTAL_EXIT -ne 0 ]; then
+          echo "  Romanian: $([ $RO_TOTAL_EXIT -eq 0 ] && echo 'SUCCESS' || echo 'FAILED')"
+              
+          # Fail the step if any build failed
+          if [ $EN_TOTAL_EXIT -ne 0 ] || [ $ZH_TOTAL_EXIT -ne 0 ] || [ $RO_TOTAL_EXIT -ne 0 ]; then
             echo "One or more builds failed"
             exit 1
           fi
-      
-      # - name: Minify CSS/JS files
-      #   uses: nizarmah/auto-minify@v3
-      #   with:
-      #     overwrite: true
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

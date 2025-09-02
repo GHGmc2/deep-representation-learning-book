@@ -34,11 +34,13 @@
     // UI Labels
     ui: {
       bookTitle: "数据分布的深度表达学习",
-      langLabel: "EN",
+      langLabel: "ZH",
       brandHref: "index.html",
       searchPlaceholder: "搜索页面…",
       menu: "菜单",
       github: "GitHub",
+      dateLocale: "zh-CN",
+      lastUpdatedTemplate: "最后更新: {date}",
       footer:
         "© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. 保留所有权利。",
     },
@@ -153,10 +155,19 @@
       intro: "社区资源（建设中）。",
       pending: "敬请期待。",
       sections: {
-        slides: "幻灯片",
-        talks: "报告",
-        code: "代码",
+        tutorials: "教程",
         translations: "社区翻译",
+      },
+      content: {
+        tutorials: `
+下面是一些与本书内容高度相关的教程或长篇讲座：
+- [（即将推出）ICCV 2025 教程：从高维数据学习低维模型](https://low-dim-models-tutorials.github.io/iccv2025-tutorial/)
+- [CVPR 2024 教程：从高维数据学习低维模型](https://low-dim-models-tutorials.github.io/cvpr2024-tutorial/)
+        `,
+        translations: `
+以下是（非官方）社区翻译版本：
+- [罗马尼亚语译本](../assets/book-main_ro.pdf)，由 [Piatra Institute](https://piatra.institute/) 的 Jan Cavel 贡献。
+        `,
       },
     },
 
@@ -179,7 +190,7 @@
   // Helper functions to build navigation and TOC arrays
   window.BOOK_COMPONENTS.buildNavLinks = function () {
     return [
-      // { label: this.nav.community, href: "community.html" },
+      { label: this.nav.community, href: "community.html" },
       { label: this.nav.contributors, href: "contributors.html" },
       { label: this.nav.aiHelpers, href: "ai_helpers.html" },
       {

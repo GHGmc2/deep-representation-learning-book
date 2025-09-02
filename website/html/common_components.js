@@ -61,6 +61,8 @@
       searchPlaceholder: "Search pages…",
       menu: "Menu",
       github: "GitHub",
+      dateLocale: "en-US",
+      lastUpdatedTemplate: "Last Updated: {date}",
       footer:
         "© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. All rights reserved.",
     },
@@ -175,16 +177,19 @@ This book would have not been possible without the financial support for these r
       intro: "Community resources and materials for the book.",
       pending: "Coming soon.",
       sections: {
-        slides: "Slides",
-        talks: "Talks",
-        code: "Code",
+        tutorials: "Tutorials",
         translations: "Community Translations",
       },
       content: {
-        slides: "Coming soon.",
-        talks: "Coming soon.",
-        code: "Coming soon.",
-        translations: "Coming soon.",
+        tutorials: `
+The following are some tutorials, or long-form lectures, about content which is highly relevant to the book.
+- [(Forthcoming) ICCV 2025 Tutorial on Learning Low-Dimensional Models from High-Dimensional Data](https://low-dim-models-tutorials.github.io/iccv2025-tutorial/)
+- [CVPR 2024 Tutorial on Learning Low-Dimensional Models from High-Dimensional Data](https://low-dim-models-tutorials.github.io/cvpr2024-tutorial/)
+        `,
+        translations: `
+The following are (unofficial) community translations of the book.
+- [A Romanian translation](assets/book-main_ro.pdf), contributed by Jan Cavel at the [Piatra Institute](https://piatra.institute/).
+`,
       },
     },
 
@@ -208,7 +213,7 @@ The BookQA series of models is designed to help readers understand the book's co
   // Helper functions to build navigation and TOC arrays
   window.BOOK_COMPONENTS.buildNavLinks = function () {
     return [
-      // { label: this.nav.community, href: "community.html" },
+      { label: this.nav.community, href: "community.html" },
       { label: this.nav.contributors, href: "contributors.html" },
       { label: this.nav.aiHelpers, href: "ai_helpers.html" },
       {
