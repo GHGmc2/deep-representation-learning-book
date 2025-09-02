@@ -94,24 +94,25 @@
       sections: {
         about: {
           title: "关于本书",
-          paragraphs: [
-            '在当前深度学习，特别是"生成式人工智能"时代，人们在训练超大型生成模型方面投入了大量资源。迄今为止，这些模型一直是难以理解的"黑盒子"，因为它们的内部机制不透明，导致在可解释性、可靠性和可控性方面存在困难。自然而然地，这种缺乏理解的情况既带来了炒作，也带来了恐惧。',
-            '这本书试图"打开黑盒子"，通过表示学习的视角来理解大型深度网络的机制，表示学习是深度学习模型经验能力的一个主要因素——可以说是最重要的一个因素。本书的简要概述如下。第1章将总结贯穿全书的主线。第2、3、4、5章将通过优化和信息论来解释现代神经网络架构的设计原则，将架构开发过程（长期以来被描述为某种"炼金术"）简化为在引入基本原理后的本科水平线性代数和微积分练习。第6章和第7章将讨论这些原理的应用，以更范式化的方式解决问题，获得设计上高效、可解释且可控的新方法和模型，但功能不逊于——有时甚至超过——它们所类似的黑盒模型。第8章将讨论深度学习的潜在未来方向、表示学习的作用以及一些开放问题。',
-            "本书面向具有线性代数、概率论和机器学习背景的高年级本科生或研究生一年级学生。对于数学思维较强的学生，本书应该适合作为深度学习的第一门课程，但拥有一些深度学习的初步表面知识可能有助于更好地理解书中讨论的观点和技术。",
-            "由于本书的时效性，以及深度学习在未来几年可能具有的普遍性，我们决定让本书完全开源，并欢迎学科专家的贡献。源代码可在[GitHub](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book)上获取。在深度表示学习方面，肯定有许多我们在本书中没有涵盖的主题；如果您是专家并认为缺少某些内容，您可以[告诉我们](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book?tab=readme-ov-file#raising-an-issue)或[自己贡献](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution)。我们将努力为新贡献保持类似的质量标准，并在[贡献者页面](contributors.html)中认可贡献。",
-          ],
+          content: `
+ 在当前深度学习，特别是"生成式人工智能"时代，人们在训练超大型生成模型方面投入了大量资源。迄今为止，这些模型一直是难以理解的"黑盒子"，因为它们的内部机制不透明，导致在可解释性、可靠性和可控性方面存在困难。自然而然地，这种缺乏理解的情况既带来了炒作，也带来了恐惧。
+
+ 这本书试图"打开黑盒子"，通过表示学习的视角来理解大型深度网络的机制，表示学习是深度学习模型经验能力的一个主要因素——可以说是最重要的一个因素。本书的简要概述如下。第1章将总结贯穿全书的主线。第2、3、4、5章将通过优化和信息论来解释现代神经网络架构的设计原则，将架构开发过程（长期以来被描述为某种"炼金术"）简化为在引入基本原理后的本科水平线性代数和微积分练习。第6章和第7章将讨论这些原理的应用，以更范式化的方式解决问题，获得设计上高效、可解释且可控的新方法和模型，但功能不逊于——有时甚至超过——它们所类似的黑盒模型。第8章将讨论深度学习的潜在未来方向、表示学习的作用以及一些开放问题。
+
+ 本书面向具有线性代数、概率论和机器学习背景的高年级本科生或研究生一年级学生。对于数学思维较强的学生，本书应该适合作为深度学习的第一门课程，但拥有一些深度学习的初步表面知识可能有助于更好地理解书中讨论的观点和技术。
+
+ 由于本书的时效性，以及深度学习在未来几年可能具有的普遍性，我们决定让本书完全开源，并欢迎学科专家的贡献。源代码可在[GitHub](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book)上获取。在深度表示学习方面，肯定有许多我们在本书中没有涵盖的主题；如果您是专家并认为缺少某些内容，您可以[告诉我们](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book?tab=readme-ov-file#raising-an-issue)或[自己贡献](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution)。我们将努力为新贡献保持类似的质量标准，并在[贡献者页面](contributors.html)中认可贡献。`,
         },
         acknowledgements: {
           title: "致谢",
-          paragraphs: [
-            "本书主要基于过去八年中所得的研究成果。感谢加州大学伯克利分校（2018）和香港大学（2023）慷慨地提供启动经费，使马毅在过去八年能够投身并专注于这一令人振奋的新研究方向。在这些年里，围绕该研究方向，马毅及其在伯克利的团队获得了以下研究项目的资助",
-            "如果没有这些研究项目的资金支持，本书将无法完成。作者从参与这些项目的同事和学生的研究成果中获得了巨大的启发。",
-          ],
-          grants: [
-            "由 Simons Foundation 和 National Science Foundation (DMS grant #2031899）共同资助的多个大学联合开展的THEORINET project for the Foundations of Deep Learning项目;",
-            "由 Office of Naval Research (grant N00014-22-1-2102) 资助的Closed-Loop Data Transcription via Minimaxing Rate Reduction项目；",
-            "由 National Science Foundation (CISE grant #2402951) 资助的Principled Approaches to Deep Learning for Low-dimensional Structures项目。",
-          ],
+          content: `
+ 本书主要基于过去八年中所得的研究成果。感谢加州大学伯克利分校（2018）和香港大学（2023）慷慨地提供启动经费，使马毅在过去八年能够投身并专注于这一令人振奋的新研究方向。在这些年里，围绕该研究方向，马毅及其在伯克利的团队获得了以下研究项目的资助：
+
+ - 由 Simons Foundation 和 National Science Foundation (DMS grant #2031899）共同资助的多个大学联合开展的 THEORINET project for the Foundations of Deep Learning 项目；
+ - 由 Office of Naval Research (grant N00014-22-1-2102) 资助的 Closed-Loop Data Transcription via Minimaxing Rate Reduction 项目；
+ - 由 National Science Foundation (CISE grant #2402951) 资助的 Principled Approaches to Deep Learning for Low-dimensional Structures 项目。
+
+ 如果没有这些研究项目的资金支持，本书将无法完成。作者从参与这些项目的同事和学生的研究成果中获得了巨大的启发。`,
         },
       },
     },
@@ -133,12 +134,12 @@
         "peng-wang": { desc: "作者，中文翻译。" },
         "yi-ma": { desc: "资深作者。" },
         "stephen-butterfill": {
-          desc: 'PR：<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14">#14</a>',
+          desc: 'PRs：[#14](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14)',
         },
         "kerui-min": { desc: "中文翻译。" },
-        "jan-cavel": { desc: "罗马尼亚语翻译." },
+        "jan-cavel": { desc: "罗马尼亚语翻译. PRs：[#16](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/16)" },
         "kevin-murphy": {
-          desc: '大量反馈。Issues：<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3">#3</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4">#4</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5">#5</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/8">#8</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10">#10</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11">#11</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12">#12</a>、<a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13">#13</a>',
+          desc: '大量反馈。Issues：[#3](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3)、[#4](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4)、[#5](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5)、[#8](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/8)、[#10](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10)、[#11](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11)、[#12](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12)、[#13](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13)',
         },
         "yaodong-yu": { desc: "为第四章提供初始文本。" },
         "tianzhe-chu": { desc: "AI 工具。" },
@@ -165,7 +166,7 @@
       intro:
         "本页提供面向本书的简洁 AI 助手。可试用下方 BookQA，更多即将推出。",
       techDetails:
-        "BookQA 系列旨在帮助读者理解一本书的内容。它可以回答与材料相关的问题，并清晰解释关键概念与理论。为构建这些模型，我们首先使用 <a href=\"https://arxiv.org/pdf/2409.07431\">EntiGraph</a> 通过链接从文本中抽样的实体来生成丰富的与书籍相关的数据。随后，我们在这些数据上对 <a href=\"https://huggingface.co/Qwen/Qwen2.5-7B-Instruct\">Qwen2.5-7B/32B-Instruct</a> 进行持续的自回归预训练。我们还在训练中加入了指令跟随数据，使模型在学习书中的新知识的同时，不会遗忘基本的对话能力。",
+        "BookQA 系列旨在帮助读者理解一本书的内容。它可以回答与材料相关的问题，并清晰解释关键概念与理论。为构建这些模型，我们首先使用 [EntiGraph](https://arxiv.org/pdf/2409.07431) 通过链接从文本中抽样的实体来生成丰富的与书籍相关的数据。随后，我们在这些数据上对 [Qwen2.5-7B/32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) 进行持续的自回归预训练。我们还在训练中加入了指令跟随数据，使模型在学习书中的新知识的同时，不会遗忘基本的对话能力。",
       sections: {
         aiAssistants: "AI 助手",
         aiTools: "AI 工具",

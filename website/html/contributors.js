@@ -118,10 +118,9 @@
       ),
       React.createElement("p", { className: "affil" }, affil),
       description
-        ? React.createElement("p", {
-            className: "desc",
-            dangerouslySetInnerHTML: { __html: description },
-          })
+        ? (window.get_text_block &&
+            window.get_text_block(description, "desc")) ||
+          null
         : null
     );
   }
@@ -133,21 +132,27 @@
       React.createElement(
         "h1",
         null,
-        (window.get_text && window.get_text("contributors.title")) || ""
+        (window.get_text_inline &&
+          window.get_text_inline("contributors.title")) ||
+          ""
       ),
-      React.createElement(
-        "p",
-        { className: "intro" },
-        (window.get_text && window.get_text("contributors.intro")) || ""
-      ),
+      (function () {
+        var intro =
+          (window.get_text && window.get_text("contributors.intro")) || "";
+        return React.createElement(
+          "p",
+          { className: "intro" },
+          (window.get_text_inline && window.get_text_inline(intro)) || ""
+        );
+      })(),
       React.createElement(
         "section",
         { "aria-label": "Authors", className: "authors-grid" },
         React.createElement(
           "h2",
           { style: { margin: "16px 0 8px", fontSize: "18px" } },
-          (window.get_text &&
-            window.get_text("contributors.sections.authors")) ||
+          (window.get_text_inline &&
+            window.get_text_inline("contributors.sections.authors")) ||
             ""
         ),
         AUTHORS.map((p) => React.createElement(Card, { key: p.name, ...p }))
@@ -162,8 +167,10 @@
         React.createElement(
           "h2",
           { style: { margin: "16px 0 8px", fontSize: "18px" } },
-          (window.get_text &&
-            window.get_text("contributors.sections.contentContributors")) ||
+          (window.get_text_inline &&
+            window.get_text_inline(
+              "contributors.sections.contentContributors"
+            )) ||
             ""
         ),
         CONTENT_CONTRIBUTORS.map((p) =>
@@ -179,8 +186,8 @@
         React.createElement(
           "h2",
           { style: { margin: "16px 0 8px", fontSize: "18px" } },
-          (window.get_text &&
-            window.get_text("contributors.sections.infraContributors")) ||
+          (window.get_text_inline &&
+            window.get_text_inline("contributors.sections.infraContributors")) ||
             ""
         ),
         INFRA_CONTRIBUTORS.map((p) =>

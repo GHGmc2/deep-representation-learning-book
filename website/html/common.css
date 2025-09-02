@@ -40,6 +40,23 @@ body,
   box-sizing: border-box !important;
 }
 
+/* Markdown wrapper helpers: ensure negligible layout impact */
+.md-inline-text,
+.md-block-text {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+.md-inline-text {
+  display: inline !important;
+}
+.md-block-text {
+  display: block !important;
+}
+.md-block-text p:last-child { margin-bottom: 0; }
+
+
 /* Images */
 img,
 .img-fluid,

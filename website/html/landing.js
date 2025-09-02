@@ -49,17 +49,23 @@
           React.createElement(
             "h1",
             { className: "hero-title" },
-            (window.get_text && window.get_text("landing.hero.title")) || ""
+            (window.get_text_inline &&
+              window.get_text_inline("landing.hero.title")) ||
+              ""
           ),
           React.createElement(
             "div",
             { className: "hero-authors" },
-            (window.get_text && window.get_text("landing.hero.authors")) || ""
+            (window.get_text_inline &&
+              window.get_text_inline("landing.hero.authors")) ||
+              ""
           ),
           React.createElement(
             "p",
             { className: "hero-sub" },
-            (window.get_text && window.get_text("landing.hero.subtitle")) || ""
+            (window.get_text_inline &&
+              window.get_text_inline("landing.hero.subtitle")) ||
+              ""
           ),
           // React.createElement('div', { className: 'pub-info' },
           //   React.createElement('div', { className: 'pub-info-title' }, 'Publication Information'),
@@ -87,15 +93,15 @@
             React.createElement(
               "a",
               { className: "btn", href: "Chx1.html" },
-              (window.get_text &&
-                window.get_text("landing.hero.buttons.readHtml")) ||
+              (window.get_text_inline &&
+                window.get_text_inline("landing.hero.buttons.readHtml")) ||
                 ""
             ),
             React.createElement(
               "a",
               { className: "btn", href: window.BOOK_COMPONENTS.bookPdfPath },
-              (window.get_text &&
-                window.get_text("landing.hero.buttons.readPdf")) ||
+              (window.get_text_inline &&
+                window.get_text_inline("landing.hero.buttons.readPdf")) ||
                 ""
             ),
             React.createElement(
@@ -106,8 +112,8 @@
                 target: "_blank",
                 rel: "noopener noreferrer",
               },
-              (window.get_text &&
-                window.get_text("landing.hero.buttons.github")) ||
+              (window.get_text_inline &&
+                window.get_text_inline("landing.hero.buttons.github")) ||
                 ""
             )
           )
@@ -138,8 +144,8 @@
           React.createElement(
             "div",
             { className: "cover-version" },
-            (window.get_text &&
-              window.get_text("landing.hero.cover.version")) ||
+            (window.get_text_inline &&
+              window.get_text_inline("landing.hero.cover.version")) ||
               ""
           )
         )
@@ -157,15 +163,9 @@
               window.get_text("landing.sections.about.title")) ||
               ""
           ),
-          (function () {
-            var paragraphs =
-              (window.get_text &&
-                window.get_text("landing.sections.about.paragraphs")) ||
-              [];
-            return paragraphs.map(function (p, i) {
-              return React.createElement("p", { key: i }, parseLinks(p));
-            });
-          })()
+          ((window.get_text_block &&
+            window.get_text_block("landing.sections.about.content")) ||
+            null)
         ),
         React.createElement(
           "div",
@@ -177,47 +177,11 @@
               window.get_text("landing.sections.acknowledgements.title")) ||
               ""
           ),
-          (function () {
-            var paragraphs =
-              (window.get_text &&
-                window.get_text(
-                  "landing.sections.acknowledgements.paragraphs"
-                )) ||
-              [];
-            var grants =
-              (window.get_text &&
-                window.get_text("landing.sections.acknowledgements.grants")) ||
-              [];
-            var elements = [];
-            elements.push(
-              React.createElement("p", { key: "p1" }, paragraphs[0])
-            );
-            elements.push(
-              React.createElement(
-                "ul",
-                { key: "grants" },
-                grants.map(function (grant, i) {
-                  // Convert *text* to <em>text</em>
-                  var parts = grant.split("*");
-                  var content = [];
-                  for (var j = 0; j < parts.length; j++) {
-                    if (j % 2 === 0) {
-                      content.push(parts[j]);
-                    } else {
-                      content.push(
-                        React.createElement("em", { key: j }, parts[j])
-                      );
-                    }
-                  }
-                  return React.createElement("li", { key: i }, content);
-                })
-              )
-            );
-            elements.push(
-              React.createElement("p", { key: "p2" }, paragraphs[1])
-            );
-            return elements;
-          })()
+          ((window.get_text_block &&
+            window.get_text_block(
+              "landing.sections.acknowledgements.content"
+            )) ||
+            null)
         )
         // React.createElement('div', { className: 'section-card' },
         //   React.createElement('h3', null, 'Citation'),

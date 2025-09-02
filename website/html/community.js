@@ -16,9 +16,7 @@
       "section",
       { className: "text-section", "aria-label": title },
       React.createElement("h2", null, title),
-      React.createElement("p", {
-        dangerouslySetInnerHTML: { __html: content },
-      })
+      (window.get_text_block && window.get_text_block(content)) || null
     );
   }
 
@@ -31,13 +29,14 @@
         null,
         (window.get_text && window.get_text("community.title")) || ""
       ),
-      React.createElement("p", {
-        className: "intro",
-        dangerouslySetInnerHTML: {
-          __html:
-            (window.get_text && window.get_text("community.intro")) || "",
-        },
-      }),
+      (function () {
+        var intro =
+          (window.get_text && window.get_text("community.intro")) || "";
+        return (
+          (window.get_text_block &&
+            window.get_text_block(intro, "intro")) || null
+        );
+      })(),
       React.createElement(Section, { idKey: "slides" }),
       React.createElement(Section, { idKey: "talks" }),
       React.createElement(Section, { idKey: "code" }),

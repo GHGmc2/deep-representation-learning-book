@@ -56,7 +56,7 @@
     // UI Labels
     ui: {
       bookTitle: "Learning Deep Representations of Data Distributions",
-      langLabel: "CN",
+      langLabel: "EN",
       brandHref: "index.html",
       searchPlaceholder: "Search pages…",
       menu: "Menu",
@@ -116,24 +116,25 @@
       sections: {
         about: {
           title: "About this Book",
-          paragraphs: [
-            'In the current era of deep learning and especially "generative artificial intelligence", there is significant investment in training very large generative models. Thus far, such models have been "black boxes" that are difficult to understand in the sense that they have opaque internal mechanisms, leading to difficulties in interpretability, reliability, and control. Naturally, this lack of understanding has led to both hype and fear.',
-            'This book is an attempt to "open the black box" and understand the mechanisms of large deep networks, through the perspective of representation learning, which is a major factor --- arguably the single most important one --- in the empirical power of deep learning models. A brief outline of this book is as follows. Chapter 1 will summarize the threads that underlie the whole text. Chapters 2, 3, 4, and 5 will explain the design principles of modern neural network architectures through optimization and information theory, reducing the process of architecture development (long having been described as a sort of "alchemy") to undergraduate-level linear algebra and calculus exercises once the underlying principles are introduced. Chapters 6 and 7 will discuss applications of these principles to solve problems in more paradigmatic ways, obtaining new methods and models which are efficient, interpretable, and controllable by design, and yet no less --- sometimes even more --- powerful than the black-box models they resemble. Chapter 8 will discuss potential future directions for deep learning, the role of representation learning, as well as some open problems.',
-            "This book is intended for older undergraduate students, or initial graduate students, who have some background in linear algebra, probability, and machine learning. This book should be suitable as a first course in deep learning for mathematically-minded students, but it may help to have some initial surface-level knowledge of deep learning to better appreciate the perspectives and techniques discussed in the book.",
-            "Due to the timeliness of the book, and the prevalence that deep learning already has and may continue to have in the future, we have decided to make the book completely open-source. We will update it regularly to improve the presentation of the material and reflect advances in the field, and welcome contributions from subject matter experts about relevant topics that we may have missed. The source code is available on [GitHub](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book). If you feel that something is missing or can be improved, you can [let us know](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book?tab=readme-ov-file#raising-an-issue) or [contribute it yourself](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution). We will work to keep a similar standard of quality for new contributions, and recognize contributions in [the contributors page](contributors.html).",
-          ],
+          content: `
+In the current era of deep learning and especially "generative artificial intelligence", there is significant investment in training very large generative models. Thus far, such models have been "black boxes" that are difficult to understand in the sense that they have opaque internal mechanisms, leading to difficulties in interpretability, reliability, and control. Naturally, this lack of understanding has led to both hype and fear.
+
+This book is an attempt to "open the black box" and understand the mechanisms of large deep networks, through the perspective of representation learning, which is a major factor — arguably the single most important one — in the empirical power of deep learning models. A brief outline of this book is as follows. Chapter 1 will summarize the threads that underlie the whole text. Chapters 2, 3, 4, and 5 will explain the design principles of modern neural network architectures through optimization and information theory, reducing the process of architecture development (long having been described as a sort of "alchemy") to undergraduate-level linear algebra and calculus exercises once the underlying principles are introduced. Chapters 6 and 7 will discuss applications of these principles to solve problems in more paradigmatic ways, obtaining new methods and models which are efficient, interpretable, and controllable by design, and yet no less — sometimes even more — powerful than the black-box models they resemble. Chapter 8 will discuss potential future directions for deep learning, the role of representation learning, as well as some open problems.
+
+This book is intended for older undergraduate students, or initial graduate students, who have some background in linear algebra, probability, and machine learning. This book should be suitable as a first course in deep learning for mathematically-minded students, but it may help to have some initial surface-level knowledge of deep learning to better appreciate the perspectives and techniques discussed in the book.
+
+Due to the timeliness of the book, and the prevalence that deep learning already has and may continue to have in the future, we have decided to make the book completely open-source. We will update it regularly to improve the presentation of the material and reflect advances in the field, and welcome contributions from subject matter experts about relevant topics that we may have missed. The source code is available on [GitHub](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book). If you feel that something is missing or can be improved, you can [let us know](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book?tab=readme-ov-file#raising-an-issue) or [contribute it yourself](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution). We will work to keep a similar standard of quality for new contributions, and recognize contributions in [the contributors page](contributors.html).`,
         },
         acknowledgements: {
           title: "Acknowledgements",
-          paragraphs: [
-            "This book is primarily based on research results that have been developed within the past eight years. Thanks to generous funding from UC Berkeley (2018) and the University of Hong Kong (2023), Yi Ma was able to embark and focus on this new exciting research direction in the past eight years. Through these years, related to this research direction, Yi Ma and his research team at Berkeley have been supported by the following research grants:",
-            "This book would have not been possible without the financial support for these research projects. The authors have drawn tremendous inspiration from research results by colleagues and students who have been involved in these projects.",
-          ],
-          grants: [
-            "The multi-university *THEORINET* project for the Foundations of Deep Learning, jointly funded by the Simons Foundation and the National Science Foundation (DMS grant #2031899)",
-            "The *Closed-Loop Data Transcription via Minimaxing Rate Reduction* project funded by the Office of Naval Research (grant N00014-22-1-2102);",
-            "The *Principled Approaches to Deep Learning for Low-dimensional Structures* project funded by the National Science Foundation (CISE grant #2402951).",
-          ],
+          content: `
+This book is primarily based on research results that have been developed within the past eight years. Thanks to generous funding from UC Berkeley (2018) and the University of Hong Kong (2023), Yi Ma was able to embark and focus on this new exciting research direction in the past eight years. Through these years, related to this research direction, Yi Ma and his research team at Berkeley have been supported by the following research grants:
+
+- The multi-university *THEORINET* project for the Foundations of Deep Learning, jointly funded by the Simons Foundation and the National Science Foundation (DMS grant #2031899)
+- The *Closed-Loop Data Transcription via Minimaxing Rate Reduction* project funded by the Office of Naval Research (grant N00014-22-1-2102);
+- The *Principled Approaches to Deep Learning for Low-dimensional Structures* project funded by the National Science Foundation (CISE grant #2402951).
+
+This book would have not been possible without the financial support for these research projects. The authors have drawn tremendous inspiration from research results by colleagues and students who have been involved in these projects.`,
         },
       },
     },
@@ -155,12 +156,12 @@
         "peng-wang": { desc: "Author, Chinese translation." },
         "yi-ma": { desc: "Senior author." },
         "stephen-butterfill": {
-          desc: 'PRs: <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14">#14</a>',
+          desc: "PRs: [#14](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14)",
         },
         "kerui-min": { desc: "Chinese translation." },
-        "jan-cavel": { desc: "Romanian translation." },
+        "jan-cavel": { desc: "Romanian translation. PRs: [#16](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/16)" },
         "kevin-murphy": {
-          desc: 'Extensive feedback. Issues: <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3">#3</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4">#4</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5">#5</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/8">#8</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10">#10</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11">#11</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12">#12</a>, <a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13">#13</a>',
+          desc: "Extensive feedback. Issues: [#3](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3), [#4](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4), [#5](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5), [#8](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10), [#10](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10), [#11](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11), [#12](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12), [#13](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13)",
         },
         "yaodong-yu": { desc: "Provided initial text for Chapter 4." },
         "tianzhe-chu": { desc: "AI tooling." },
@@ -171,8 +172,7 @@
     // Community page content
     community: {
       title: "Community",
-      intro:
-        "Community resources and materials for the book.",
+      intro: "Community resources and materials for the book.",
       pending: "Coming soon.",
       sections: {
         slides: "Slides",
@@ -181,23 +181,21 @@
         translations: "Community Translations",
       },
       content: {
-        slides:
-          "Coming soon.",
-        talks:
-          "Coming soon.",
+        slides: "Coming soon.",
+        talks: "Coming soon.",
         code: "Coming soon.",
-        translations:
-          "Coming soon.",
+        translations: "Coming soon.",
       },
     },
 
     // AI Helpers page content
     aiHelpers: {
       title: "AI Helpers",
-      intro:
-        'We provide simple AI assistants tailored to this book.',
+      intro: "We provide simple AI assistants tailored to this book.",
       techDetails:
-        "The models that power the \"Ask AI\" button, the BookQA Series is designed to help readers understand the book's content. It can answer questions about the material and give clear explanations of the key concepts and theories. To build these models, we first use <a href=\"https://arxiv.org/pdf/2409.07431\">EntiGraph</a> to generate a rich set of book-related data by linking sampled entities from the text. We then continually pre-train <a href=\"https://huggingface.co/Qwen/Qwen2.5-7B-Instruct\">Qwen2.5-7B/32B-Instruct</a> on this data using auto-regressive training. We also incorporate instruction-following data during training such that the model can learn new knowledge from the book without forgetting basic chatting skills.",
+        `
+The BookQA series of models is designed to help readers understand the book's content. It can answer questions about the material and give clear explanations of the key concepts and theories. To build these models, we first use [EntiGraph](https://arxiv.org/pdf/2409.07431) to generate a rich set of book-related data by linking sampled entities from the text. We then continually pre-train [Qwen2.5-7B/32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) on this data using auto-regressive training. We also incorporate instruction-following data during training such that the model can learn new knowledge from the book without forgetting basic chatting skills. The BookQA 7B model currently powers the "Ask AI" button in the top bar of this website.
+      `,
       sections: {
         aiAssistants: "AI Assistants",
         aiTools: "AI Tools",

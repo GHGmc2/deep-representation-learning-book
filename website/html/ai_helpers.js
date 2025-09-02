@@ -225,21 +225,22 @@
         null,
         (window.get_text && window.get_text("aiHelpers.title")) || ""
       ),
-      React.createElement("p", {
-        className: "intro",
-        dangerouslySetInnerHTML: {
-          __html:
-            (window.get_text && window.get_text("aiHelpers.intro")) || "",
-        },
-      }),
+      (function () {
+        var intro =
+          (window.get_text && window.get_text("aiHelpers.intro")) || "";
+        return (
+          (window.get_text_block &&
+            window.get_text_block(intro, "intro")) || null
+        );
+      })(),
       React.createElement(
         "section",
         { "aria-label": "BookQA Series" },
         React.createElement(
           "h2",
           { style: { margin: "16px 0 8px", fontSize: "18px" } },
-          (window.get_text &&
-            window.get_text("aiHelpers.sections.customizedChatbots")) ||
+          (window.get_text_inline &&
+            window.get_text_inline("aiHelpers.sections.customizedChatbots")) ||
             ""
         ),
         React.createElement(
@@ -249,14 +250,9 @@
             React.createElement(Card, { key: p.name, ...p })
           )
         ),
-        React.createElement("p", {
-          className: "tech-details",
-          dangerouslySetInnerHTML: {
-            __html:
-              (window.get_text && window.get_text("aiHelpers.techDetails")) ||
-              "",
-          },
-        })
+        ((window.get_text_block &&
+          window.get_text_block("aiHelpers.techDetails", "tech-details")) ||
+          null)
       ),
       // React.createElement('section', { 'aria-label': 'AI Tools', className: 'ai-helpers-grid' },
       //   React.createElement('h2', { style: { margin: '16px 0 8px', fontSize: '18px' } }, (window.get_text && window.get_text('aiHelpers.sections.aiTools')) || ''),

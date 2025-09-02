@@ -386,7 +386,7 @@
       var langLabel =
         (options && options.langLabel) ||
         (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.ui.langLabel) ||
-        "CN";
+        "EN";
       var brandHref =
         (options && options.brandHref) ||
         (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.ui.brandHref) ||
@@ -2139,4 +2139,172 @@
     }
   })();
   // --- End global text helper ---
+
+  // --- Begin markdown helpers (inline and block) ---
+  (function () {
+    // Load external Markdown library (marked) once and re-render wrappers when ready
+
+    function basicEscapeHtml(s) {
+      try {
+        return (s || "").replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+      } catch (_) {
+        return s || "";
+      }
+    }
+
+    function basicMarkdownToHtml(md, inline) {
+      // Extremely small fallback: links [text](url), emphasis *em* and **strong**
+      try {
+        var html = basicEscapeHtml(md || "");
+        // Bold
+        html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+        // Italic
+        html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+        // Links
+        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1<\/a>');
+        if (!inline) {
+          // Preserve single newlines as <br> minimally; leave paragraphs to caller
+          html = html.replace(/\n/g, "<br/>");
+        }
+        return html;
+      } catch (_) {
+        return basicEscapeHtml(md || "");
+      }
+    }
+
+    function convertMarkdown(md, inline) {
+      try {
+        if (window.marked) {
+          if (inline && window.marked.parseInline) return window.marked.parseInline(md || "");
+          if (!inline && window.marked.parse) return window.marked.parse(md || "");
+        }
+      } catch (_) {}
+      // Fallback minimal converter until marked loads
+      return basicMarkdownToHtml(md || "", !!inline);
+    }
+
+    function tryReprocessMarkdownWrappersIn(root) {
+      try {
+        if (!window.marked) return;
+        var scope = root || document;
+        var nodes = scope.querySelectorAll(
+          ".md-inline-text[data-md], .md-block-text[data-md]"
+        );
+        for (var i = 0; i < nodes.length; i++) {
+          var el = nodes[i];
+          var md = el.getAttribute("data-md") || "";
+          var mode = el.getAttribute("data-md-mode") || "block";
+          var html = convertMarkdown(md, mode === "inline");
+          if (el.innerHTML !== html) el.innerHTML = html;
+        }
+      } catch (_) {}
+    }
+
+    function tryReprocessMarkdownWrappers() {
+      tryReprocessMarkdownWrappersIn(document);
+    }
+
+    // Expose helpers that return React elements with dangerouslySetInnerHTML
+    function resolveText(pathOrText) {
+      try {
+        // If looks like a path and resolves to a non-empty value, use it
+        if (typeof pathOrText === "string" && pathOrText.indexOf(".") !== -1) {
+          var val = window.get_text ? window.get_text(pathOrText) : "";
+          if (val !== undefined && val !== null && val !== "") return val;
+        }
+      } catch (_) {}
+      return pathOrText;
+    }
+
+    function toArray(val) {
+      return Array.isArray(val) ? val : [val];
+    }
+
+    function joinClassNames(a, b) {
+      var aa = (a || "").trim();
+      var bb = (b || "").trim();
+      return (aa && bb ? aa + " " + bb : aa || bb || "").trim();
+    }
+
+    window.get_text_inline = function (pathOrText, className) {
+      try {
+        var val = resolveText(pathOrText);
+        if (Array.isArray(val)) {
+          // Map arrays to multiple inline spans
+          return val.map(function (item, idx) {
+            var md = String(item == null ? "" : item);
+            var html = convertMarkdown(md, true);
+            return React.createElement("span", {
+              key: idx,
+              className: joinClassNames("md-inline-text", className),
+              dangerouslySetInnerHTML: { __html: html },
+              "data-md": md,
+              "data-md-mode": "inline",
+            });
+          });
+        }
+        var md = String(val == null ? "" : val);
+        var html = convertMarkdown(md, true);
+        return React.createElement("span", {
+          className: joinClassNames("md-inline-text", className),
+          dangerouslySetInnerHTML: { __html: html },
+          "data-md": md,
+          "data-md-mode": "inline",
+        });
+      } catch (_) {
+        return React.createElement("span", {
+          className: joinClassNames("md-inline-text", className),
+          text: String(resolveText(pathOrText) || ""),
+        });
+      }
+    };
+
+    window.get_text_block = function (pathOrText, className) {
+      try {
+        var val = resolveText(pathOrText);
+        if (Array.isArray(val)) {
+          // Map arrays to multiple block divs
+          return val.map(function (item, idx) {
+            var md = String(item == null ? "" : item);
+            var html = convertMarkdown(md, false);
+            return React.createElement("div", {
+              key: idx,
+              className: joinClassNames("md-block-text", className),
+              dangerouslySetInnerHTML: { __html: html },
+              "data-md": md,
+              "data-md-mode": "block",
+            });
+          });
+        }
+        var md = String(val == null ? "" : val);
+        var html = convertMarkdown(md, false);
+        return React.createElement("div", {
+          className: joinClassNames("md-block-text", className),
+          dangerouslySetInnerHTML: { __html: html },
+          "data-md": md,
+          "data-md-mode": "block",
+        });
+      } catch (_) {
+        return React.createElement("div", {
+          className: joinClassNames("md-block-text", className),
+          text: String(resolveText(pathOrText) || ""),
+        });
+      }
+    };
+
+    // On DOM ready, start loading and reprocess once available
+    (function ready(fn) {
+      if (document.readyState === "loading")
+        document.addEventListener("DOMContentLoaded", fn);
+      else fn();
+    })(function () {
+      tryReprocessMarkdownWrappers();
+    });
+
+    // Also expose a manual hook (if needed elsewhere)
+    window.__reprocess_markdown_wrappers = tryReprocessMarkdownWrappers;
+  })();
+  // --- End markdown helpers ---
 })();
