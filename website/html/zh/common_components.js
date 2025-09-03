@@ -162,6 +162,7 @@
         tutorials: `
 下面是一些与本书内容高度相关的教程或长篇讲座：
 - [（即将推出）ICCV 2025 教程：从高维数据学习低维模型](https://low-dim-models-tutorials.github.io/iccv2025-tutorial/)
+- [（即将推出）IAISS 2025 教程：从高维数据学习低维模型](https://2025.iaiss.cc/)
 - [CVPR 2024 教程：从高维数据学习低维模型](https://low-dim-models-tutorials.github.io/cvpr2024-tutorial/)
         `,
         translations: `

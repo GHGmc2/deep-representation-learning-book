@@ -184,6 +184,7 @@ This book would have not been possible without the financial support for these r
         tutorials: `
 The following are some tutorials, or long-form lectures, about content which is highly relevant to the book.
 - [(Forthcoming) ICCV 2025 Tutorial on Learning Low-Dimensional Models from High-Dimensional Data](https://low-dim-models-tutorials.github.io/iccv2025-tutorial/)
+- [(Forthcoming) IAISS 2025 Tutorial on Learning Low-Dimensional Models from High-Dimensional Data](https://2025.iaiss.cc/)
 - [CVPR 2024 Tutorial on Learning Low-Dimensional Models from High-Dimensional Data](https://low-dim-models-tutorials.github.io/cvpr2024-tutorial/)
         `,
         translations: `
