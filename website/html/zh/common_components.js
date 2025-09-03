@@ -190,7 +190,6 @@
   // Helper functions to build navigation and TOC arrays
   window.BOOK_COMPONENTS.buildNavLinks = function () {
     return [
-      { label: this.nav.community, href: "community.html" },
       { label: this.nav.contributors, href: "contributors.html" },
       { label: this.nav.aiHelpers, href: "ai_helpers.html" },
       {
@@ -198,6 +197,7 @@
         href: "https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution",
         external: true,
       },
+      { label: this.nav.community, href: "community.html" },
     ];
   };
 
