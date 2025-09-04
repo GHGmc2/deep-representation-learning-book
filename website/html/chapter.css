@@ -220,7 +220,6 @@ img,
   top: 42px;
   z-index: 30;
   background: #fff;
-  border-bottom: 1px solid #e8edf6;
 }
 .ltx_page_header .ltx_align_center {
   display: flex;
@@ -900,6 +899,7 @@ body > *:first-child {
   z-index: 30;
   background: #fff;
   margin: 0 !important;
+  border-bottom: none !important;
   border-top: none !important;
 }
 .ltx_page_navbar,
