@@ -233,16 +233,16 @@
             window.get_text_block(intro, "intro")) || null
         );
       })(),
-      React.createElement(
-        "section",
-        { "aria-label": "BookQA Series" },
-      React.createElement(
-        "h2",
-        { style: { margin: "16px 0 8px", fontSize: "18px" } },
-        (window.get_text_inline &&
-          window.get_text_inline("aiHelpers.sections.customizedChatbots")) ||
-          ""
-      ),
+        React.createElement(
+          "section",
+          { "aria-label": "BookQA Series" },
+        React.createElement(
+          "h2",
+          { style: { margin: "16px 0 8px", fontSize: "18px" } },
+          (window.get_text_inline &&
+            window.get_text_inline("aiHelpers.sections.customizedChatbots")) ||
+            ""
+        ),
         React.createElement(
           "div",
           { className: "ai-helpers-grid" },

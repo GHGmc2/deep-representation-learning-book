@@ -73,6 +73,8 @@
       clear: "Clear",
       close: "Close",
       send: "Send",
+      feedback: "Feedback",
+      save: "Save",
       chatWithAI: "Ask AI",
       includeSelection: "Include current text selection",
       selectionEmpty: "Select text on the page to include it as context.",
@@ -283,4 +285,76 @@ The BookQA series of models is designed to help readers understand the book's co
 
   window.BOOK_COMPONENTS.coverImagePath = "assets/book-cover.png";
   window.BOOK_COMPONENTS.bookPdfPath = "assets/book-main.pdf";
+
+  // Feedback notice functionality
+  window.showFeedbackNotice = function() {
+    // Helper function to create elements with properties
+    function createElement(tag, props) {
+      var el = document.createElement(tag);
+      if (props) {
+        if (props.id) el.id = props.id;
+        if (props.className) el.className = props.className;
+        if (props.text) el.textContent = props.text;
+        if (props.html) el.innerHTML = props.html;
+        if (props.title) el.title = props.title;
+        if (props.onclick) el.onclick = props.onclick;
+      }
+      return el;
+    }
+
+    // Remove existing feedback notice if any
+    var existing = document.getElementById("feedback-notice");
+    if (existing) {
+      existing.remove();
+    }
+
+    // Create feedback notice
+    var notice = createElement("div", { id: "feedback-notice", className: "feedback-notice" });
+    var content = createElement("div", { className: "feedback-notice-content" });
+    var header = createElement("div", { className: "feedback-notice-header" });
+    var title = createElement("h2", { className: "feedback-notice-title", text: "Feedback Guidelines" });
+    var closeBtn = createElement("button", {
+      className: "feedback-notice-close",
+      title: "Close",
+      html: "&times;",
+      onclick: function() { notice.remove(); }
+    });
+    
+    header.appendChild(title);
+    header.appendChild(closeBtn);
+    
+    var body = createElement("div", { className: "feedback-notice-body" });
+    body.innerHTML = 
+      '<p>We value your feedback on the BookQA AI assistants and would love to hear about your experience!</p>' +
+      '<h3>Disclaimer</h3>' +
+      '<p>Your queries are anonymously logged on our local server for troubleshooting. In order to protect your privacy, please avoid sending sensitive information.</p>' +
+      '<h3>🐛 Bug Reports</h3>' +
+      '<p>If you encounter any issues with the AI helpers, please report them on our GitHub repository:</p>' +
+      '<ul>' +
+      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues" target="_blank" rel="noopener noreferrer">Report a Bug</a></li>' +
+      '<li>Include the question you asked and the AI\'s response</li>' +
+      '<li>Describe the expected vs. actual behavior</li>' +
+      '</ul>' +
+      '<h3>💡 Feature Requests</h3>' +
+      '<p>Have ideas for improving the AI helpers? We\'d love to hear them:</p>' +
+      '<ul>' +
+      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues" target="_blank" rel="noopener noreferrer">Raise a new issue to discuss</a></li>' +
+      '<li>Suggest new features or capabilities</li>' +
+      '<li>Share use cases that aren\'t well supported</li>' +
+      '</ul>' +
+      '<h3>📚 General Feedback</h3>' +
+      '<p>For broader feedback about the book or this website:</p>' +
+      '<ul>' +
+      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution" target="_blank" rel="noopener noreferrer">Contributing Guide</a></li>' +
+      '<li>Email the authors (contact information in the book)</li>' +
+      '</ul>' +
+      '<p><strong>Thank you for helping us improve the BookQA AI assistants!</strong></p>';
+    
+    content.appendChild(header);
+    content.appendChild(body);
+    notice.appendChild(content);
+    
+    // Add to DOM
+    document.body.appendChild(notice);
+  };
 })();

@@ -897,6 +897,12 @@
           var closeText =
             (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.chat.close) ||
             "Close";
+          var feedbackText =
+            (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.chat.feedback) ||
+            "Feedback";
+          var saveText =
+            (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.chat.save) ||
+            "Save";
           var panel = h(
             "div",
             {
@@ -921,7 +927,7 @@
                   className: "ai-chat-feedback",
                   type: "button",
                   title: "Provide Feedback",
-                  text: "💬 Feedback",
+                  text: feedbackText,
                 }),
                 h("button", {
                   className: "ai-chat-clear",
@@ -933,7 +939,7 @@
                   className: "ai-chat-save",
                   type: "button",
                   title: "Save chat history",
-                  text: "Save",
+                  text: saveText,
                 }),
                 h("button", {
                   className: "ai-chat-close",
@@ -2394,89 +2400,4 @@
     window.__reprocess_markdown_wrappers = tryReprocessMarkdownWrappers;
   })();
   // --- End markdown helpers ---
-
-  // Feedback notice functionality
-  window.showFeedbackNotice = function() {
-    // Remove existing feedback notice if any
-    var existing = document.getElementById("feedback-notice");
-    if (existing) {
-      existing.remove();
-    }
-
-    // Create feedback notice
-    var notice = document.createElement("div");
-    notice.id = "feedback-notice";
-    notice.className = "feedback-notice";
-    
-    var content = document.createElement("div");
-    content.className = "feedback-notice-content";
-    
-    var header = document.createElement("div");
-    header.className = "feedback-notice-header";
-    
-    var title = document.createElement("h2");
-    title.className = "feedback-notice-title";
-    title.textContent = "Feedback Guidelines";
-    
-    var closeBtn = document.createElement("button");
-    closeBtn.className = "feedback-notice-close";
-    closeBtn.innerHTML = "&times;";
-    closeBtn.title = "Close";
-    closeBtn.onclick = function() {
-      notice.remove();
-    };
-    
-    header.appendChild(title);
-    header.appendChild(closeBtn);
-    
-    var body = document.createElement("div");
-    body.className = "feedback-notice-body";
-    body.innerHTML = 
-      '<p>We value your feedback on the BookQA AI assistants and would love to hear about your experience!</p>' +
-      '<h3>Disclaimer</h3>' +
-      '<p>Your queries are anonymously logged on our local server for troubleshooting. In order to protect your privacy, please avoid sending sensitive information.</p>' +
-      '<h3>🐛 Bug Reports</h3>' +
-      '<p>If you encounter any issues with the AI helpers, please report them on our GitHub repository:</p>' +
-      '<ul>' +
-      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues" target="_blank" rel="noopener noreferrer">Report a Bug</a></li>' +
-      '<li>Include the question you asked and the AI\'s response</li>' +
-      '<li>Describe the expected vs. actual behavior</li>' +
-      '</ul>' +
-      '<h3>💡 Feature Requests</h3>' +
-      '<p>Have ideas for improving the AI helpers? We\'d love to hear them:</p>' +
-      '<ul>' +
-      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues" target="_blank" rel="noopener noreferrer">Raise a new issue to discuss</a></li>' +
-      '<li>Suggest new features or capabilities</li>' +
-      '<li>Share use cases that aren\'t well supported</li>' +
-      '</ul>' +
-      '<h3>📚 General Feedback</h3>' +
-      '<p>For broader feedback about the book or this website:</p>' +
-      '<ul>' +
-      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution" target="_blank" rel="noopener noreferrer">Contributing Guide</a></li>' +
-      '<li>Email the authors (contact information in the book)</li>' +
-      '</ul>' +
-      '<p><strong>Thank you for helping us improve the BookQA AI assistants!</strong></p>';
-    
-    content.appendChild(header);
-    content.appendChild(body);
-    notice.appendChild(content);
-    
-    // Close on background click
-    notice.onclick = function(e) {
-      if (e.target === notice) {
-        notice.remove();
-      }
-    };
-    
-    // Close on Escape key
-    var handleKeydown = function(e) {
-      if (e.key === "Escape") {
-        notice.remove();
-        document.removeEventListener("keydown", handleKeydown);
-      }
-    };
-    document.addEventListener("keydown", handleKeydown);
-    
-    document.body.appendChild(notice);
-  };
 })();
