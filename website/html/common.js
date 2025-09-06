@@ -2433,6 +2433,8 @@
     body.className = "feedback-notice-body";
     body.innerHTML = 
       '<p>We value your feedback on the BookQA AI assistants and would love to hear about your experience!</p>' +
+      '<h3>Disclaimer</h3>' +
+      '<p>Your queries are anonymously logged on our local server for troubleshooting. In order to protect your privacy, please avoid sending sensitive information.</p>' +
       '<h3>🐛 Bug Reports</h3>' +
       '<p>If you encounter any issues with the AI helpers, please report them on our GitHub repository:</p>' +
       '<ul>' +
@@ -2443,16 +2445,9 @@
       '<h3>💡 Feature Requests</h3>' +
       '<p>Have ideas for improving the AI helpers? We\'d love to hear them:</p>' +
       '<ul>' +
-      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/discussions" target="_blank" rel="noopener noreferrer">Start a Discussion</a></li>' +
+      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues" target="_blank" rel="noopener noreferrer">Raise a new issue to discuss</a></li>' +
       '<li>Suggest new features or capabilities</li>' +
       '<li>Share use cases that aren\'t well supported</li>' +
-      '</ul>' +
-      '<h3>🎯 Accuracy Feedback</h3>' +
-      '<p>Help us improve the quality of AI responses:</p>' +
-      '<ul>' +
-      '<li>Report factual errors or misleading information</li>' +
-      '<li>Share examples of particularly helpful responses</li>' +
-      '<li>Suggest areas where the AI could be more precise</li>' +
       '</ul>' +
       '<h3>📚 General Feedback</h3>' +
       '<p>For broader feedback about the book or this website:</p>' +
