@@ -122,7 +122,7 @@ Around 1955, a group of ambitious young scientists sought to break away from the
 \begin{quote}
     ``\textit{The study is to proceed on the basis of the conjecture that every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it. An attempt will be made to find how to make machines use language, form abstractions and concepts, solve kinds of problems now reserved for humans, and improve themselves}.''
 \end{quote}
-They aimed to formalize and study the higher-level intelligence that distinguishes humans from animals. Their agenda included abstraction, symbolic methods, natural language, and deductive reasoning (causal inference, logical deduction, etc.), i.e., abstractive intelligence. The organizer of the workshop, John McCarthy---then a young assistant professor of mathematics at Dartmouth College---coined the now-famous term ``Artificial Intelligence'' (AI) to describe machines that exhibit abstractive intelligence, in order to formally describe the problems and goals of the workshop.
+They aimed to formalize and study the higher-level intelligence that distinguishes humans from animals. Their agenda included abstraction, symbolic methods, natural language, and deductive reasoning (causal inference, logical deduction, etc.), i.e., abstractive intelligence. The organizer of the workshop, John McCarthy---then a young assistant professor of mathematics at Dartmouth College---coined the now-famous term ``Artificial Intelligence'' (AI) to describe machines that exhibit abstractive intelligence in order to formally describe the problems and goals of the workshop.
 
 \paragraph{Renaissance of ``artificial intelligence'' or ``cybernetics''?}
 Over the past decade, machine intelligence has undergone explosive development, driven largely by deep artificial neural networks, sparked by the 2012 work of Geoffrey Hinton and his students \cite{krizhevsky2012imagenet}. This period is hailed as the ``Renaissance of AI.'' Yet, in terms of the tasks actually tackled (recognition, generation, prediction) and the techniques developed (reinforcement learning, imitation learning, encoding, decoding, denoising, and compression), we are largely emulating mechanisms common to the intelligence of early life and animals. Even in this regard, as we will clarify in this book, current ``AI'' models and systems have not fully or correctly implemented all necessary mechanisms for intelligence at the animal level which were known to the 1940s Cybernetics movement.
@@ -473,7 +473,7 @@ If \(p\) in \eqref{eqn:ICA-modes} is very small, the probability that any compon
 
 A \(k\)-sparse model is the set of all \textit{\(k\)-sparse vectors}:
 \begin{equation}
-    \cZ = \{\vz \in \R^{n} \mid \|\vz\|_{0} \le k\},
+    \cZ = \{\vz \in \R^{n} \mid \|\vz\|_{0} \leq k\},
 \end{equation}
 where \(\|\cdot\|_{0}\) counts the number of non-zero entries. Thus \(\cZ\) is the union of all \(k\)-dimensional subspaces aligned with the coordinate axes, as illustrated in \Cref{fig:mixture-models} (left). A central problem in signal processing and statistics is to recover a sparse vector \(\vz\) from its linear observations
 \begin{equation}
@@ -484,7 +484,7 @@ where \(\vA\) is given, typically \(m < n\), and \(\vepsilon\) is small noise. T
 
 Despite a rich history dating back to the eighteenth century \cite{Boscovichca1750}, no provably efficient algorithm existed for this class of problems, although many heuristic algorithms were proposed between the 1960s and 1990s. Some were effective in practice but lacked rigorous justification. A major breakthrough came in the early 2000s when mathematicians including David Donoho, Emmanuel Cand\'{e}s, and Terence Tao \cite{donoho2005neighborly,Candes2005,CandesE2005-IT} established a rigorous theoretical framework that characterizes precise conditions under which the sparse recovery problem can be solved effectively and efficiently via convex \(\ell^{1}\) minimization:
 \begin{equation}
-    \min \|\vz\|_{1} \quad \text{subject to} \quad \|\vx - \vA\vz\|_{2} \le \epsilon,
+    \min \|\vz\|_{1} \quad \text{subject to} \quad \|\vx - \vA\vz\|_{2} \leq \epsilon,
 \end{equation}
 where \(\|\cdot\|_{1}\) is the sparsity-promoting \(\ell^{1}\) norm of a vector and \(\epsilon\) is a small constant. Any solution yields a sparse (auto) encoding 
 \begin{equation}
@@ -818,7 +818,7 @@ Given two coding schemes \(\cE_{1}\) and \(\cE_{2}\) for the segments, if the di
 \begin{equation}
    R(S \mid \cE_{1}) -  R(S \mid \cE_{2}) > 0, 
 \end{equation}
-we may say the coding scheme \(\cE_{2}\) is better. This difference can be viewed as a measure of how much more information \(\cE_{2}\) has over \(\cE_{1}\) about the distribution of the data. To a large extent, the goal of learning the data \(S\) is equivalent to finding the most efficient encoding and decoding scheme that minimizes the coding rate subject to a desired precision:
+we may say the coding scheme \(\cE_{2}\) is better. This difference can be viewed as a measure of how much more information \(\cE_{2}\) has over \(\cE_{1}\) about the distribution of the data. To a large extent, the goal of learning the data distribution is equivalent to finding the most efficient encoding and decoding scheme that minimizes the coding rate subject to a desired precision:
 \begin{equation}
    \min_{\cE, \cD} R(S \mid \cE) \quad \text{subject to} \quad \operatorname{dist}(S, \cD(\cE(S))) \leq \epsilon. 
 \end{equation}
