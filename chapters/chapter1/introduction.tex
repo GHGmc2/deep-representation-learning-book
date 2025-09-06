@@ -141,15 +141,15 @@ Data that carry useful information manifest in many forms. In their most natural
 \begin{equation}
    S = 1, 2, 3, 4, 5, 6, \ldots, n, n+1, \ldots
 \end{equation}
-in which the next number $x_{n+1}$ is defined as the previous number $x_{n}$ plus 1:
+in which the next number \(x_{n+1}\) is defined as the previous number \(x_{n}\) plus 1:
 \begin{equation}
     x_{n+1} = x_{n} + 1.    
 \end{equation}
-One may generalize the notion of predictability to any sequence $\{x_{n}\}_{n=1}^\infty$ with $x_{n} \in \R$ if the next number $x_{n+1}$ can always be computed from its predecessor $x_{n}$:
+One may generalize the notion of predictability to any sequence \(\{x_{n}\}_{n=1}^{\infty}\) with \(x_{n} \in \R\) if the next number \(x_{n+1}\) can always be computed from its predecessor \(x_{n}\):
 \begin{equation}
     x_{n+1} = f(x_{n}), \quad x_{n} \in \R, \; n = 1, 2, 3, \ldots
 \end{equation}
-where $f(\cdot)$ is a \textit{computable} (scalar) function.\footnote{Here we emphasize that the function $f(\cdot)$ itself is computable, meaning it can be implemented as a program on a computer.} Alan Turing's seminal work in 1936 \cite{Turing-1936} gives a rigorous definition of computability. In practice, we often further assume that $f$ is efficiently computable and has nice properties such as continuity and differentiability. The necessity of these properties will become clear later once we understand more refined notions of computability and their roles in machine learning and intelligence
+where \(f(\cdot)\) is a \textit{computable} (scalar) function.\footnote{Here we emphasize that the function \(f(\cdot)\) itself is computable, meaning it can be implemented as a program on a computer.} Alan Turing's seminal work in 1936 \cite{Turing-1936} gives a rigorous definition of computability. In practice, we often further assume that \(f\) is efficiently computable and has nice properties such as continuity and differentiability. The necessity of these properties will become clear later once we understand more refined notions of computability and their roles in machine learning and intelligence.
 
 \paragraph{Multivariable case.}
 The next value may also depend on two predecessors. For example, the famous \textit{Fibonacci sequence}
@@ -164,15 +164,15 @@ More generally, we may write
 \begin{equation}
     x_{n+2} = f(x_{n+1}, x_{n}), \quad x_{n} \in \R, \; n = 1, 2, 3, \ldots
 \end{equation}
-for any computable function $f$ that takes two inputs. Extending further, the next value may depend on the preceding $d$ values:
+for any computable function \(f\) that takes two inputs. Extending further, the next value may depend on the preceding \(d\) values:
 \begin{equation}
     x_{n+d} = f(x_{n+d-1}, \ldots, x_{n}), \quad x_{n} \in \R, \; n = 1, 2, 3, \ldots
     \label{eqn:recursive-d}
 \end{equation}
-The integer $d$ is called the \textit{degree} of the recursion. The above expression \eqref{eqn:recursive-d} is called an \textit{autoregression}, and the resulting sequence is \textit{autoregressive}. When $f$ is linear, we say it is a \textit{linear autoregression}.
+The integer \(d\) is called the \textit{degree} of the recursion. The above expression \eqref{eqn:recursive-d} is called an \textit{autoregression}, and the resulting sequence is \textit{autoregressive}. When \(f\) is linear, we say it is a \textit{linear autoregression}.
 
 \paragraph{Vector case.}
-To simplify notation, we define a vector $\vx \in \R^{d}$ that collects $d$ consecutive values in the sequence:
+To simplify notation, we define a vector \(\vx \in \R^{d}\) that collects \(d\) consecutive values in the sequence:
 \begin{equation}
     \vx_{n} \doteq [x_{n+d-1}, \ldots, x_{n}]^{\top}, \quad \vx_{n} \in \R^{d}, \; n = 1, 2, 3, \ldots
 \end{equation}
@@ -181,43 +181,43 @@ With this notation, the recursive relation \eqref{eqn:recursive-d} becomes
     \vx_{n+1} = g(\vx_{n}) \in \R^{d}, \quad n = 1, 2, 3, \ldots
     \label{eqn:recursive-v}
 \end{equation}
-where $g(\cdot)$ is uniquely determined by the function $f$ in \eqref{eqn:recursive-d} and maps a $d$-dimensional vector to a $d$-dimensional vector. In different contexts, such a vector is sometimes called a ``state'' or a ``token.'' Note that \eqref{eqn:recursive-d} defines a mapping $\R^{d} \to \R$, whereas here we have $g \colon \R^{d} \to \R^{d}$.
+where \(g(\cdot)\) is uniquely determined by the function \(f\) in \eqref{eqn:recursive-d} and maps a \(d\)-dimensional vector to a \(d\)-dimensional vector. In different contexts, such a vector is sometimes called a ``state'' or a ``token.'' Note that \eqref{eqn:recursive-d} defines a mapping \(\R^{d} \to \R\), whereas here we have \(g \colon \R^{d} \to \R^{d}\).
 
 \paragraph{Controlled prediction.}
 We may also define a predictable sequence that depends on another predictable sequence as input:
 \begin{equation}
     \vx_{n+1} = f(\vx_{n}, \vu_{n}) \in \R^{d}, \quad n = 1, 2, 3, \ldots,
-\label{eqn:recursive-control}
+    \label{eqn:recursive-control}
 \end{equation}
-where $\{\vu_{n}\}$ with $\vu_{n} \in \R^{k}$ is a (computable) predictable sequence. In other words, the next vector $\vx_{n+1} \in \R^{d}$ depends on both $\vx_{n} \in \R^{d}$ and $\vu_{n} \in \R^{k}$. In control theory, the sequence $\{\vu_{n}\}$ is often referred to as the ``control input'' and $\vx_{n}$ as the ``state'' or ``output'' of the system \eqref{eqn:recursive-control}. A classic example is a linear dynamical system:
+where \(\{\vu_{n}\}\) with \(\vu_{n} \in \R^{k}\) is a (computable) predictable sequence. In other words, the next vector \(\vx_{n+1} \in \R^{d}\) depends on both \(\vx_{n} \in \R^{d}\) and \(\vu_{n} \in \R^{k}\). In control theory, the sequence \(\{\vu_{n}\}\) is often referred to as the ``control input'' and \(\vx_{n}\) as the ``state'' or ``output'' of the system \eqref{eqn:recursive-control}. A classic example is a linear dynamical system:
 \begin{equation}
     \vx_{n+1} = \vA\vx_{n} + \vB\vu_{n}, \quad \vA \in \R^{d \times d}, \vB \in \R^{d \times k},
     \label{eqn:lineary-system} 
 \end{equation}
 which is widely studied in control theory \cite{Cal:Des}. 
 
-Often the control input is given by a computable function of the state $\vx_{n}$ itself: 
+Often the control input is given by a computable function of the state \(\vx_{n}\) itself: 
 \begin{equation}
     \vu_{n} = h(\vx_{n}), \quad n = 1, 2, 3, \ldots 
+    \label{eqn:control-function}
 \end{equation}
-As a result, the sequence $\{\vx_{n}\}$ is given by composing the two computable functions $f$ and $h$:
+As a result, the sequence \(\{\vx_{n}\}\) is given by composing the two computable functions \(f\) and \(h\):
 \begin{equation}
     \vx_{n+1} = f(\vx_{n}, h(\vx_{n})), \quad n = 1, 2, 3, \ldots
     \label{eqn:recursive-closed-loop}
 \end{equation}
-In this way, the sequence $\{\vx_{n}\}$ again becomes an autoregressive predictable sequence. When the input $\vu_{n}$ depends on the output $\vx_{n}$, we say the resulting sequence is produced by a ``closed-loop'' system \eqref{eqn:recursive-closed-loop}. As the closed-loop system no longer depends on any external input, we say such a system has become \textit{autonomous}. It can be viewed as a special case of autoregression. For instance, if we choose $\vu_{n} = \vF\vx_{n}$ in the above linear system \eqref{eqn:lineary-system}, the closed-loop system becomes
+In this way, the sequence \(\{\vx_{n}\}\) again becomes an autoregressive predictable sequence. When the input \(\vu_{n}\) depends on the output \(\vx_{n}\), we say the resulting sequence is produced by a ``closed-loop'' system \eqref{eqn:recursive-closed-loop}. As the closed-loop system no longer depends on any external input, we say such a system has become \textit{autonomous}. It can be viewed as a special case of autoregression. For instance, if we choose \(\vu_{n} = \vF\vx_{n}\) in the above linear system \eqref{eqn:lineary-system}, the closed-loop system becomes
 \begin{equation}
-        \vx_{n+1} = \vA\vx_{n} + \vB\vu_{n} = \vA\vx_{n} + \vB\vF\vx_{n} = (\vA + \vB\vF)\vx_{n},
+    \vx_{n+1} = \vA\vx_{n} + \vB\vu_{n} = \vA\vx_{n} + \vB\vF\vx_{n} = (\vA + \vB\vF)\vx_{n},
     \label{eqn:lineary-system-closed}
 \end{equation}
 which is a linear autoregression.
 
 
-
 \paragraph{Continuous processes.}
-Predictable sequences have natural continuous counterparts, which we call predictable processes. The simplest such process is time itself, $x(t) = t$.
+Predictable sequences have natural continuous counterparts, which we call predictable processes. The simplest such process is time itself, \(x(t) = t\).
 
-More generally, a process $\vx(t)$ is \textit{predictable} if, at every time $t$, its value at $t + \delta t$ is determined by its value at $t$, where $\delta t$ is an infinitesimal increment. Typically, $\vx(t)$ is continuous and smooth, so the change $\delta \vx(t) = \vx(t + \delta t) - \vx(t)$ is infinitesimally small. Such processes are typically described by (multivariate) differential equations
+More generally, a process \(\vx(t)\) is \textit{predictable} if, at every time \(t\), its value at \(t + \delta t\) is determined by its value at \(t\), where \(\delta t\) is an infinitesimal increment. Typically, \(\vx(t)\) is continuous and smooth, so the change \(\delta \vx(t) = \vx(t + \delta t) - \vx(t)\) is infinitesimally small. Such processes are typically described by (multivariate) differential equations
 \begin{equation}
     \dot{\vx}(t) = f(\vx(t)), \quad \vx \in \R^{d}.
     \label{eqn:process}
@@ -227,48 +227,51 @@ In systems theory \cite{Cal:Des,Sastry-Nonlinear}, the equation \eqref{eqn:proce
     \dot{\vx}(t) = f(\vx(t), \vu(t)), \quad \vx \in \R^{d}, \vu \in \R^{k},
     \label{eqn:process-controlled}
 \end{equation}
-where $\vu(t)$ is a computable input process.
+where \(\vu(t)\) is a computable input process.
 
 \begin{example}
-Newton's second law predicts the trajectory $\vx(t) \in \R^{3}$ of a moving object under a force $\vF(t) \in \R^{3}$:
+Newton's second law predicts the trajectory \(\vx(t) \in \R^{3}\) of a moving object under a force \(\vF(t) \in \R^{3}\):
 \begin{equation}
     m\ddot{\vx}(t) = \vF(t).
+    \label{eqn:newton-second}
 \end{equation}
-When there is no force, i.e., $\vF(t) \equiv 0$, this reduces to Newton's first law: the object moves at constant velocity $\vv \in \R^{3}$:
+When there is no force, i.e., \(\vF(t) \equiv \vzero\), this reduces to Newton's first law: the object moves at constant velocity \(\vv \in \R^{3}\):
 \begin{equation}
-    \ddot{\vx}(t) = \vzero \iff \ \text{there exists $\vv \in \R^{3}$ such that $\dot{\vx}(t) = \vv$}.
+    \ddot{\vx}(t) = \vzero \iff \ \text{there exists } \vv \in \R^{3} \text{ such that } \dot{\vx}(t) = \vv.
+    \label{eqn:newton-first}
 \end{equation}
 \end{example}
 
 
 \subsection{Low Dimensionality}\label{sec:intro-low-dimensionality}
-\paragraph{Learn to Predict.}
+\paragraph{Learning to predict.}
 Now suppose you have observed or have been given many sequence segments:
 \begin{equation}
-    \{S_1, S_2, \ldots, S_i, \ldots, S_N\}
+    \{S_{1}, S_{2}, \ldots, S_{i}, \ldots, S_{N}\}
 \end{equation}
-drawn from a predictable sequence $\{x_n\}_{n=1}^\infty$. Without loss of generality, assume each segment has length $D \gg d$, so
+drawn from a predictable sequence \(\{x_{n}\}_{n=1}^{\infty}\). Without loss of generality, assume each segment has length \(D \gg d\), so
 \begin{equation}
-    S_i = [x_{j(i)}, x_{j(i)+1}, \ldots, x_{j(i)+D-1}]^\top \in \mathbb{R}^D
+    S_{i} = [x_{j(i)}, x_{j(i)+1}, \ldots, x_{j(i)+D-1}]^{\top} \in \R^{D}
 \end{equation}
-for some $j \in \mathbb{N}$. You are then given a new segment $S_t$ and asked to predict its future values.
+for some \(j \in \N\). You are then given a new segment \(S_{t}\) and asked to predict its future values.
 
-The difficulty is that the generating function $f$ and its order $d$ are unknown:
+The difficulty is that the generating function \(f\) and its order \(d\) are unknown:
 \begin{equation}
     x_{n+d} = f(x_{n+d-1}, \ldots, x_{n}).
-\label{eqn:sequence-order-d}
+    \label{eqn:sequence-order-d}
 \end{equation}
-The goal is therefore to learn $f$ and $d$ from the sample segments $S_1, S_2, \ldots, S_N$. The central task of learning to predict is:
+The goal is therefore to learn \(f\) and \(d\) from the sample segments \(S_{1}, S_{2}, \ldots, S_{N}\). The central task of learning to predict is:
 \begin{center}
-\textit{Given many sampled segments of a predictable sequence, how can we effectively and efficiently identify the function $f$?}
+\textit{Given many sampled segments of a predictable sequence, how can we effectively and efficiently identify the function \(f\)?}
 \end{center}
 
 \paragraph{Predictability and low-dimensionality.}
-To identify the predictive function $f$, we may notice a common characteristic of segments of any predictable sequence given by \eqref{eqn:sequence-order-d}. If we take a long segment, say of length $D \gg d$, and view it as a vector
+To identify the predictive function \(f\), we may notice a common characteristic of segments of any predictable sequence given by \eqref{eqn:sequence-order-d}. If we take a long segment, say of length \(D \gg d\), and view it as a vector
 \begin{equation}
-    \vx_i = [x_i, x_{i+1}, \ldots, x_{i+D-1}]^\top \in \mathbb{R}^D,
+    \vx_{i} = [x_{i}, x_{i+1}, \ldots, x_{i+D-1}]^{\top} \in \R^{D},
+    \label{eqn:segment-vector}
 \end{equation}
-then the set of all such vectors $\{\vx_i\}$ is far from random and cannot occupy the entire space $\R^D$. Instead, it has at most $d$ degrees of freedom---given the first $d$ entries of any $\vx_i$, the remaining entries are uniquely determined. In other words, all $\{\vx_i\}$ lie on a $d$-dimensional surface. In mathematics, such a surface is called a submanifold, denoted $\mathcal{S} \subset \R^D$.
+then the set of all such vectors \(\{\vx_{i}\}\) is far from random and cannot occupy the entire space \(\R^{D}\). Instead, it has at most \(d\) degrees of freedom---given the first \(d\) entries of any \(\vx_{i}\), the remaining entries are uniquely determined. In other words, all \(\{\vx_{i}\}\) lie on a \(d\)-dimensional surface. In mathematics, such a surface is called a submanifold, denoted \(\cS \subset \R^{D}\).
 
 \begin{figure}[t]
 \centering
@@ -276,17 +279,16 @@ then the set of all such vectors $\{\vx_i\}$ is far from random and cannot occup
     \caption{A two-dimensional subspace in a ten-dimensional ambient space.}
     \label{fig:lowdimplane}
 \end{figure}
-In practice, if we choose the segment length $D$ large enough, all segments sampled from the same predicting function lie on a surface with intrinsic dimension $d$, significantly lower than that of the ambient space $D$. For example, if the sequence is given by the linear autoregression
+In practice, if we choose the segment length \(D\) large enough, all segments sampled from the same predicting function lie on a surface with intrinsic dimension \(d\), significantly lower than that of the ambient space \(D\). For example, if the sequence is given by the linear autoregression
 \begin{equation}
-    x_{n+2} = a x_{n+1} + b x_n,
+    x_{n+2} = a x_{n+1} + b x_{n},
     \label{eqn:sequence-2d}
 \end{equation}
-for some constants $a, b \in \R$, and we sample segments of length $D = 10$, then all samples lie on a two-dimensional plane in $\R^{10}$, as illustrated in \Cref{fig:lowdimplane}. Identifying this two-dimensional subspace fully determines the constants $a$ and $b$ in \eqref{eqn:sequence-2d}.
+for some constants \(a, b \in \R\), and we sample segments of length \(D = 10\), then all samples lie on a two-dimensional plane in \(\R^{10}\), as illustrated in \Cref{fig:lowdimplane}. Identifying this two-dimensional subspace fully determines the constants \(a\) and \(b\) in \eqref{eqn:sequence-2d}.
 
-More generally, when the predicting function $f$ is linear, as in the systems given in \eqref{eqn:lineary-system} and \eqref{eqn:lineary-system-closed}, the long segments always lie on a low-dimensional linear subspace. Identifying the predicting function is then largely equivalent to identifying this subspace, a problem known as principal component analysis. We will discuss such classic models and methods in \Cref{ch:classic}.
+More generally, when the predicting function \(f\) is linear, as in the systems given in \eqref{eqn:lineary-system} and \eqref{eqn:lineary-system-closed}, the long segments always lie on a low-dimensional linear subspace. Identifying the predicting function is then largely equivalent to identifying this subspace, a problem known as principal component analysis. We will discuss such classic models and methods in \Cref{ch:classic}.
 
-
-This observation extends to general predictable sequences: if we can identify the low-dimensional surface on which the segment samples lie, we can identify the predictive function $f$.\footnote{Under mild conditions, there is a one-to-one mapping between the low-dimensional surface and the function $f$. This fact has been exploited in problems such as system identification, which we will discuss later.} We cannot overemphasize the importance of this property: \textit{All samples of long segments of a predictable sequence lie on a low-dimensional submanifold.} As we will see in this book, all modern learning methods exploit this property, implicitly or explicitly.
+This observation extends to general predictable sequences: if we can identify the low-dimensional surface on which the segment samples lie, we can identify the predictive function \(f\).\footnote{Under mild conditions, there is a one-to-one mapping between the low-dimensional surface and the function \(f\). This fact has been exploited in problems such as system identification, which we will discuss later.} We cannot overemphasize the importance of this property: \textit{All samples of long segments of a predictable sequence lie on a low-dimensional submanifold.} As we will see in this book, all modern learning methods exploit this property, implicitly or explicitly.
 
 In real-world scenarios, observed data often come from multiple predictable sequences. For example, a video sequence may contain several moving objects. In such cases, the data lie on a mixture of low-dimensional linear subspaces or nonlinear submanifolds, as illustrated in \Cref{fig:mixture-models}. 
 \begin{figure}
@@ -330,11 +332,12 @@ By constraining the observed data point $\vx$ to lie on a low-dimensional surfac
 
 Under mild conditions, these properties generalize to many other low-dimensional structures in high-dimensional spaces \cite{Wright-Ma-2022}. As we will see, these useful properties---completion and denoising, for example---inspire effective methods for learning such structures.
 
-For simplicity, we have so far used the deterministic case to introduce the notions of predictability and low-dimensionality, where data lie precisely on geometric structures such as subspaces or surfaces. In practice, however, data always contain some uncertainty or randomness. In this case, we may assume the data follow a probability distribution with density $p(\vx)$. A distribution is considered ``low-dimensional'' if its density concentrates around a low-dimensional geometric structure---a subspace, a surface, or a mixture thereof---as shown in \Cref{fig:mixture-models}. Once learned, such a density $p(\vx)$ serves as a powerful prior for estimating $\vx$ from partial, noisy, or corrupted observations:
+For simplicity, we have so far used the deterministic case to introduce the notions of predictability and low-dimensionality, where data lie precisely on geometric structures such as subspaces or surfaces. In practice, however, data always contain some uncertainty or randomness. In this case, we may assume the data follow a probability distribution with density \(p(\vx)\). A distribution is considered ``low-dimensional'' if its density concentrates around a low-dimensional geometric structure---a subspace, a surface, or a mixture thereof---as shown in \Cref{fig:mixture-models}. Once learned, such a density \(p(\vx)\) serves as a powerful prior for estimating \(\vx\) from partial, noisy, or corrupted observations:
 \begin{equation}
-\y = f(\x) + \boldsymbol{n},
+    \vy = f(\vx) + \vn,
+    \label{eqn:noisy-observation}
 \end{equation}
-by computing the conditional estimate $\hat{\x}(\y) = \mathbb{E}(\x \mid \y)$ or by sampling the conditional distribution $\hat{\x}(\y) \sim p(\x\mid \y)$.\footnote{Modern generative AI technologies, such as conditioned image generation, rely heavily on this principle, as we will discuss in \Cref{ch:conditional-inference}.}
+by computing the conditional estimate \(\hat{\vx}(\vy) = \Ex(\vx \mid \vy)\) or by sampling the conditional distribution \(\hat{\vx}(\vy) \sim p(\vx\mid \vy)\).\footnote{Modern generative AI technologies, such as conditioned image generation, rely heavily on this principle, as we will discuss in \Cref{ch:conditional-inference}.}
 
 These discussions lead to the single assumption on which this book bases its deductive approach to understanding intelligence and deep networks:
 \begin{quote}
@@ -364,37 +367,39 @@ As discussed in \Cref{sec:predictability}, a central task of intelligence is to 
     x[n] = h[n]*z[n] + \epsilon[n], 
     \label{eqn:Wiener-model}
 \end{equation}
-where $z$ is the input and $h$ is the impulse response function.\footnote{Typically, $h$ is assumed to have certain desirable properties, such as finite length or a band-limited spectrum.} Here $\epsilon[n]$ denotes additive observation noise. Given the input process $\{z[n]\}$ and observations of the output process $\{x[n]\}$, the goal is to find the optimal $h[n]$ such that $\hat x[n] = h[n]*z[n]$ predicts $x[n]$ optimally. Prediction quality (i.e., goodness) is measured by the mean squared error (MSE):
+where \(*\) is the convolution operation, \(z\) is the input and \(h\) is the impulse response function.\footnote{Typically, \(h\) is assumed to have certain desirable properties, such as finite length or a band-limited spectrum.} Here \(\epsilon[n]\) denotes additive observation noise. Given the input process \(\{z[n]\}\) and observations of the output process \(\{x[n]\}\), the goal is to find the optimal \(h[n]\) such that \(\hat{x}[n] = h[n]*z[n]\) predicts \(x[n]\) optimally. Prediction quality (i.e., goodness) is measured by the mean squared error (MSE):
 \begin{equation}
-    \min_{h} \mathbb{E} \big[\epsilon[n]^2\big] = \mathbb{E} \big[\|x[n] - h[n]*z[n]\|_2^2\big].
+    \min_{h} \Ex[\epsilon[n]^{2}] = \Ex[\|x[n] - h[n]*z[n]\|_{2}^{2}].
+    \label{eqn:wiener-mse}
 \end{equation}
-The optimal solution $h[n]$ is called a (denoising) filter. Norbert Wiener---who also initiated the Cybernetics movement---studied this problem in the 1940s and derived an elegant closed-form solution known as the \textit{Wiener filter} \cite{Wiener-1942,Wiener-1949}. This result became one of the cornerstones of signal processing.
+The optimal solution \(h[n]\) is called a (denoising) filter. Norbert Wiener---who also initiated the Cybernetics movement---studied this problem in the 1940s and derived an elegant closed-form solution known as the \textit{Wiener filter} \cite{Wiener-1942,Wiener-1949}. This result became one of the cornerstones of signal processing.
 
 \paragraph{Kalman filter.} 
 The idea of denoising or filtering a dynamical system was later extended by Rudolph Kalman in the 1960s to a linear time-invariant system described by a finite-dimensional state-space model:
 \begin{equation}
-    \z[n] = \boldsymbol{A} \z[n-1] + \boldsymbol{B}\boldsymbol{u}[n] + \boldsymbol{\epsilon}[n]. 
+    \vz[n] = \vA \vz[n-1] + \vB\vu[n] + \vepsilon[n]. 
     \label{eqn:linear-state-space}
 \end{equation}
-The problem is to estimate the system state $\z[n]$ from noisy observations of the form
+The problem is to estimate the system state \(\vz[n]\) from noisy observations of the form
 \begin{equation}
-    \x[n] = \boldsymbol{C} \z[n] + \boldsymbol{w}[n],
+    \vx[n] = \vC \vz[n] + \vw[n],
     \label{eqn:Kalman-model}
 \end{equation}
-where $\boldsymbol{w}$ is (white) noise. The optimal causal\footnote{This means the estimator can use only observations up to the current time step $n$. The Kalman filter is always causal, whereas the Wiener filter need not be.} state estimator that minimizes the minimum-MSE (MMSE) prediction error
+where \(\vw\) is (white) noise. The optimal causal\footnote{This means the estimator can use only observations up to the current time step \(n\). The Kalman filter is always causal, whereas the Wiener filter need not be.} state estimator that minimizes the minimum-MSE (MMSE) prediction error
 \begin{equation}
-    \min \mathbb{E}\big[ \|\x[n] - \boldsymbol{C}\z[n]\|_2^2\big]
+    \min \Ex[ \|\vx[n] - \vC\vz[n]\|_{2}^{2}]
+    \label{eqn:kalman-mse}
 \end{equation}
-is given in closed form by the so-called \textit{Kalman filter} \cite{kalman1960new}. This result is a cornerstone of modern control theory because it enables estimation of a dynamical system's state from noisy observations. One can then introduce linear state feedback, for example $\boldsymbol{u}[n] = \boldsymbol{F} \hat{\boldsymbol{z}}[n]$, and render the closed-loop system fully autonomous, as shown in equation \eqref{eqn:recursive-closed-loop}.
+is given in closed form by the so-called \textit{Kalman filter} \cite{kalman1960new}. This result is a cornerstone of modern control theory because it enables estimation of a dynamical system's state from noisy observations. One can then introduce linear state feedback, for example \(\vu[n] = \vF \hat{\vz}[n]\), and render the closed-loop system fully autonomous, as shown in \Cref{eqn:recursive-closed-loop}.
 
 \paragraph{Identification of linear dynamical systems.}
-To derive the Kalman filter, the system parameters $(\boldsymbol{A}, \boldsymbol{B}, \boldsymbol{C})$ are assumed to be known. If they are not given in advance, the problem becomes more challenging and is known as \textit{system identification}: how to \textit{learn} the parameters $(\boldsymbol{A}, \boldsymbol{B}, \boldsymbol{C})$ from many samples of the input sequence $\{\boldsymbol{u}[n]\}$ and observation sequence $\{\x[n]\}$. This is a classic problem in systems theory. If the system is linear, the input and output sequences $\{\boldsymbol{u}[n], \x[n]\}$ jointly lie on a certain low-dimensional subspace\footnote{which has the same dimension as the order of the state-space model \eqref{eqn:linear-state-space}.}. Hence, the identification problem is essentially equivalent to identifying this low-dimensional subspace \cite{OverscheeP1996,Liu-2009-CDC,Liu-2010-SIAM}.
+To derive the Kalman filter, the system parameters \(\vA, \vB, \vC\) are assumed to be known. If they are not given in advance, the problem becomes more challenging and is known as \textit{system identification}: how to \textit{learn} the parameters \(\vA, \vB, \vC\) from many samples of the input sequence \(\{\vu[n]\}\) and observation sequence \(\{\vx[n]\}\). This is a classic problem in systems theory. If the system is linear, the input and output sequences \(\{\vu[n], \vx[n]\}\) jointly lie on a certain low-dimensional subspace\footnote{which has the same dimension as the order of the state-space model \eqref{eqn:linear-state-space}.}. Hence, the identification problem is essentially equivalent to identifying this low-dimensional subspace \cite{OverscheeP1996,Liu-2009-CDC,Liu-2010-SIAM}.
 
-Note that the above problems have two things in common: first, the noise-free sequences or signals are assumed to be generated by an explicit family of parametric models; second, these models are essentially linear. Conceptually, let $\x_o$ be a random variable whose ``true'' distribution is supported on a low-dimensional linear subspace, say $S$. To a large extent, the Wiener filter and Kalman filter both try to estimate such an $\x_o$ from its noisy observations:
+Note that the above problems have two things in common: first, the noise-free sequences or signals are assumed to be generated by an explicit family of parametric models; second, these models are essentially linear. Conceptually, let \(\vx_{o}\) be a random variable whose ``true'' distribution is supported on a low-dimensional linear subspace, say \(S\). To a large extent, the Wiener filter and Kalman filter both try to estimate such an \(\vx_{o}\) from its noisy observations:
 \begin{equation}
-    \x = \x_o + \boldsymbol{\epsilon}, \quad \x_o \sim S,
+    \vx = \vx_{o} + \vepsilon, \quad \vx_{o} \sim S,
 \end{equation}
-where $\boldsymbol{\epsilon}$ is typically a random Gaussian noise (or process). Hence, their solutions rely on identifying a low-dimensional linear subspace that best fits the observed noisy data. By projecting the data onto this subspace, one obtains the optimal denoising operations, all in closed form.
+where \(\vepsilon\) is typically a random Gaussian noise (or process). Hence, their solutions rely on identifying a low-dimensional linear subspace that best fits the observed noisy data. By projecting the data onto this subspace, one obtains the optimal denoising operations, all in closed form.
 
 
 \subsubsection{Linear and Mixed Linear Models}
@@ -402,51 +407,51 @@ where $\boldsymbol{\epsilon}$ is typically a random Gaussian noise (or process).
 \paragraph{Principal component analysis.}
 From the above problems in classical signal processing and system identification, we see that the main task behind all these problems is to learn a \textit{single} low-dimensional linear subspace from noisy observations. Mathematically, we may model such a structure as
 \begin{equation}
-    \x = \boldsymbol{u}_1 z_1 + \boldsymbol{u}_2 z_2 + \cdots + \boldsymbol{u}_d z_d + \boldsymbol{\epsilon} =  \boldsymbol{U} \z + \boldsymbol{\epsilon}, \quad \boldsymbol{U} \in \mathbb{R}^{D\times d},
+    \vx = \vu_{1} z_{1} + \vu_{2} z_{2} + \cdots + \vu_{d} z_{d} + \vepsilon =  \vU \vz + \vepsilon, \quad \vU \in \R^{D\times d},
     \label{eqn:PCA-model}
 \end{equation}
-where $\boldsymbol{\epsilon} \in \mathbb{R}^D$ is small random noise. \Cref{fig:PCA} illustrates such a distribution with two principal components.
+where \(\vepsilon \in \R^{D}\) is small random noise. \Cref{fig:PCA} illustrates such a distribution with two principal components.
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{\toplevelprefix/chapters/chapter1/figs/PCA.png}
     \caption{A distribution with two principal components.}
     \label{fig:PCA}
 \end{figure}
-The problem is to find the subspace basis $\boldsymbol{U}$ from many samples of $\x$. A typical approach is to minimize the projection error onto the subspace:
+The problem is to find the subspace basis \(\vU\) from many samples of \(\vx\). A typical approach is to minimize the projection error onto the subspace:
 \begin{equation}
-    \min_{\boldsymbol{U}}\mathbb{E}\big[\|\x - \boldsymbol{U}\boldsymbol{U}^{\top} \z\|_2^2\big].
+    \min_{\vU}\Ex[\|\vx - \vU\vU^{\top} \vz\|_{2}^{2}].
 \end{equation}
-This is essentially a denoising task: once the basis $\boldsymbol{U}$ is correctly found, we can denoise the noisy sample $\x$ by projecting it onto the low-dimensional subspace spanned by $\boldsymbol{U}$:
+This is essentially a denoising task: once the basis \(\vU\) is correctly found, we can denoise the noisy sample \(\vx\) by projecting it onto the low-dimensional subspace spanned by \(\vU\):
 \begin{equation}
-\x \rightarrow \hat \x = \boldsymbol{U}\boldsymbol{U}^\top \x. 
+\vx \rightarrow \hat{\vx} = \vU\vU^{\top} \vx. 
 \end{equation}
-If the noise is small and the low-dimensional subspace $\boldsymbol{U}$ is correctly learned, we expect $\x \approx \hat \x$. Thus, PCA is a special case of a so-called ``auto-encoding'' scheme, which encodes the data by projecting it into a lower-dimensional space, and decodes a lower-dimensional code by it into the original space:
+If the noise is small and the low-dimensional subspace \(\vU\) is correctly learned, we expect \(\vx \approx \hat{\vx}\). Thus, PCA is a special case of a so-called ``auto-encoding'' scheme, which encodes the data by projecting it into a lower-dimensional space, and decodes a lower-dimensional code by it into the original space:
 \begin{equation}
-    \x   \xrightarrow{\hspace{2mm} \boldsymbol{U}^\top\hspace{2mm}} \z  \xrightarrow{\hspace{2mm} \boldsymbol{U} \hspace{2mm}} \hat \x.
+    \vx   \xrightarrow{\hspace{2mm} \vU^{\top}\hspace{2mm}} \vz  \xrightarrow{\hspace{2mm} \vU \hspace{2mm}} \hat{\vx}.
        \label{eqn:auto-encoding-PCA}
 \end{equation}
-Because of the simple data structure, the encoder $\mathcal{E}$ and decoder $\mathcal{D}$ both become simple linear operators (projecting and lifting).
+Because of the simple data structure, the encoder \(\cE\) and decoder \(\cD\) both become simple linear operators (projecting and lifting).
 
 This classic problem in statistics is known as principal component analysis (PCA). It was first studied by Pearson in 1901 \cite{Pearson1901} and later independently by Hotelling in 1933 \cite{Hotelling1933}. The topic is systematically summarized in the classic book \cite{Jolliffe1986,JolliffeI2002}.
-One may also explicitly assume the data $\x$ is distributed according to a single low-dimensional Gaussian:
+One may also explicitly assume the data \(\vx\) is distributed according to a single low-dimensional Gaussian:
 \begin{equation}
-    \x \sim \mathcal{N}(\boldsymbol{0}, \boldsymbol{U}\boldsymbol{U}^\top + \sigma \I), \quad \boldsymbol{U} \in \mathbb{R}^{D\times d},
+    \vx \sim \mathcal{N}(\vzero, \vU\vU^{\top} + \sigma \vI), \quad \vU \in \R^{D\times d},
 \end{equation}
-which is equivalent to assuming that $\z$ in the PCA model \eqref{eqn:PCA-model} is a standard normal distribution. This problem is known as probabilistic PCA \cite{TippingM1999} and has the same computational solution as PCA. 
+which is equivalent to assuming that \(\vz\) in the PCA model \eqref{eqn:PCA-model} is a standard normal distribution. This problem is known as probabilistic PCA \cite{TippingM1999} and has the same computational solution as PCA. 
 
 In this book, we revisit PCA in \Cref{ch:classic} from the perspective of learning a low-dimensional distribution. Our goal is to use this simple and idealistic model to convey some of the most fundamental ideas for learning a compact representation of a low-dimensional distribution, including the important notions of compression via denoising and auto-encoding for a consistent representation.
 \paragraph{Independent component analysis.}
-Independent component analysis (ICA) was originally proposed by \cite{Ans-1985} as a classic model for \textit{learning a good representation}. In fact, it was originally proposed as a simple mathematical model for our memory. The ICA model takes a deceptively similar form to the above PCA model \eqref{eqn:PCA-model} by assuming that the observed random variable $\x$ is a linear superposition of multiple independent components $z_i$:\footnote{In PCA the ``components'' are the learned vectors, whereas in ICA they are scalars. This is just a difference in names and convention.}
+Independent component analysis (ICA) was originally proposed by \cite{Ans-1985} as a classic model for \textit{learning a good representation}. In fact, it was originally proposed as a simple mathematical model for our memory. The ICA model takes a deceptively similar form to the above PCA model \eqref{eqn:PCA-model} by assuming that the observed random variable \(\vx\) is a linear superposition of multiple independent components \(z_{i}\):\footnote{In PCA the ``components'' are the learned vectors, whereas in ICA they are scalars. This is just a difference in names and convention.}
 \begin{equation}
-    \x = \boldsymbol{u}_1 z_1 + \boldsymbol{u}_2 z_2 + \cdots + \boldsymbol{u}_d z_d  + \boldsymbol{\epsilon} =  \boldsymbol{U} \z + \boldsymbol{\epsilon}.
+    \vx = \vu_{1} z_{1} + \vu_{2} z_{2} + \cdots + \vu_{d} z_{d}  + \vepsilon =  \vU \vz + \vepsilon.
     \label{eqn:ICA-model}
 \end{equation}
-However, here the components $z_i$ are assumed to be independent \textit{non-Gaussian} variables. For example, a popular choice is
+However, here the components \(z_{i}\) are assumed to be independent \textit{non-Gaussian} variables. For example, a popular choice is
 \begin{equation}
-    z_i = \sigma_i \cdot w_i, \quad \sigma_i \sim B(1,p),
+    z_{i} = \sigma_{i} \cdot w_{i}, \quad \sigma_{i} \sim B(1,p),
     \label{eqn:ICA-modes}
 \end{equation}
-where $\sigma_i$ is a Bernoulli random variable and $w_i$ could be a constant value or another random variable, say Gaussian.\footnote{Even if $w$ is Gaussian, $\sigma w$ is no longer a Gaussian variable!} The ICA problem aims to identify both $\boldsymbol{U}$ and $\z$ from observed samples of $\x$. \Cref{fig:ICA-PCA} illustrates the difference between ICA and PCA.
+where \(\sigma_{i}\) is a Bernoulli random variable and \(w_{i}\) could be a constant value or another random variable, say Gaussian.\footnote{Even if \(w\) is Gaussian, \(\sigma w\) is no longer a Gaussian variable!} The ICA problem aims to identify both \(\vU\) and \(\vz\) from observed samples of \(\vx\). \Cref{fig:ICA-PCA} illustrates the difference between ICA and PCA.
 
 \begin{figure}
     \centering
@@ -455,40 +460,40 @@ where $\sigma_i$ is a Bernoulli random variable and $w_i$ could be a constant va
     \label{fig:ICA-PCA}
 \end{figure}
 
-Although the (decoding) mapping from $\z$ to $\x$ seems linear and straightforward once $\boldsymbol{U}$ and $\z$ are learned, the (encoding) mapping from $\x$ to $\z$ can be complicated and may not be represented by a simple linear mapping. Hence, ICA generally gives an auto-encoding of the form:
+Although the (decoding) mapping from \(\vz\) to \(\vx\) seems linear and straightforward once \(\vU\) and \(\vz\) are learned, the (encoding) mapping from \(\vx\) to \(\vz\) can be complicated and may not be represented by a simple linear mapping. Hence, ICA generally gives an auto-encoding of the form:
 \begin{equation}
-    \x   \xrightarrow{\hspace{2mm} \mathcal{E}\hspace{2mm}} \z  \xrightarrow{\hspace{2mm} \boldsymbol{U} \hspace{2mm}} \hat \x.
+    \vx   \xrightarrow{\hspace{2mm} \cE\hspace{2mm}} \vz  \xrightarrow{\hspace{2mm} \vU \hspace{2mm}} \hat{\vx}.
        \label{eqn:auto-encoding-ICA}
 \end{equation}
-Thus, unlike PCA, ICA is somewhat more difficult to analyze and solve. In the 1990s, researchers such as Erkki Oja and Aapo Hyv\"{a}rinen \cite{hyvarinen-1997,Hyvrinen-2000} made significant theoretical and algorithmic contributions to ICA. In \Cref{ch:classic}, we will study and provide a solution to ICA from which the encoding mapping $\mathcal{E}$ will become clear.
+Thus, unlike PCA, ICA is somewhat more difficult to analyze and solve. In the 1990s, researchers such as Erkki Oja and Aapo Hyv\"{a}rinen \cite{hyvarinen-1997,Hyvrinen-2000} made significant theoretical and algorithmic contributions to ICA. In \Cref{ch:classic}, we will study and provide a solution to ICA from which the encoding mapping \(\cE\) will become clear.
 
 
 \paragraph{Sparse structures and compressive sensing.}
-If $p$ in \eqref{eqn:ICA-modes} is very small, the probability that any component is non-zero is small. In this case we say $\x$ is sparsely generated and concentrates on a union of linear subspaces whose dimension is $k = p \cdot d$. We may therefore extend the ICA model to a more general family of low-dimensional structures known as sparse models.
+If \(p\) in \eqref{eqn:ICA-modes} is very small, the probability that any component is non-zero is small. In this case we say \(\vx\) is sparsely generated and concentrates on a union of linear subspaces whose dimension is \(k = p \cdot d\). We may therefore extend the ICA model to a more general family of low-dimensional structures known as sparse models.
 
-A $k$-sparse model is the set of all \textit{$k$-sparse vectors}:
+A \(k\)-sparse model is the set of all \textit{\(k\)-sparse vectors}:
 \begin{equation}
-    \mathcal{Z} = \{\z \in \mathbb{R}^n \mid \|\z\|_0 \le k\},
+    \cZ = \{\vz \in \R^{n} \mid \|\vz\|_{0} \le k\},
 \end{equation}
-where $\|\cdot\|_0$ counts the number of non-zero entries. Thus $\mathcal{Z}$ is the union of all $k$-dimensional subspaces aligned with the coordinate axes, as illustrated in \Cref{fig:mixture-models} (left). A central problem in signal processing and statistics is to recover a sparse vector $\z$ from its linear observations
+where \(\|\cdot\|_{0}\) counts the number of non-zero entries. Thus \(\cZ\) is the union of all \(k\)-dimensional subspaces aligned with the coordinate axes, as illustrated in \Cref{fig:mixture-models} (left). A central problem in signal processing and statistics is to recover a sparse vector \(\vz\) from its linear observations
 \begin{equation}
-    \x = \boldsymbol{A} \z + \boldsymbol{\epsilon}, \quad \boldsymbol{A} \in \mathbb{R}^{m\times n},
+    \vx = \vA \vz + \vepsilon, \quad \vA \in \R^{m\times n},
     \label{eqn:sparse-model}
 \end{equation}
-where $\boldsymbol{A}$ is given, typically $m < n$, and $\boldsymbol{\epsilon}$ is small noise. This seemingly benign problem is NP-hard to solve and even hard to approximate (see \cite{Wright-Ma-2022} for details).
+where \(\vA\) is given, typically \(m < n\), and \(\vepsilon\) is small noise. This seemingly benign problem is NP-hard to solve and even hard to approximate (see \cite{Wright-Ma-2022} for details).
 
-Despite a rich history dating back to the eighteenth century \cite{Boscovichca1750}, no provably efficient algorithm existed for this class of problems, although many heuristic algorithms were proposed between the 1960s and 1990s. Some were effective in practice but lacked rigorous justification. A major breakthrough came in the early 2000s when mathematicians including David Donoho, Emmanuel Cand\'{e}s, and Terence Tao \cite{donoho2005neighborly,Candes2005,CandesE2005-IT} established a rigorous theoretical framework that characterizes precise conditions under which the sparse recovery problem can be solved effectively and efficiently via convex $\ell^1$ minimization:
+Despite a rich history dating back to the eighteenth century \cite{Boscovichca1750}, no provably efficient algorithm existed for this class of problems, although many heuristic algorithms were proposed between the 1960s and 1990s. Some were effective in practice but lacked rigorous justification. A major breakthrough came in the early 2000s when mathematicians including David Donoho, Emmanuel Cand\'{e}s, and Terence Tao \cite{donoho2005neighborly,Candes2005,CandesE2005-IT} established a rigorous theoretical framework that characterizes precise conditions under which the sparse recovery problem can be solved effectively and efficiently via convex \(\ell^{1}\) minimization:
 \begin{equation}
-    \min \|\z\|_1 \quad \text{subject to} \quad \|\x - \boldsymbol{A}\z\|_2 \le \epsilon,
+    \min \|\vz\|_{1} \quad \text{subject to} \quad \|\vx - \vA\vz\|_{2} \le \epsilon,
 \end{equation}
-where $\|\cdot\|_1$ is the sparsity-promoting $\ell^1$ norm of a vector and $\epsilon$ is a small constant. Any solution yields a sparse (auto) encoding 
+where \(\|\cdot\|_{1}\) is the sparsity-promoting \(\ell^{1}\) norm of a vector and \(\epsilon\) is a small constant. Any solution yields a sparse (auto) encoding 
 \begin{equation}
-    \x \xrightarrow{\hspace{2mm} \mathcal{E} \hspace{2mm}} \z \xrightarrow{\hspace{2mm} \boldsymbol{A} \hspace{2mm}} \hat \x.
+    \vx \xrightarrow{\hspace{2mm} \cE \hspace{2mm}} \vz \xrightarrow{\hspace{2mm} \vA \hspace{2mm}} \hat{\vx}.
     \label{eqn:decoding-sparse}
 \end{equation}
 We will describe such an algorithm (and thus mapping) in \Cref{ch:classic}, revealing fundamental connections between sparse coding and deep learning.\footnote{Similarities between sparse-coding algorithms and deep networks were noted as early as 2010 \cite{gregor2010learning}.}
 
-Conditions for $\ell^1$ minimization to succeed are surprisingly general: the minimum number of measurements $m$ required for a successful recovery is only proportional to the intrinsic dimension $k$. This is the \textit{compressive sensing} phenomenon \cite{CandesE2006-ICM}. It extends to broad families of low-dimensional structures, including low-rank matrices. These results fundamentally changed our understanding of recovering low-dimensional structures in high-dimensional spaces. David Donoho, among others, celebrated this reversal as the ``blessing of dimensionality'' \cite{DonohoD2000}, in contrast to the usual pessimistic belief in the ``curse of dimensionality.'' The complete theory and body of results is presented in \cite{Wright-Ma-2022}.
+Conditions for \(\ell^{1}\) minimization to succeed are surprisingly general: the minimum number of measurements \(m\) required for a successful recovery is only proportional to the intrinsic dimension \(k\). This is the \textit{compressive sensing} phenomenon \cite{CandesE2006-ICM}. It extends to broad families of low-dimensional structures, including low-rank matrices. These results fundamentally changed our understanding of recovering low-dimensional structures in high-dimensional spaces. David Donoho, among others, celebrated this reversal as the ``blessing of dimensionality'' \cite{DonohoD2000}, in contrast to the usual pessimistic belief in the ``curse of dimensionality.'' The complete theory and body of results is presented in \cite{Wright-Ma-2022}.
 
 The computational significance of this framework cannot be overstated. It transformed problems previously believed intractable into ones that are not only tractable but scalably solvable using extremely efficient algorithms:
 \begin{equation}
@@ -497,18 +502,18 @@ The computational significance of this framework cannot be overstated. It transf
 The algorithms come with rigorous theoretical guarantees of correctness given precise requirements in data and computation. The deductive nature of this approach contrasts sharply with the empirical, inductive practice of deep neural networks. Yet we now know that both approaches share a common goal---pursuing low-dimensional structures in high-dimensional spaces.
 
 \paragraph{Dictionary learning.}
-Conceptually, an even harder problem than the sparse-coding problem \eqref{eqn:sparse-model} arises when the observation matrix $\boldsymbol{A}$ is unknown and must itself be learned from a set of (possibly noisy) observations $\X = [\x_1, \x_2, \ldots, \x_n]$:
+Conceptually, an even harder problem than the sparse-coding problem \eqref{eqn:sparse-model} arises when the observation matrix \(\vA\) is unknown and must itself be learned from a set of (possibly noisy) observations \(\vX = [\vx_{1}, \vx_{2}, \ldots, \vx_{n}]\):
 \begin{equation}
-    \X = \boldsymbol{A} \Z + \boldsymbol{E}, \quad \boldsymbol{A} \in \mathbb{R}^{m\times n}.
+    \vX = \vA \vZ + \vE, \quad \vA \in \R^{m\times n}.
     \label{eqn:dictionary-learning}
 \end{equation}
-Here we are given only $\X$, not the corresponding $\Z = [\z_1, \z_2, \ldots, \z_n]$ or the noise term $\boldsymbol{E}= [\boldsymbol{\epsilon}_1, \boldsymbol{\epsilon}_2, \ldots, \boldsymbol{\epsilon}_n]$, except that the $\z_i$ are known to be sparse. This is the {\em dictionary learning} problem, which generalizes the ICA problem \eqref{eqn:ICA-model} discussed earlier. In other words, given that the distribution of the data $\X$ is the image of a standard sparse distribution $\Z$ under a linear transform $\boldsymbol{A}$, we wish to learn both $\boldsymbol{A}$ and its ``inverse'' mapping $\mathcal{E}$ so as to obtain an autoencoder:
+Here we are given only \(\vX\), not the corresponding \(\vZ = [\vz_{1}, \vz_{2}, \ldots, \vz_{n}]\) or the noise term \(\vE = [\vepsilon_{1}, \vepsilon_{2}, \ldots, \vepsilon_{n}]\), except that the \(\vz_{i}\) are known to be sparse. This is the \textit{dictionary learning} problem, which generalizes the ICA problem \eqref{eqn:ICA-model} discussed earlier. In other words, given that the distribution of the data \(\vX\) is the image of a standard sparse distribution \(\vZ\) under a linear transform \(\vA\), we wish to learn both \(\vA\) and its ``inverse'' mapping \(\cE\) so as to obtain an autoencoder:
 \begin{equation}
-    \X   \xrightarrow{\hspace{2mm} \mathcal{E}\hspace{2mm}}  \Z \xrightarrow{\hspace{2mm} \boldsymbol{A} \hspace{2mm}} \hat\X.
+    \vX   \xrightarrow{\hspace{2mm} \cE\hspace{2mm}}  \vZ \xrightarrow{\hspace{2mm} \vA \hspace{2mm}} \hat{\vX}.
        \label{eqn:decoding-DL}
 \end{equation}
 
-PCA, ICA, and dictionary learning all assume that the data distribution is supported on or near low-dimensional linear or piecewise-linear structures. Each method requires learning a (global or local) basis for these structures from noisy samples. In \Cref{ch:classic} we study how to identify such low-dimensional structures through these classical models. In particular, we will see that all of these low-dimensional (piecewise) linear models can be learned efficiently by the same family of fast algorithms known as {\em power iteration} \cite{Zhai-2020}. Although these linear or piecewise-linear models are somewhat idealized for most real-world data, understanding them is an essential first step toward understanding more general low-dimensional distributions.
+PCA, ICA, and dictionary learning all assume that the data distribution is supported on or near low-dimensional linear or piecewise-linear structures. Each method requires learning a (global or local) basis for these structures from noisy samples. In \Cref{ch:classic} we study how to identify such low-dimensional structures through these classical models. In particular, we will see that all of these low-dimensional (piecewise) linear models can be learned efficiently by the same family of fast algorithms known as \textit{power iteration} \cite{Zhai-2020}. Although these linear or piecewise-linear models are somewhat idealized for most real-world data, understanding them is an essential first step toward understanding more general low-dimensional distributions.
 
 \subsubsection{General Distributions}\label{sec:denoising-intro}
 
@@ -516,41 +521,41 @@ The distributions of real-world data such as images, videos, and audio are too c
 
 In practice, for a general distribution of real-world data, we typically only have many samples from the distribution---the so-called \textit{empirical distribution}. In such cases, we normally cannot expect to have a clear analytical form for their low-dimensional structures, nor for the resulting denoising operators.\footnote{This is unlike the cases of PCA, Wiener filter, and Kalman filter.} We therefore need to develop a more general solution to these empirical distributions, not necessarily in closed form but at least efficiently computable. If we do this correctly, solutions to the aforementioned linear models should become their special cases.
 
-\paragraph{Denoising.} In the 1950s, statisticians became interested in the problem of denoising data drawn from an arbitrary distribution. Let $\x_o$ be a random variable with probability density function $p_o(\cdot)$. Suppose we observe a noisy version of $\x_o$:
+\paragraph{Denoising.} In the 1950s, statisticians became interested in the problem of denoising data drawn from an arbitrary distribution. Let \(\vx_{o}\) be a random variable with probability density function \(p_{o}(\cdot)\). Suppose we observe a noisy version of \(\vx_{o}\):
 \begin{equation}
-    \x = \x_o + \sigma \vg, 
+    \vx = \vx_{o} + \sigma \vg, 
 \end{equation}
-where $\vg \sim \dNorm(\vzero, \vI)$ is standard Gaussian noise and $\sigma$ is the noise level of the observation. Let $p(\cdot)$ be the probability density function of $\x$.\footnote{That is, $p(\x) = \int_{-\infty}^{\infty} \phi_{\sigma}(\x - \z)p_o(\z) \odif{\z}$, where $\phi_{\sigma}$ is the density function of the Gaussian distribution $\mathcal{N}(\boldsymbol{0}, \sigma^2 \boldsymbol{I})$.} Remarkably, the posterior expectation of $\x_o$ given $\x$ can be calculated by an elegant formula, known as Tweedie's formula \cite{Robbins1956AnEB}:\footnote{Herbert Robbins gave the credit for this formula to Maurice Kenneth Tweedie from their personal correspondence.}
+where \(\vg \sim \dNorm(\vzero, \vI)\) is standard Gaussian noise and \(\sigma\) is the noise level of the observation. Let \(p(\cdot)\) be the probability density function of \(\vx\).\footnote{That is, \(p(\vx) = \int_{-\infty}^{\infty} \phi_{\sigma}(\vx - \vz)p_{o}(\vz) \odif{\vz}\), where \(\phi_{\sigma}\) is the density function of the Gaussian distribution \(\mathcal{N}(\vzero, \sigma^{2} \vI)\).} Remarkably, the posterior expectation of \(\vx_{o}\) given \(\vx\) can be calculated by an elegant formula, known as Tweedie's formula \cite{Robbins1956AnEB}:\footnote{Herbert Robbins gave the credit for this formula to Maurice Kenneth Tweedie from their personal correspondence.}
 \begin{equation}
-    \hat \x_o = \mathbb{E}[\x_o\mid \x] = \x + \sigma^2 \nabla \log p(\x).
+    \hat{\vx}_{o} = \Ex[\vx_{o}\mid \vx] = \vx + \sigma^{2} \nabla \log p(\vx).
 \end{equation}
-As can be seen from the formula, the function $\nabla \log p(\x)$ plays a very special role in denoising the observation $\x$ here. The noise $\vg$ can be explicitly estimated as
+As can be seen from the formula, the function \(\nabla \log p(\vx)\) plays a very special role in denoising the observation \(\vx\) here. The noise \(\vg\) can be explicitly estimated as
 \begin{equation}
-    \hat{\vg} = \frac{\x - \hat \x_o}{\sigma} = -\sigma \nabla \log p(\x),
+    \hat{\vg} = \frac{\vx - \hat{\vx}_{o}}{\sigma} = -\sigma \nabla \log p(\vx),
 \end{equation}
-for which we only need to know the distribution $p(\cdot)$ of $\x$, not the ground truth $p_o(\cdot)$ for $\x_o$. An important implication of this result is that if we add Gaussian noise to any distribution, the denoising process can be done easily if we can somehow obtain the function $\nabla \log p(\x)$.
+for which we only need to know the distribution \(p(\cdot)\) of \(\vx\), not the ground truth \(p_{o}(\cdot)\) for \(\vx_{o}\). An important implication of this result is that if we add Gaussian noise to any distribution, the denoising process can be done easily if we can somehow obtain the function \(\nabla \log p(\vx)\).
 
-Because this is such an important and useful result, it has been rediscovered and used in many different contexts and areas. For example, after Tweedie's formula \cite{Robbins1956AnEB}, it was rediscovered a few years later by \cite{Miyasawa61}. In the early 2000s, the function $\nabla \log p(\x)$ was rediscovered again in the context of learning a general distribution and was named the ``score function'' by Aapo Hyv\"{a}rinen \cite{hyvarinen05a}. Its connection to (empirical Bayesian) denoising was soon recognized by \cite{Vincent2011}.
-Generalizations to other measurement distributions (beyond Gaussian noise) have been made by Eero Simoncelli's group \cite{Raphan10}. Today, the most direct application of Tweedie's formula and denoising is image generation via iterative denoising \cite{Kadkhodaie21a,ho2020denoising}
+Because this is such an important and useful result, it has been rediscovered and used in many different contexts and areas. For example, after Tweedie's formula \cite{Robbins1956AnEB}, it was rediscovered a few years later by \cite{Miyasawa61}. In the early 2000s, the function \(\nabla \log p(\vx)\) was rediscovered again in the context of learning a general distribution and was named the ``score function'' by Aapo Hyv\"{a}rinen \cite{hyvarinen05a}. Its connection to (empirical Bayesian) denoising was soon recognized by \cite{Vincent2011}.
+Generalizations to other measurement distributions (beyond Gaussian noise) have been made by Eero Simoncelli's group \cite{Raphan10}. Today, the most direct application of Tweedie's formula and denoising is image generation via iterative denoising \cite{Kadkhodaie21a,ho2020denoising}.
 
 \begin{figure}
     \centering
     \includegraphics[width=1\linewidth]{\toplevelprefix/chapters/chapter1/figs/Density-compress.png}
-    \caption{Geometric interpretation of a score function $\nabla \log p(\x)$ for a distribution with density $p(\x)$ on the left. The operation generated by the score function pushes the distribution towards areas of higher density. The goal is that, by a certain measure of compactness (e.g. entropy or coding length), the resulting distribution is more ``compressed''. Eventually, the distribution converges to one that has a lower-dimensional support, as $p^*(\x)$ shown on the right.}
+    \caption{Geometric interpretation of a score function \(\nabla \log p(\vx)\) for a distribution with density \(p(\vx)\) on the left. The operation generated by the score function pushes the distribution towards areas of higher density. The goal is that, by a certain measure of compactness (e.g. entropy or coding length), the resulting distribution is more ``compressed''. Eventually, the distribution converges to one that has a lower-dimensional support, as \(p^{*}(\vx)\) shown on the right.}
     \label{fig:score-function}
 \end{figure}
 
-\paragraph{Entropy minimization.} The score has an intuitive information-theoretic and geometric interpretation. In information theory, $-\log p(\x)$ corresponds to the number of bits needed to encode $\x$\footnote{at least for discrete variables, as detailed in \Cref{ch:compression}.}. The gradient $\nabla \log p(\x)$ points toward higher-probability-density regions, as shown in \Cref{fig:score-function} (left). Moving in this direction reduces the number of bits required to encode $\x$. Thus, the operator $\nabla \log p(\x)$ pushes the distribution to ``shrink'' toward high-density regions. Formally, one can show that the (differential) entropy
+\paragraph{Entropy minimization.} The score has an intuitive information-theoretic and geometric interpretation. In information theory, \(-\log p(\vx)\) corresponds to the number of bits needed to encode \(\vx\)\footnote{at least for discrete variables, as detailed in \Cref{ch:compression}.}. The gradient \(\nabla \log p(\vx)\) points toward higher-probability-density regions, as shown in \Cref{fig:score-function} (left). Moving in this direction reduces the number of bits required to encode \(\vx\). Thus, the operator \(\nabla \log p(\vx)\) pushes the distribution to ``shrink'' toward high-density regions. Formally, one can show that the (differential) entropy
 \begin{equation}
-H(\x) = - \int p(\boldsymbol{w}) \log p(\boldsymbol{w}) \odif{\boldsymbol{w}}
+    H(\vx) = - \int p(\vw) \log p(\vw) \odif{\vw}
 \end{equation}
-decreases under this operation (see \Cref{ch:compression} and \Cref{app:diffusion-denoising}). With an optimal codebook, the resulting distribution achieves a lower coding rate and is thus more compressed. Repeating this denoising process indefinitely produces a distribution whose probability mass is concentrated on a support of lower dimension. For instance, the distribution $p(\x)$ in \Cref{fig:score-function} (left) converges to $p^*(\x)$ (right):\footnote{Strictly speaking, $p^*(\x)$ is a generalized function: $p^*(\x) = p^*(\x_1)\delta(\x-\x_1) + p^*(\x_2) \delta(\x-\x_2)$ with $p^*(\x_1) + p^*(\x_2) = 1$.}\footnote{Notice that in this section we discuss the process of iteratively denoising and compressing a high-entropy noise distribution until it converges to the low-entropy data distribution. As we will see in \Cref{ch:general-distribution}, this problem is dual to the problem of learning an optimal encoding for the data distribution, which is also a useful application \cite{relic2024lossy}.}
+decreases under this operation (see \Cref{ch:compression} and \Cref{app:diffusion-denoising}). With an optimal codebook, the resulting distribution achieves a lower coding rate and is thus more compressed. Repeating this denoising process indefinitely produces a distribution whose probability mass is concentrated on a support of lower dimension. For instance, the distribution \(p(\vx)\) in \Cref{fig:score-function} (left) converges to \(p^{*}(\vx)\) (right):\footnote{Strictly speaking, \(p^{*}(\vx)\) is a generalized function: \(p^{*}(\vx) = p^{*}(\vx_{1})\delta(\vx-\vx_{1}) + p^{*}(\vx_{2}) \delta(\vx-\vx_{2})\) with \(p^{*}(\vx_{1}) + p^{*}(\vx_{2}) = 1\).}\footnote{Notice that in this section we discuss the process of iteratively denoising and compressing a high-entropy noise distribution until it converges to the low-entropy data distribution. As we will see in \Cref{ch:general-distribution}, this problem is dual to the problem of learning an optimal encoding for the data distribution, which is also a useful application \cite{relic2024lossy}.}
 \begin{equation}
-H(\x) = - \int p(\boldsymbol{w}) \log p(\boldsymbol{w}) \odif{\boldsymbol{w}} \quad \xrightarrow{\hspace{1mm} \text{decreasing} \hspace{1mm}} \quad H^*(\x) = - \int p^*(\boldsymbol{w}) \log p^*(\boldsymbol{w}) \odif{\boldsymbol{w}}.
+    H(\vx) = - \int p(\vw) \log p(\vw) \odif{\vw} \quad \xrightarrow{\hspace{1mm} \text{decreasing} \hspace{1mm}} \quad H^{*}(\vx) = - \int p^{*}(\vw) \log p^{*}(\vw) \odif{\vw}.
 \end{equation}
-As the distribution converges to $p^*(\x)$, its differential entropy approaches negative infinity due to a technical difference between continuous and discrete entropy definitions. \Cref{ch:compression} resolves this using a unified \textit{rate-distortion} measure.
+As the distribution converges to \(p^{*}(\vx)\), its differential entropy approaches negative infinity due to a technical difference between continuous and discrete entropy definitions. \Cref{ch:compression} resolves this using a unified \textit{rate-distortion} measure.
 
-Later in this chapter and \Cref{ch:compression}, we explore how this simple denoising-compression framework unifies powerful methods for learning low-dimensional distributions in high-dimensional spaces, including natural image distributions
+Later in this chapter and \Cref{ch:compression}, we explore how this simple denoising-compression framework unifies powerful methods for learning low-dimensional distributions in high-dimensional spaces, including natural image distributions.
 \subsection{Empirical Approaches}
 In practice, it is difficult to model important real-world data---such as images, sounds, and text---with the idealized linear, piecewise-linear, or other analytical models discussed in the previous section. Historically, many empirical models and methods have therefore been proposed. These models often drew inspiration from the biological nervous system, because the brain of an animal or human processes such data with remarkable efficiency and effectiveness.
 
@@ -601,7 +606,7 @@ Also inspired by how neurons work in the cat's visual cortex, Fukushima was the 
 \begin{equation}
     \varphi(x) = \max\{0, x\} = \casework{x, & \text{if } x > 0, \\ 0, & \text{if } x \leq 0,}
 \end{equation}
-as the activation function $\varphi(\cdot)$ in 1969 \cite{Fukushima-1969}. However, it was not until recent years that ReLU became widely used in modern deep (convolutional) neural networks. This book will explain why ReLU is a good choice once we discuss the main operations deep networks implement: compression.
+as the activation function \(\varphi(\cdot)\) in 1969 \cite{Fukushima-1969}. However, it was not until recent years that ReLU became widely used in modern deep (convolutional) neural networks. This book will explain why ReLU is a good choice once we discuss the main operations deep networks implement: compression.
 
 \begin{figure}
     \centering
@@ -622,25 +627,25 @@ CNN-type networks continued to evolve in the 1980s, and many different variants 
 \paragraph{Backpropagation.}
 Throughout history, the fate of deep neural networks has been tied to how easily and efficiently they can be trained. Backpropagation (BP) was introduced for this purpose. A multilayer perceptron can be expressed as a composition of linear mappings and nonlinear activations:
 \begin{equation}
-    h(\bm W_1, \ldots, \bm W_L) = f^L(\bm W_Lf^{L-1}(\bm W_{L-1} \cdots f^2(\bm W_2f^1(\bm W_1\x)))).
+    h(\vW_{1}, \ldots, \vW_{L}) = f^{L}(\vW_{L}f^{L-1}(\vW_{L-1} \cdots f^{2}(\vW_{2}f^{1}(\vW_{1}\vx)))).
 \end{equation}
-To train the network weights $\{\bm W_l\}_{l=1}^L$ via gradient descent, we must evaluate the gradient ${\partial h}/{\partial \bm W_l}$. The chain rule in calculus shows that gradients can be computed efficiently for such functions---a technique later termed backpropagation or BP; see \Cref{app:optimization} for details. BP was already known in optimal control and dynamic programming during the 1960s and 1970s, appearing in Paul Werbos's 1974 PhD thesis \cite{Werbos-1974, Werbos1994TheRO}. In 1986, David Rumelhart et al. were the first to apply it to train a multilayer perceptron (MLP) \cite{Rumelhart1986}. Since then, BP has become the dominant technique for training deep networks, as it is scalable and can be efficiently implemented on parallel and distributed computing platforms. However, nature likely does not use BP,\footnote{As we have discussed earlier, nature almost ubiquitously learns to correct errors via closed-loop feedback.} as the mechanism is too expensive for physical implementation.\footnote{End-to-end BP is computationally intractable for neural structures as complex as the brain, especially if the updates need to happen in real time. Instead, localized updates to small sections of the neural circuitry are much more biologically feasible. There is a relatively small amount of work on transplanting such ``local learning'' rules to training deep networks, circumventing BP \cite{baldi2016theory,li2025noprop}. We believe this is an exciting opportunity to improve the scalability of training deep networks.} This leaves ample room for future improvement.
+To train the network weights \(\{\vW_{l}\}_{l=1}^{L}\) via gradient descent, we must evaluate the gradient \(\partial h/\partial \vW_{l}\). The chain rule in calculus shows that gradients can be computed efficiently for such functions---a technique later termed backpropagation or BP; see \Cref{app:optimization} for details. BP was already known in optimal control and dynamic programming during the 1960s and 1970s, appearing in Paul Werbos's 1974 PhD thesis \cite{Werbos-1974, Werbos1994TheRO}. In 1986, David Rumelhart et al. were the first to apply it to train a multilayer perceptron (MLP) \cite{Rumelhart1986}. Since then, BP has become the dominant technique for training deep networks, as it is scalable and can be efficiently implemented on parallel and distributed computing platforms. However, nature likely does not use BP,\footnote{As we have discussed earlier, nature almost ubiquitously learns to correct errors via closed-loop feedback.} as the mechanism is too expensive for physical implementation.\footnote{End-to-end BP is computationally intractable for neural structures as complex as the brain, especially if the updates need to happen in real time. Instead, localized updates to small sections of the neural circuitry are much more biologically feasible. There is a relatively small amount of work on transplanting such ``local learning'' rules to training deep networks, circumventing BP \cite{baldi2016theory,li2025noprop}. We believe this is an exciting opportunity to improve the scalability of training deep networks.} This leaves ample room for future improvement.
 
 Despite the aforementioned algorithmic advances, training deep networks remained finicky and computationally expensive in the 1980s and 1990s. By the late 1990s, support vector machines (SVMs) \cite{SVM-1995} had gained popularity as a superior alternative for classification tasks.\footnote{Similar ideas for classification problems trace back to Thomas Cover's 1964 PhD dissertation, which was condensed and published in a paper in 1964 \cite{Cover-1964}.} SVMs offered two advantages: a rigorous statistical learning framework known as the Vapnik--Chervonenkis (VC) theory and efficient convex optimization algorithms \cite{BoydVa04}. The rise of SVMs ushered in a second winter for neural networks in the early 2000s.
 
 \paragraph{Compressive auto-encoding.}
-In the late 1980s and 1990s, artificial neural networks were already being used to learn low-dimensional representations of high-dimensional data such as images. It had been shown that neural networks could learn PCA directly from data \cite{Oja1982SimplifiedNM,Baldi89}, rather than using the classic methods discussed in \Cref{sec:PCA-ICA}. It was also argued during this period that, due to their ability to model nonlinear transformations, neural networks could learn low-dimensional representations for data with nonlinear distributions. Similar to the linear PCA case, one can simultaneously learn a nonlinear dimension-reduction encoder $f$ and a decoder $g$, each modeled by a deep neural network \cite{Rumelhart1986,Kramer1991NonlinearPC}:
+In the late 1980s and 1990s, artificial neural networks were already being used to learn low-dimensional representations of high-dimensional data such as images. It had been shown that neural networks could learn PCA directly from data \cite{Oja1982SimplifiedNM,Baldi89}, rather than using the classic methods discussed in \Cref{sec:PCA-ICA}. It was also argued during this period that, due to their ability to model nonlinear transformations, neural networks could learn low-dimensional representations for data with nonlinear distributions. Similar to the linear PCA case, one can simultaneously learn a nonlinear dimension-reduction encoder \(f\) and a decoder \(g\), each modeled by a deep neural network \cite{Rumelhart1986,Kramer1991NonlinearPC}:
 \begin{equation}
-    \X   \xrightarrow{\hspace{2mm} f \hspace{2mm}} \Z  \xrightarrow{\hspace{2mm} g \hspace{2mm}} \hat \X.
+    \vX   \xrightarrow{\hspace{2mm} f \hspace{2mm}} \vZ  \xrightarrow{\hspace{2mm} g \hspace{2mm}} \hat{\vX}.
        \label{eqn:auto-encoding-deep-networks}
 \end{equation}
-By enforcing consistency between the decoded data $\hat \X$ and the original $\X$---for example, by minimizing a MSE-type reconstruction error\footnote{MSE-type errors are known to be problematic for imagery data with complex nonlinear structures. As we will soon discuss, much recent work in generative methods, including GANs, has focused on finding better surrogate distance functions between the original data $\X$ and the regenerated $\hat \X$.}:
+By enforcing consistency between the decoded data \(\hat{\vX}\) and the original \(\vX\)---for example, by minimizing a MSE-type reconstruction error\footnote{MSE-type errors are known to be problematic for imagery data with complex nonlinear structures. As we will soon discuss, much recent work in generative methods, including GANs, has focused on finding better surrogate distance functions between the original data \(\vX\) and the regenerated \(\hat{\vX}\).}:
 \begin{equation}
-    \min_{f,g} \big\|\X - \hat \X\big\|_2^2 = \big\|\X - g(f( \X))\big\|_2^2,
+    \min_{f,g} [\|\vX - \hat{\vX}\|_{2}^{2} = \|\vX - g(f(\vX))\|_{2}^{2}],
 \end{equation}
-an autoencoder can be learned directly from the data $\X$.
+an autoencoder can be learned directly from the data \(\vX\).
 
-But how can we guarantee that such an auto-encoding indeed captures the true low-dimensional structures in $\X$ rather than yielding a trivial redundant representation? For instance, one could simply choose $f$ and $g$ to be identity maps and set $\Z = \X$. To ensure the auto-encoding is worthwhile, the resulting representation should be compressive according to some computable measure of complexity. In 1993, Geoffrey Hinton and colleagues proposed using coding length as such a measure, transforming the auto-encoding objective into finding a representation that minimizes coding length \cite{Hinton-1993}. This work established a fundamental connection between the principle of minimum description length \cite{Rissanen-1978} and free (Helmholtz) energy minimization. Later work from Hinton's group \cite{Hinton504} empirically demonstrated that such auto-encoding can learn meaningful low-dimensional representations for real-world images. Pierre Baldi provided a comprehensive survey of autoencoders in 2011 \cite{Baldi2011}, just before deep networks gained widespread popularity. We will discuss measures of complexity and auto-encoding further in \Cref{sec:unifying-approach}, and present a systematic study of compressive auto-encoding in \Cref{ch:consistent} from a more unified perspective.
+But how can we guarantee that such an auto-encoding indeed captures the true low-dimensional structures in \(\vX\) rather than yielding a trivial redundant representation? For instance, one could simply choose \(f\) and \(g\) to be identity maps and set \(\vZ = \vX\). To ensure the auto-encoding is worthwhile, the resulting representation should be compressive according to some computable measure of complexity. In 1993, Geoffrey Hinton and colleagues proposed using coding length as such a measure, transforming the auto-encoding objective into finding a representation that minimizes coding length \cite{Hinton-1993}. This work established a fundamental connection between the principle of minimum description length \cite{Rissanen-1978} and free (Helmholtz) energy minimization. Later work from Hinton's group \cite{Hinton504} empirically demonstrated that such auto-encoding can learn meaningful low-dimensional representations for real-world images. Pierre Baldi provided a comprehensive survey of autoencoders in 2011 \cite{Baldi2011}, just before deep networks gained widespread popularity. We will discuss measures of complexity and auto-encoding further in \Cref{sec:unifying-approach}, and present a systematic study of compressive auto-encoding in \Cref{ch:consistent} from a more unified perspective.
 
 \begin{figure}
     \centering
@@ -673,30 +678,30 @@ AlphaGo's success surprised the computing community, which had long regarded the
 \end{figure}
 
 \paragraph{Generation and prediction.}
-From a certain perspective, the early practice of deep networks in the 2010s was focused on extracting relevant information from the data $\X$ and encoding it into a task-specific representation $\Z$ (say $\vZ$ denotes class labels in classification tasks\footnote{This is a highly atypical notation for labels --- the usual notation is \(\vy\) --- but it is useful for our purposes to consider labels as highly compressed and sparse representations of the data. See \Cref{example:image_classification_feature_learning} for more details.}):
+From a certain perspective, the early practice of deep networks in the 2010s was focused on extracting relevant information from the data \(\vX\) and encoding it into a task-specific representation \(\vZ\) (say \(\vZ\) denotes class labels in classification tasks\footnote{This is a highly atypical notation for labels --- the usual notation is \(\vy\) --- but it is useful for our purposes to consider labels as highly compressed and sparse representations of the data. See \Cref{example:image_classification_feature_learning} for more details.}):
 \begin{equation}
-    \X   \xrightarrow{\hspace{2mm} f \hspace{2mm}} \Z.
+    \vX   \xrightarrow{\hspace{2mm} f \hspace{2mm}} \vZ.
        \label{eqn:encoding-deep-networks}
 \end{equation}
-Here the learned mappings $f$ and $h$ need not preserve most distributional information about $\X$; it suffices to retain only the sufficient statistics for the task. For example, a sample $\x\in\X$ might be an image of an apple, mapped by $f$ to the class label $\vz=\text{``apple.''}$. 
+Here the learned mapping \(f\) needs not preserve most distributional information about \(\vX\); it suffices to retain only the sufficient statistics for the task. For example, a sample \(\vx \in \vX\) might be an image of an apple, mapped by \(f\) to the class label \(\vz = \text{``apple''}\). 
 
-In many modern settings---such as the so-called large general-purpose (``foundation'') models---we may need to also decode $\Z$ to recover the corresponding $\X$ to a prescribed precision:
+In many modern settings---such as the so-called large general-purpose (``foundation'') models---we may need to also decode \(\vZ\) to recover the corresponding \(\vX\) to a prescribed precision:
 \begin{equation}
-    \Z   \xrightarrow{\hspace{2mm} g  \hspace{2mm}} \hat \X.
+    \vZ   \xrightarrow{\hspace{2mm} g  \hspace{2mm}} \hat{\vX}.
        \label{eqn:decoding-deep-networks}
 \end{equation}
-Because $\X$ typically represents data observed from the external world, a good decoder allows us to simulate or predict what happens in the world. In a ``text-to-image'' or ``text-to-video'' task, for instance, $\z$ is the text describing the desired image $\x$, and the decoder should generate an $\hat \x$ whose content matches $\x$. Given an object class $\z=\text{``apple''}$, the decoder $g$ should produce an image $\hat \x$ that looks like an apple, though not necessarily identical to the original $\x$.
+Because \(\vX\) typically represents data observed from the external world, a good decoder allows us to simulate or predict what happens in the world. In a ``text-to-image'' or ``text-to-video'' task, for instance, \(\vz\) is the text describing the desired image \(\vx\), and the decoder should generate an \(\hat{\vx}\) whose content matches \(\vx\). Given an object class \(\vz = \text{``apple''}\), the decoder \(g\) should produce an image \(\hat{\vx}\) that looks like an apple, though not necessarily identical to the original \(\vx\).
 
 
 
 \paragraph{Generation via discriminative approaches.}
-For the generated images $\hat \X$ to resemble true natural images $\X$, we must be able to evaluate and minimize some distance:
+For the generated images \(\hat{\vX}\) to resemble true natural images \(\vX\), we must be able to evaluate and minimize some distance:
 \begin{equation}
-    \min \operatorname{dist}(\X, \hat \X).
+    \min \operatorname{dist}(\vX, \hat{\vX}).
 \end{equation}
-As it turns out, most theoretically motivated distances are extremely difficult---if not impossible---to compute and optimize for distributions in high-dimensional space with low intrinsic dimension.\footnote{This remains true even when a parametric family of distributions for $\X$ is specified. The distance often becomes ill-conditioned or ill-defined for distributions with low-dimensional supports. Worse still, the chosen family might poorly approximate the true distribution of interest.}
+As it turns out, most theoretically motivated distances are extremely difficult---if not impossible---to compute and optimize for distributions in high-dimensional space with low intrinsic dimension.\footnote{This remains true even when a parametric family of distributions for \(\vX\) is specified. The distance often becomes ill-conditioned or ill-defined for distributions with low-dimensional supports. Worse still, the chosen family might poorly approximate the true distribution of interest.}
 
-In 2007, Zhuowen Tu, disappointed by early analytical attempts to model and generate natural images, decided to try a drastically different approach. In a paper published at CVPR 2007 \cite{Tu-2007}, he first suggested learning a generative model for images via a discriminative approach. The idea is simple: if evaluating the distance $\operatorname{dist}(\X, \hat \X)$ proves difficult, one can instead learn a discriminator $d$ to separate $\hat \X$ from $\X$:
+In 2007, Zhuowen Tu, disappointed by early analytical attempts to model and generate natural images, decided to try a drastically different approach. In a paper published at CVPR 2007 \cite{Tu-2007}, he first suggested learning a generative model for images via a discriminative approach. The idea is simple: if evaluating the distance \(\operatorname{dist}(\vX, \hat{\vX})\) proves difficult, one can instead learn a discriminator \(d\) to separate \(\hat{\vX}\) from \(\vX\):
 \begin{equation}
     \begin{tikzpicture}[node distance=1cm, auto]
         \node (Z) {$\Z$};
@@ -710,16 +715,16 @@ In 2007, Zhuowen Tu, disappointed by early analytical attempts to model and gene
     \end{tikzpicture}
     \label{eqn:gan-networks}
 \end{equation}
-where labels $0$ and $1$ indicate whether an image is generated or real.
-Intuitively, the harder it becomes to separate $\hat \X$ and $\X$, the closer they likely are.
+where labels \(0\) and \(1\) indicate whether an image is generated or real.
+Intuitively, the harder it becomes to separate \(\hat{\vX}\) and \(\vX\), the closer they likely are.
 
-Tu's work \cite{Tu-2007} first demonstrated the feasibility of learning a generative model from a discriminative approach. However, the work employed traditional methods for image generation and distribution classification (such as boosting), which proved slow and difficult to implement. After 2012, deep neural networks gained popularity for image classification. In 2014, Ian Goodfellow and colleagues again proposed generating natural images with a discriminative approach \cite{Goodfellow-2014}. They suggested modeling both the generator $g$ and discriminator $d$ with deep neural networks. Moreover, they proposed learning $g$ and $d$ via a minimax game:
+Tu's work \cite{Tu-2007} first demonstrated the feasibility of learning a generative model from a discriminative approach. However, the work employed traditional methods for image generation and distribution classification (such as boosting), which proved slow and difficult to implement. After 2012, deep neural networks gained popularity for image classification. In 2014, Ian Goodfellow and colleagues again proposed generating natural images with a discriminative approach \cite{Goodfellow-2014}. They suggested modeling both the generator \(g\) and discriminator \(d\) with deep neural networks. Moreover, they proposed learning \(g\) and \(d\) via a minimax game:
 \begin{equation}
-    \min_g \max_d \ell(\X, \hat \X),
+    \min_{g} \max_{d} \ell(\vX, \hat{\vX}),
 \end{equation}
-where $\ell(\cdot)$ is some natural loss function associated with the classification task. In this formulation, the discriminator $d$ maximizes its success in separating $\X$ and $\hat \X$, while the generator $g$ does the opposite. This approach is named \textit{generative adversarial networks} (GANs). It was shown that once trained on a large dataset, GANs can indeed generate photo-realistic images. Partially due to this work's influence, Yoshua Bengio received the 2018 Turing Award.
+where \(\ell(\cdot)\) is some natural loss function associated with the classification task. In this formulation, the discriminator \(d\) maximizes its success in separating \(\vX\) and \(\hat{\vX}\), while the generator \(g\) does the opposite. This approach is named \textit{generative adversarial networks} (GANs). It was shown that once trained on a large dataset, GANs can indeed generate photo-realistic images. Partially due to this work's influence, Yoshua Bengio received the 2018 Turing Award.
 
-The discriminative approach appears to cleverly bypass a fundamental difficulty in distribution learning. However, rigorously speaking, this approach does not fully resolve the fundamental difficulty. It is shown in \cite{Goodfellow-2014} that with a properly chosen loss, the minimax formulation becomes mathematically equivalent to minimizing the Jensen-Shannon distance (see \cite{Cover-Thomas}) between $\X$ and $\hat \X$. This remains a hard problem for two low-dimensional distributions in high-dimensional space. Consequently, GANs typically rely on many heuristics and engineering tricks and often suffer from instability issues such as mode collapsing.\footnote{Nevertheless, such a minimax formulation provides a practical approximation of the distance. It simplifies implementation and avoids certain caveats in directly computing the distance.}
+The discriminative approach appears to cleverly bypass a fundamental difficulty in distribution learning. However, rigorously speaking, this approach does not fully resolve the fundamental difficulty. It is shown in \cite{Goodfellow-2014} that with a properly chosen loss, the minimax formulation becomes mathematically equivalent to minimizing the Jensen-Shannon distance (see \cite{Cover-Thomas}) between \(\vX\) and \(\hat{\vX}\). This remains a hard problem for two low-dimensional distributions in high-dimensional space. Consequently, GANs typically rely on many heuristics and engineering tricks and often suffer from instability issues such as mode collapsing.\footnote{Nevertheless, such a minimax formulation provides a practical approximation of the distance. It simplifies implementation and avoids certain caveats in directly computing the distance.}
 
 \paragraph{Generation via denoising and diffusion.}
 In 2015, shortly after GANs were introduced and gained popularity, Surya Ganguli and his students proposed that an iterative denoising process modeled by a deep network could be used to learn a general distribution, such as that of natural images \cite{Sohl-Dickstein2015}. Their method was inspired by properties of special Gaussian and binomial processes studied by William Feller in 1949 \cite{Feller1949OnTT}.\footnote{Again, in the magical era of the 1940s!}
@@ -727,13 +732,13 @@ In 2015, shortly after GANs were introduced and gained popularity, Surya Ganguli
 \begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{\toplevelprefix/chapters/chapter1/figs/diffusion_pipeline.png}
-    \caption{Illustration of an iterative denoising and compressing process that, starting from a Gaussian distribution $q^0 = \mathcal{N}(\boldsymbol{0}, \boldsymbol{I})$, converges to an arbitrary low-dimensional data distribution $q^L = p(\x)$.}
+    \caption{Illustration of an iterative denoising and compressing process that, starting from a Gaussian distribution \(q^{0} = \mathcal{N}(\vzero, \vI)\), converges to an arbitrary low-dimensional data distribution \(q^{L} = p\).}
     \label{fig:diffusion}
 \end{figure}
 
-Soon, denoising operators based on the score function \cite{hyvarinen05a}, briefly introduced in \Cref{sec:denoising-intro}, were shown to be more general and unified the denoising and diffusion processes and algorithms \cite{song2019,song2020score,ho2020denoising}. \Cref{fig:diffusion} illustrates the process that transforms a generic Gaussian distribution $q^0 = \mathcal{N}(\boldsymbol{0}, \boldsymbol{I})$ to an (arbitrary) empirical distribution $p(\x)$ by performing a sequence of iterative denoising (or compressing) operations:
+Soon, denoising operators based on the score function \cite{hyvarinen05a}, briefly introduced in \Cref{sec:denoising-intro}, were shown to be more general and unified the denoising and diffusion processes and algorithms \cite{song2019,song2020score,ho2020denoising}. \Cref{fig:diffusion} illustrates the process that transforms a generic Gaussian distribution \(q^{0} = \mathcal{N}(\vzero, \vI)\) to an (arbitrary) empirical distribution \(p(\vx)\) by performing a sequence of iterative denoising (or compressing) operations:
 \begin{equation}
-    \z^0 \sim  \mathcal{N}(\boldsymbol{0}, \boldsymbol{I})\xrightarrow{\hspace{2mm} g^0  \hspace{2mm}} \z^1 \xrightarrow{\hspace{2mm} g^1 \hspace{2mm}} \cdots \xrightarrow{\hspace{2mm} g^{L-1}  \hspace{2mm}} \z^L \sim p(\x).
+    \vz^{0} \sim  \mathcal{N}(\vzero, \vI) \xrightarrow{\hspace{2mm} g^{0} \hspace{2mm}} \vz^{1} \xrightarrow{\hspace{2mm} g^{1} \hspace{2mm}} \cdots \xrightarrow{\hspace{2mm} g^{L-1} \hspace{2mm}} \vz^{L} \sim p(\vx).
 \end{equation}
 By now, denoising (and diffusion) has replaced GANs and become the mainstream method for learning distributions of images and videos, leading to popular commercial image generation engines such as Midjourney and Stability.ai. 
 In \Cref{ch:compression} we will systematically introduce and study the denoising and diffusion method for learning a general low-dimensional distribution.
@@ -755,7 +760,7 @@ In recent years, mounting evidence suggests these goals can indeed be achieved b
 \label{sec:computational-approach-compression}
 One necessary condition for any learning task to be possible is that the sequences of interest must be \textit{computable}, at least in the sense of Alan Turing \cite{Turing-1936}. That is, a sequence can be computed via a program on a typical computer.\footnote{There are indeed well-defined sequences that are not computable.} In addition to being computable, we require computation to be \textit{tractable}.\footnote{We do not need to consider predicting things whose computational complexity is intractable---say, grows exponentially in the length or dimension of the sequence.} That is, the computational cost (space and time) for learning and computing the sequence should not grow exponentially in length. Furthermore, as we see in nature (and in the modern practice of machine intelligence), for most practical tasks an intelligent system needs to learn what is predictable from massive data in a very high-dimensional space, such as from vision, sound, and touch. Hence, for intelligence we do not need to consider all computable and tractable sequences or structures; we should focus only on predictable sequences and structures that admit \textit{scalable} realizations of their learning and computing algorithms:
 \begin{equation}
-\text{\textbf{computable}} \;
+    \text{\textbf{computable}} \;
    \Longrightarrow \; \text{\textbf{tractable}} \; \Longrightarrow \; 
    \text{\textbf{scalable}}.
 \end{equation}
@@ -765,14 +770,14 @@ The main goal of this book is to develop a theoretical and computational framewo
 
 
 \paragraph{Pursuing low-dimensionality via compression.}
-From the examples of sequences we gave in \Cref{sec:predictability}, it is clear that some sequences are easy to model and compute, while others are more difficult. The computational cost of a sequence depends on the complexity of the predicting function $f$. The higher the degree of regression $d$, the more costly it is to compute. The function $f$ could be a simple linear function, or it could be a nonlinear function that is arbitrarily difficult to specify and compute.
+From the examples of sequences we gave in \Cref{sec:predictability}, it is clear that some sequences are easy to model and compute, while others are more difficult. The computational cost of a sequence depends on the complexity of the predicting function \(f\). The higher the degree of regression \(d\), the more costly it is to compute. The function \(f\) could be a simple linear function, or it could be a nonlinear function that is arbitrarily difficult to specify and compute.
 
-It is reasonable to believe that if a sequence is harder---by whatever measure we choose---to specify and compute, then it will also be more difficult to learn from its sampled segments. Nevertheless, for any given predictable sequence, there are in fact many, often infinitely many, ways to specify it. For example, for the simple sequence $x_{n+1} = a x_{n}$, we could also define the same sequence with $x_{n+1} = a x_n + b x_{n-1} - b x_{n-1}$.
+It is reasonable to believe that if a sequence is harder---by whatever measure we choose---to specify and compute, then it will also be more difficult to learn from its sampled segments. Nevertheless, for any given predictable sequence, there are in fact many, often infinitely many, ways to specify it. For example, for the simple sequence \(x_{n+1} = a x_{n}\), we could also define the same sequence with \(x_{n+1} = a x_{n} + b x_{n-1} - b x_{n-1}\).
 Hence it would be very useful to develop an objective and rigorous notion of ``complexity'' for any given computable sequence.
 
-Andrey Kolmogorov, a Russian mathematician, was one of the first to define complexity for any computable sequence.\footnote{Many contributed to this notion of sequence complexity, most notably Ray Solomonoff and Greg Chaitin. All three developed algorithmic information theory independently---Solomonoff in 1960, Kolmogorov in 1965 \cite{Kolmogorov1998OnTO}, and Chaitin around 1966 \cite{Chaitin-1966}.} He proposed that among all programs computing the same sequence, the length of the shortest program measures its complexity. This aligns with Occam's Razor---\textit{choose the simplest theory explaining the same observation}. Formally, let $p$ be a program generating sequence $S$ on universal computer $\mathcal{U}$. The Kolmogorov complexity of $S$ is:
+Andrey Kolmogorov, a Russian mathematician, was one of the first to define complexity for any computable sequence.\footnote{Many contributed to this notion of sequence complexity, most notably Ray Solomonoff and Greg Chaitin. All three developed algorithmic information theory independently---Solomonoff in 1960, Kolmogorov in 1965 \cite{Kolmogorov1998OnTO}, and Chaitin around 1966 \cite{Chaitin-1966}.} He proposed that among all programs computing the same sequence, the length of the shortest program measures its complexity. This aligns with Occam's Razor---\textit{choose the simplest theory explaining the same observation}. Formally, let \(p\) be a program generating sequence \(S\) on universal computer \(\cU\). The Kolmogorov complexity of \(S\) is:
 \begin{equation}
-    K(S) = \min_{p\,:\, \mathcal{U}(p) = S} L(p). 
+    K(S) = \min_{p\,:\, \cU(p) = S} L(p). 
 \end{equation}
 Thus, complexity measures how parsimoniously we can specify or compute the sequence. This definition is conceptually important and historically inspired profound studies in computational complexity and theoretical computer science.
 
@@ -780,9 +785,9 @@ The shortest program length represents the ultimate compression of the sequence,
 
 
 \paragraph{Computable measure of parsimony.}
-For practical purposes, we need an efficiently computable measure of complexity for sequences generated by the same predicting function.\footnote{In practice, we typically care about learning the predicting function $f$, rather than any particular sequence generated by $f$.} Note that part of the reason Kolmogorov complexity is not computable is that its definition is non-constructive.
+For practical purposes, we need an efficiently computable measure of complexity for sequences generated by the same predicting function.\footnote{In practice, we typically care about learning the predicting function \(f\), rather than any particular sequence generated by \(f\).} Note that part of the reason Kolmogorov complexity is not computable is that its definition is non-constructive.
 
-To introduce a computable measure of complexity, we may take a more constructive approach, as advocated by Claude Shannon through the framework of information theory \cite{Shannon-1948,Cover-Thomas}.\footnote{This framework has successfully guided engineering practice in the communication industry for over 80 years.} By assuming the sequence $S$ is drawn from a probabilistic distribution $p(S)$, the entropy of the distribution:\footnote{Here we consider differential entropy as we assume the sequence consists of continuous variables. For discrete variables, we would use $H(S) = - \sum_{i}p(s_i) \log p(s_i).$ }
+To introduce a computable measure of complexity, we may take a more constructive approach, as advocated by Claude Shannon through the framework of information theory \cite{Shannon-1948,Cover-Thomas}.\footnote{This framework has successfully guided engineering practice in the communication industry for over 80 years.} By assuming the sequence \(S\) is drawn from a probabilistic distribution \(p(S)\), the entropy of the distribution:\footnote{Here we consider differential entropy as we assume the sequence consists of continuous variables. For discrete variables, we would use \(H(S) = - \sum_{i}p(s_{i}) \log p(s_{i})\).}
 \begin{equation}
     h(S) \doteq -\int p(s) \log p(s) \odif{s}
     \label{eqn:entropy-definition}
@@ -791,9 +796,9 @@ provides a natural measure of its complexity. This measure also has a natural in
 
 To illustrate the main ideas of this view, let us take a large number of long sequence segments:
 \begin{equation}
-    \{S_1, S_2, \ldots, S_i, \ldots, S_N\} \subset \mathbb{R}^D,
+    \{S_{1}, S_{2}, \ldots, S_{i}, \ldots, S_{N}\} \subset \R^{D},
 \end{equation}
-generated by a predicting function $f$. Without loss of generality, we assume all sequences have the same length $D$, so each sequence can be viewed as a vector in $\mathbb{R}^D$. We introduce a coding scheme (with a codebook), denoted $\mathcal{E}$, that maps every segment $S_i$ to a unique stream of binary bits $\mathcal{E}(S_i)$, and a corresponding decoding scheme $\mathcal{D}$ that maps binary bit strings back to sequence segments (say subject to error $\epsilon \geq 0$ as such an encoding scheme can be lossy). The simplest scheme fills the space spanned by all segments with $\epsilon$-balls, as shown in \Cref{fig:coding-schemes}. We then number the balls, and each sequence is encoded as the binary index of its closest ball, while each binary index is decoded back to the center of the corresponding ball. Thus, each segment can be recovered up to precision $\epsilon$ from its bit stream.
+generated by a predicting function \(f\). Without loss of generality, we assume all sequences have the same length \(D\), so each sequence can be viewed as a vector in \(\R^{D}\). We introduce a coding scheme (with a codebook), denoted \(\cE\), that maps every segment \(S_{i}\) to a unique stream of binary bits \(\cE(S_{i})\), and a corresponding decoding scheme \(\cD\) that maps binary bit strings back to sequence segments (say subject to error \(\epsilon \geq 0\) as such an encoding scheme can be lossy). The simplest scheme fills the space spanned by all segments with \(\epsilon\)-balls, as shown in \Cref{fig:coding-schemes}. We then number the balls, and each sequence is encoded as the binary index of its closest ball, while each binary index is decoded back to the center of the corresponding ball. Thus, each segment can be recovered up to precision \(\epsilon\) from its bit stream.
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{\toplevelprefix/chapters/chapter1/figs/Coding-schemes.png}
@@ -802,36 +807,35 @@ generated by a predicting function $f$. Without loss of generality, we assume al
 \end{figure}
 
 
-Then, for an encoding $\mathcal{E}$, the complexity of the predicting function $f$ can be evaluated as the average coding length $L(\mathcal{E}(S))$ of all sequences $S$ that it generates, known as the coding rate:\footnote{One may make this more precise by taking $R(S \mid \mathcal{E})$ to be the expected coding length for all segments $S$ of length $D$.}
+Then, for an encoding \(\cE\), the complexity of the predicting function \(f\) can be evaluated as the average coding length \(L(\cE(S))\) of all sequences \(S\) that it generates, known as the coding rate:\footnote{One may make this more precise by taking \(R(S \mid \cE)\) to be the expected coding length for all segments \(S\) of length \(D\).}
 \begin{equation}
-   R(S \mid \mathcal E) = \mathbb{E}[L(\mathcal{E}(S))] \approx \frac{1}{N}\sum_{i=1}^N L(\mathcal{E}(S_i)). 
+   R(S \mid \cE) = \Ex[L(\cE(S))] \approx \frac{1}{N}\sum_{i=1}^{N} L(\cE(S_{i})). 
    \label{eqn:coding-rate}
 \end{equation}
 The coding rate measure will change if we use a different coding scheme (or codebook). In practice, the better we know the low-dimensional structure around which the segments are distributed, the more efficient a codebook we can design, as illustrated in \Cref{fig:coding-schemes}. Astute readers may recognize that conceptually the denoising process illustrated in \Cref{fig:diffusion} closely resembles going from the coding scheme with the blue balls to that with the green ones.
 
-Given two coding schemes $\mathcal{E}_1$ and $\mathcal{E}_2$ for the segments, if the difference in the coding rates is positive:
+Given two coding schemes \(\cE_{1}\) and \(\cE_{2}\) for the segments, if the difference in the coding rates is positive:
 \begin{equation}
-   R(S \mid \mathcal E_1) -  R(S \mid \mathcal E_2) > 0, 
+   R(S \mid \cE_{1}) -  R(S \mid \cE_{2}) > 0, 
 \end{equation}
-we may say the coding scheme $\mathcal{E}_2$ is better. This difference can be viewed as a measure of how much more information $\mathcal{E}_2$ has over $\mathcal{E}_1$ about the distribution of the data. To a large extent, the goal of learning the data $S$ is equivalent to finding the most efficient encoding and decoding scheme that minimizes the coding rate subject to a desired precision:
+we may say the coding scheme \(\cE_{2}\) is better. This difference can be viewed as a measure of how much more information \(\cE_{2}\) has over \(\cE_{1}\) about the distribution of the data. To a large extent, the goal of learning the data \(S\) is equivalent to finding the most efficient encoding and decoding scheme that minimizes the coding rate subject to a desired precision:
 \begin{equation}
-   \min_{\mathcal{E}, \mathcal{D}} R(S \mid \mathcal \mathcal{E}) \quad \text{subject to} \quad \operatorname{dist}(S, \mathcal{D}(\mathcal{E}(S))) \leq \epsilon. 
+   \min_{\cE, \cD} R(S \mid \cE) \quad \text{subject to} \quad \operatorname{dist}(S, \cD(\cE(S))) \leq \epsilon. 
 \end{equation}
-As we will see in \Cref{ch:compression}, the achievable minimal rate is closely related to the notion of entropy $H(S)$ \eqref{eqn:entropy-definition}.
+As we will see in \Cref{ch:compression}, the achievable minimal rate is closely related to the notion of entropy \(H(S)\) \eqref{eqn:entropy-definition}.
 
 
-% Start of Selection
 \begin{remark}\label{rem:computable-complexity}
-    The perspective of measuring data complexity with explicit encoding schemes has motivated several learning objectives proposed to revise Kolmogorov complexity for better computability \cite{WallaceC1999}, including the minimum message length (MML) proposed in 1968 \cite{WallaceC1968} and the minimum description length (MDL) in 1978 \cite{Rissanen-1978,HansenM2001}. These objectives normally count the coding length for the coding scheme $\mathcal{E}$ itself (including its codebook) in addition to the data $S$ of interest: $L(\mathcal E(S)) + L(\mathcal E)$. However, if the goal is to learn a finite-sized codebook and apply it to a large number of sequences, the amortized cost of the codebook can be ignored since
+    The perspective of measuring data complexity with explicit encoding schemes has motivated several learning objectives proposed to revise Kolmogorov complexity for better computability \cite{WallaceC1999}, including the minimum message length (MML) proposed in 1968 \cite{WallaceC1968} and the minimum description length (MDL) in 1978 \cite{Rissanen-1978,HansenM2001}. These objectives normally count the coding length for the coding scheme \(\cE\) itself (including its codebook) in addition to the data \(S\) of interest: \(L(\cE(S)) + L(\cE)\). However, if the goal is to learn a finite-sized codebook and apply it to a large number of sequences, the amortized cost of the codebook can be ignored since
     \begin{equation}
-        \frac{1}{N}\Big( L(\mathcal{E}) + \sum_{i=1}^N L(\mathcal{E}(S_i))\Big) \approx \frac{1}{N}\sum_{i=1}^N L(\mathcal{E}(S_i))
+        \frac{1}{N}\left( L(\cE) + \sum_{i=1}^{N} L(\cE(S_{i}))\right) \approx \frac{1}{N}\sum_{i=1}^{N} L(\cE(S_{i}))
     \end{equation}
-    as $N$ becomes large.
+    as \(N\) becomes large.
 \end{remark}
 
 Again, one may view the resulting optimal coding scheme as the one that achieves the best compression of the observed data. In general, compared to the Kolmogorov complexity, the coding length given by any encoding scheme will always be larger:
 \begin{equation}
-    K(S) < L( \mathcal E(S)).
+    K(S) < L(\cE(S)).
 \end{equation}
 Therefore, minimizing the coding rate/length essentially minimizes an upper bound of the otherwise uncomputable Kolmogorov complexity.
 
@@ -856,45 +860,45 @@ Moreover, this computational framework leads to a principled approach that natur
 
 To summarize our discussions so far, let us denote the data as
 \begin{equation}
-    \boldsymbol{X} = \{S_1, S_2, \ldots, S_i, \ldots, S_N\} \subset \mathbb{R}^D,
+    \vX = \{S_{1}, S_{2}, \ldots, S_{i}, \ldots, S_{N}\} \subset \R^{D},
 \end{equation}
-and let $\boldsymbol{Z} = \mathcal{E}(\X)$ be the codes of $\X$ via some encoder $\mathcal{E}$:
+and let \(\vZ = \cE(\vX)\) be the codes of \(\vX\) via some encoder \(\cE\):
 \begin{equation}
-    \X  \xrightarrow{\hspace{2mm} \mathcal{E}\hspace{2mm}} \Z.
+    \vX  \xrightarrow{\hspace{2mm} \cE\hspace{2mm}} \vZ.
     \label{eqn:open-loop}
 \end{equation}
-In the machine learning context, $\Z$ is often called the ``features'' of $\X$. Note that without knowing the underlying distribution of $\X$, we do not know which encoder $\mathcal{E}$ should be used to retain the most useful information about the distribution of $\X$. In practice, people often start by trying a compact encoding scheme that serves a specific task well. In particular, they try to learn an encoder that optimizes a certain (empirical) measure of parsimony for the learned representation:
+In the machine learning context, \(\vZ\) is often called the ``features'' of \(\vX\). Note that without knowing the underlying distribution of \(\vX\), we do not know which encoder \(\cE\) should be used to retain the most useful information about the distribution of \(\vX\). In practice, people often start by trying a compact encoding scheme that serves a specific task well. In particular, they try to learn an encoder that optimizes a certain (empirical) measure of parsimony for the learned representation:
 \begin{equation}
-    \min \rho(\Z). 
+    \min \rho(\vZ). 
 \end{equation}
 
 \begin{example}\label{example:image_classification_feature_learning}
     For example, image classification is such a case: we assign all images in the same class to a single code and images in different classes to different codes, say ``one-hot'' vectors:
     \begin{equation}
-        \x \mapsto \z \in \{  [1, 0, 0, \ldots , 0, 0], \;  [0, 1, 0 \ldots, 0, 0], \; \ldots, \;  [0,0,0, \ldots, 0, 1].\}
+        \vx \mapsto \vz \in \{  [1, 0, 0, \ldots , 0, 0], \;  [0, 1, 0 \ldots, 0, 0], \; \ldots, \;  [0,0,0, \ldots, 0, 1].\}
         \label{eqn:class-labels}
     \end{equation}
-    Now, a classifier $f(\cdot)$ can be modeled as a function that predicts the probability of a given $\x$ belonging to each of the $k$ classes: $\hat{\z} = f(\x) \in \mathbb{R}^K$. Then the ``goodness'' of a classifier can be measured by the so-called {\em cross entropy}:\footnote{The cross entropy can be viewed as a distance measure between the ground truth distribution of $\z$ and that of the prediction $\hat\z$. It can also be viewed as the expected coding length of $\z$ if we use the optimal code book for $\hat \z$ to encode $\z$. The cross entropy reaches its minimum when $\z$ and $\hat \z$ have the same distribution.}
+    Now, a classifier \(f(\cdot)\) can be modeled as a function that predicts the probability of a given \(\vx\) belonging to each of the \(k\) classes: \(\hat{\vz} = f(\vx) \in \R^{K}\). Then the ``goodness'' of a classifier can be measured by the so-called {\em cross entropy}:\footnote{The cross entropy can be viewed as a distance measure between the ground truth distribution of \(\vz\) and that of the prediction \(\hat{\vz}\). It can also be viewed as the expected coding length of \(\vz\) if we use the optimal code book for \(\hat{\vz}\) to encode \(\vz\). The cross entropy reaches its minimum when \(\vz\) and \(\hat{\vz}\) have the same distribution.}
     \begin{equation}
-        \ell(\hat{\z}, \z) = \sum_{k=1}^K - z_k \log \hat{z}_k,
+        \ell(\hat{\vz}, \vz) = \sum_{k=1}^{K} - z_{k} \log \hat{z}_{k},
     \end{equation}
-    where $z_k$ indicates the $k$-th entry of the vector $\z$. As the early practice of deep networks indicated \cite{krizhevsky2012imagenet}, if enough data are given, such an encoding scheme can often be represented by a deep network and learned in an end-to-end fashion by optimizing the cross-entropy. 
+    where \(z_{k}\) indicates the \(k\)-th entry of the vector \(\vz\). As the early practice of deep networks indicated \cite{krizhevsky2012imagenet}, if enough data are given, such an encoding scheme can often be represented by a deep network and learned in an end-to-end fashion by optimizing the cross-entropy. 
 \end{example}
 
-The cross-entropy loss $\ell(\hat \z, \z)$ can be viewed as a special measure of parsimony $\rho(\z)$ associated with a particular family of encoding schemes that are suitable for classification. However, such an encoding is obviously \textit{very lossy}. The learned $\z$ does not contain any other information about $\x$ except for its class type. For example, by assigning an image with (a code representing) the class label ``apple'', we no longer know which specific type of apple is in the original image from the label alone. 
+The cross-entropy loss \(\ell(\hat{\vz}, \vz)\) can be viewed as a special measure of parsimony \(\rho(\vz)\) associated with a particular family of encoding schemes that are suitable for classification. However, such an encoding is obviously \textit{very lossy}. The learned \(\vz\) does not contain any other information about \(\vx\) except for its class type. For example, by assigning an image with (a code representing) the class label ``apple'', we no longer know which specific type of apple is in the original image from the label alone. 
 
-Of course, the other extreme is to require the coding scheme to be \textit{lossless}. That is, there is a one-to-one mapping between $\x$ and its code $\z$. However, as we will see in \Cref{ch:compression}, lossless coding (or compression) is impractical unless $\x$ is discrete. For a continuous random variable, we may only consider lossy coding schemes so that the coding length for the data can be finite. That is, we only encode the data up to a certain prescribed precision. As we will elaborate more in \Cref{ch:compression}, lossy coding is not merely a practical choice; it plays a fundamental role in making learning of the underlying continuous distribution possible from finite samples of the distribution. 
+Of course, the other extreme is to require the coding scheme to be \textit{lossless}. That is, there is a one-to-one mapping between \(\vx\) and its code \(\vz\). However, as we will see in \Cref{ch:compression}, lossless coding (or compression) is impractical unless \(\vx\) is discrete. For a continuous random variable, we may only consider lossy coding schemes so that the coding length for the data can be finite. That is, we only encode the data up to a certain prescribed precision. As we will elaborate more in \Cref{ch:compression}, lossy coding is not merely a practical choice; it plays a fundamental role in making learning of the underlying continuous distribution possible from finite samples of the distribution. 
 
-For many learning purposes, we want the feature $\z$, although \textit{lossy}, to retain more information about $\x$ than just its class type. In this book, we will introduce a more general measure of parsimony based on coding length/rate associated with a more general family of coding schemes---coding with a mixture of subspaces or Gaussians. This family has the capability to closely approximate arbitrary real-world distributions up to a certain precision. As we will see in \Cref{ch:compression} and \Cref{ch:representation}, such a measure will not only preserve most information about the distribution of $\X$ but will also promote certain desirable geometric and statistical structures for the learned representation $\Z$. 
+For many learning purposes, we want the feature \(\vz\), although \textit{lossy}, to retain more information about \(\vx\) than just its class type. In this book, we will introduce a more general measure of parsimony based on coding length/rate associated with a more general family of coding schemes---coding with a mixture of subspaces or Gaussians. This family has the capability to closely approximate arbitrary real-world distributions up to a certain precision. As we will see in \Cref{ch:compression} and \Cref{ch:representation}, such a measure will not only preserve most information about the distribution of \(\vX\) but will also promote certain desirable geometric and statistical structures for the learned representation \(\vZ\). 
 
 
 \paragraph{Bidirectional auto-encoding for consistency.}
-In a broader learning context, the main goal of a compressive coding scheme $\mathcal{E}$ is to identify the low-dimensional structures in the data $\X$ so that they can be used to predict things in the original data space. This requires that the learned encoding scheme $\mathcal{E}$ admits an efficient decoding scheme, denoted $\mathcal{D}$, which maps the feature or encoded data$\Z$ back to the data space:
+In a broader learning context, the main goal of a compressive coding scheme \(\cE\) is to identify the low-dimensional structures in the data \(\vX\) so that they can be used to predict things in the original data space. This requires that the learned encoding scheme \(\cE\) admits an efficient decoding scheme, denoted \(\cD\), which maps the feature or encoded data \(\vZ\) back to the data space:
 \begin{equation}
-    \X   \xrightarrow{\hspace{2mm} \mathcal{E}\hspace{2mm}} \Z  \xrightarrow{\hspace{2mm} \mathcal{D} \hspace{2mm}} \hat \X.
+    \vX   \xrightarrow{\hspace{2mm} \cE\hspace{2mm}} \vZ  \xrightarrow{\hspace{2mm} \cD \hspace{2mm}} \hat{\vX}.
        \label{eqn:auto-encoding}
 \end{equation}
-We call such an encoding--decoding pair $(\mathcal{E}, \mathcal{D})$ an \textit{auto-encoding}. \Cref{fig:autoencoder} illustrates this process.
+We call such an encoding--decoding pair \((\cE, \cD)\) an \textit{auto-encoding}. \Cref{fig:autoencoder} illustrates this process.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{\toplevelprefix/chapters/chapter1/figs/Autoencoder.jpg}
@@ -902,22 +906,22 @@ We call such an encoding--decoding pair $(\mathcal{E}, \mathcal{D})$ an \textit{
     \label{fig:autoencoder}
 \end{figure}
 
-Ideally, the decoding is approximately an ``inverse'' of the encoding, so that the data (distribution) $\hat \X$ decoded from $\Z$ is similar to the original data (distribution) $\X$ to some extent.\footnote{We will make precise what we mean by ``similar'' later.} If this holds, we can recover or predict from $\Z$ what occurs in the original data space. In this case, we say the pair $(\mathcal{E}, \mathcal{D})$ provides a \textit{consistent} auto-encoding. For most practical purposes, we not only need such a decoding to exist, but also need it to be efficiently realizable and physically implementable. For example, if $\x$ is real-valued, quantization is required for any decoding scheme to be realizable on a finite-state machine, as we will explain in \Cref{ch:compression}. Thus, in general, realizable encoding and decoding schemes are necessarily lossy. A central question is how to learn a compact (lossy) representation $\Z$ that can still predict $\X$ well
+Ideally, the decoding is approximately an ``inverse'' of the encoding, so that the data (distribution) \(\hat{\vX}\) decoded from \(\vZ\) is similar to the original data (distribution) \(\vX\) to some extent.\footnote{We will make precise what we mean by ``similar'' later.} If this holds, we can recover or predict from \(\vZ\) what occurs in the original data space. In this case, we say the pair \((\cE, \cD)\) provides a \textit{consistent} auto-encoding. For most practical purposes, we not only need such a decoding to exist, but also need it to be efficiently realizable and physically implementable. For example, if \(\vx\) is real-valued, quantization is required for any decoding scheme to be realizable on a finite-state machine, as we will explain in \Cref{ch:compression}. Thus, in general, realizable encoding and decoding schemes are necessarily lossy. A central question is how to learn a compact (lossy) representation \(\vZ\) that can still predict \(\vX\) well.
 
 Generally speaking, both the encoder and decoder can be modeled and realized by deep networks and learned by solving an optimization problem of the following form:
 \begin{equation}
-   \min_{f, g}\, [\ell( \X, \hat \X) + \rho(\Z)], \qquad \text{where} \quad \vZ = f(\vX), \quad \hat \vX = g(\vZ)
+   \min_{f, g} [\ell(\vX, \hat{\vX}) + \rho(\vZ)], \qquad \text{where} \quad \vZ = f(\vX), \quad \hat{\vX} = g(\vZ)
    \label{eqn:auto-encoding-objective}
 \end{equation}
-where $\ell(\cdot, \cdot)$ is a distance function that promotes similarity between $\X$ and $\hat \X$\footnote{Either sample-wise or distribution-wise, depending on the choice of $\ell$.} and $\rho(\Z)$ is a measure that promotes parsimony and information richness of $\Z$. The classic principal component analysis (PCA) \cite{JolliffeI2002} is a typical example of a consistent auto-encoding, which we will study in great detail in \Cref{ch:classic}, as a precursor to more general low-dimensional structures. In \Cref{ch:auto-encoding}, we will study how to learn consistent auto-encoding for general (say nonlinear) low-dimensional distributions.  
+where \(\ell(\cdot, \cdot)\) is a distance function that promotes similarity between \(\vX\) and \(\hat{\vX}\)\footnote{Either sample-wise or distribution-wise, depending on the choice of \(\ell\).} and \(\rho(\vZ)\) is a measure that promotes parsimony and information richness of \(\vZ\). The classic principal component analysis (PCA) \cite{JolliffeI2002} is a typical example of a consistent auto-encoding, which we will study in great detail in \Cref{ch:classic}, as a precursor to more general low-dimensional structures. In \Cref{ch:auto-encoding}, we will study how to learn consistent auto-encoding for general (say nonlinear) low-dimensional distributions.  
 
 
 \subsection{Learning Self-Consistent Representations}
-In the auto-encoding objective above, one must evaluate how close the decoded data $\hat \X$ is to the original $\X$. This typically requires external supervision or knowledge of an appropriate similarity measure. Computing similarity between $\hat \X$ and $\X$ can be prohibitively expensive, or even impossible.\footnote{For instance, minimizing a distributional distance between the two random variables is statistically and computationally difficult.} In nature, animals learn autonomously without comparing their estimate $\hat \X$ with the ground truth $\X$ in the data space; they typically lack that option.\footnote{In animals and humans, the eyes process visual data long before it arrives at the brain; the brain does not have a mechanism to process raw visual data and must rely on the eyes' features to do any learning.}
+In the auto-encoding objective above, one must evaluate how close the decoded data \(\hat{\vX}\) is to the original \(\vX\). This typically requires external supervision or knowledge of an appropriate similarity measure. Computing similarity between \(\hat{\vX}\) and \(\vX\) can be prohibitively expensive, or even impossible.\footnote{For instance, minimizing a distributional distance between the two random variables is statistically and computationally difficult.} In nature, animals learn autonomously without comparing their estimate \(\hat{\vX}\) with the ground truth \(\vX\) in the data space; they typically lack that option.\footnote{In animals and humans, the eyes process visual data long before it arrives at the brain; the brain does not have a mechanism to process raw visual data and must rely on the eyes' features to do any learning.}
 
-How, then, can a system learn without external supervision or comparison? How can it know that $\hat \X$ is consistent with $\X$ without direct comparison? This leads to the idea of ``closing the loop.'' Under mild conditions (made precise in \Cref{ch:closed-loop}), ensuring consistency between $\X$ and $\hat \X$ reduces to encoding $\hat \X$ as $\hat \Z$ and checking consistency between $\Z$ and $\hat \Z$. We call this notion \textit{self-consistency}, illustrated by:
+How, then, can a system learn without external supervision or comparison? How can it know that \(\hat{\vX}\) is consistent with \(\vX\) without direct comparison? This leads to the idea of ``closing the loop.'' Under mild conditions (made precise in \Cref{ch:closed-loop}), ensuring consistency between \(\vX\) and \(\hat{\vX}\) reduces to encoding \(\hat{\vX}\) as \(\hat{\vZ}\) and checking consistency between \(\vZ\) and \(\hat{\vZ}\). We call this notion \textit{self-consistency}, illustrated by:
 \begin{equation}
-    \X   \xrightarrow{\hspace{2mm} \mathcal{E}\hspace{2mm}} \Z  \xrightarrow{\hspace{2mm} \mathcal{D} \hspace{2mm}} \hat \X \xrightarrow{\hspace{2mm} \mathcal{E}\hspace{2mm}} \hat \Z,
+    \vX   \xrightarrow{\hspace{2mm} \cE\hspace{2mm}} \vZ  \xrightarrow{\hspace{2mm} \cD \hspace{2mm}} \hat{\vX} \xrightarrow{\hspace{2mm} \cE\hspace{2mm}} \hat{\vZ},
     \label{eqn:closed-loop}
 \end{equation}
 We call this process \textit{closed-loop transcription},\footnote{Inspired by transcription between DNA and RNA or other proteins.} depicted in \Cref{fig:closed-loop}.
@@ -925,23 +929,23 @@ We call this process \textit{closed-loop transcription},\footnote{Inspired by tr
 \begin{figure}[t]
     \centering
 \includegraphics[width=0.9\linewidth]{\toplevelprefix/chapters/chapter1/figs/diagrams_redu_gan_2.pdf}
-\caption{Illustration of a closed-loop transcription. Here we use a mapping $f$ to represent the encoder $\mathcal{E}$ and $g$ to represent the decoder $\mathcal{D}$.}  \label{fig:closed-loop}
+\caption{Illustration of a closed-loop transcription. Here we use a mapping \(f\) to represent the encoder \(\cE\) and \(g\) to represent the decoder \(\cD\).}  \label{fig:closed-loop}
 \end{figure}
 
-It is arguably true that any autonomous intelligent being only needs to learn a self-consistent representation $\Z$ of the observed data $\X$, because checking consistency in the original data space---often meaning in the external world---is either too expensive or even physically infeasible. The closed-loop formulation allows one to learn an optimal encoding $f(\cdot, \theta)$ and decoding $g(\cdot, \eta)$ via a min-max game that depends only on the internal (learned) feature $\Z$:
+It is arguably true that any autonomous intelligent being only needs to learn a self-consistent representation \(\vZ\) of the observed data \(\vX\), because checking consistency in the original data space---often meaning in the external world---is either too expensive or even physically infeasible. The closed-loop formulation allows one to learn an optimal encoding \(f(\cdot, \vtheta)\) and decoding \(g(\cdot, \veta)\) via a min-max game that depends only on the internal (learned) feature \(\vZ\):
 \begin{equation}
-\max_{\theta}\min_{\eta} [\ell( \Z, \hat \Z) + \rho(\Z)],  \qquad \text{where} \quad \vZ = f(\vX), \quad \hat \vX = g(\vZ), \quad \hat \vZ = f(\hat \vX) 
+    \max_{\vtheta}\min_{\veta} [\ell( \vZ, \hat{\vZ}) + \rho(\vZ)],  \qquad \text{where} \quad \vZ = f(\vX), \quad \hat{\vX} = g(\vZ), \quad \hat{\vZ} = f(\hat{\vX}) 
    \label{eqn:closed-loop-objective}
 \end{equation}
-where $\ell( \Z, \hat \Z)$ is a loss function based on coding rates of the features $\Z$ and $\hat \Z$, which, as we will see, can be much easier to compute. Here again, $\rho(\Z)$ is some measure that promotes parsimony and information richness of $\Z$. Somewhat surprisingly, as we will see in \Cref{ch:closed-loop}, under rather mild conditions such as $\X$ being sufficiently low-dimensional, self-consistency between $(\Z, \hat \Z)$ implies consistency in $(\X, \hat \X)$! In addition, we will also see that a closed-loop system will allow us to learn the distribution in a \textit{continuous and incremental} manner,\footnote{That is, to learn with one class at a time or even one sample at a time.} without suffering from problems such as catastrophic forgetting associated with open-loop models.
+where \(\ell( \vZ, \hat{\vZ})\) is a loss function based on coding rates of the features \(\vZ\) and \(\hat{\vZ}\), which, as we will see, can be much easier to compute. Here again, \(\rho(\vZ)\) is some measure that promotes parsimony and information richness of \(\vZ\). Somewhat surprisingly, as we will see in \Cref{ch:closed-loop}, under rather mild conditions such as \(\vX\) being sufficiently low-dimensional, self-consistency between \((\vZ, \hat{\vZ})\) implies consistency in \((\vX, \hat{\vX})\)! In addition, we will also see that a closed-loop system will allow us to learn the distribution in a \textit{continuous and incremental} manner,\footnote{That is, to learn with one class at a time or even one sample at a time.} without suffering from problems such as catastrophic forgetting associated with open-loop models.
 
 % Start of Selection
 \section{Bridging Theory and Practice for Machine Intelligence}
-So far, we have introduced three related frameworks for learning a compact and structured representation $\Z$ for a given data distribution $\X$:
+So far, we have introduced three related frameworks for learning a compact and structured representation \(\vZ\) for a given data distribution \(\vX\):
 \begin{itemize}
-\item the open-ended encoding \eqref{eqn:open-loop};
-\item the bi-directional auto-encoding \eqref{eqn:auto-encoding};
-\item the closed-loop transcription \eqref{eqn:closed-loop}.
+    \item the open-ended encoding \eqref{eqn:open-loop};
+    \item the bi-directional auto-encoding \eqref{eqn:auto-encoding};
+    \item the closed-loop transcription \eqref{eqn:closed-loop}.
 \end{itemize}
 In this book, we will systematically study all three frameworks, one after another:
 \begin{equation}
@@ -961,8 +965,8 @@ As mentioned at the beginning, a fundamental task of any intelligent being is to
 
 Thus, intelligence is \textit{not} about collecting all data in advance and training a model to memorize predictable information. Instead, it requires computational mechanisms that continuously improve current knowledge and acquire new information when needed. A fundamental characteristic of any intelligent being or system---whether an animal, human, robot, scientific community, or civilization---is \textit{the ability to continuously improve or gain information on its own}. We can symbolically express the relationship between intelligence and information as:
 \begin{equation}
-\operatorname{Intelligence}(t) = \odv*{\operatorname{Information}}{t}(t), \qquad 
-\operatorname{Information}(t)  = \int_0^t \operatorname{Intelligence}(s) \odif{s}.
+    \operatorname{Intelligence}(t) = \odv*{\operatorname{Information}}{t}(t), \qquad 
+    \operatorname{Information}(t)  = \int_{0}^{t} \operatorname{Intelligence}(s) \odif{s}.
 \end{equation}
 The closed-loop framework provides a universal mechanism for self-improvement and self-learning through feedback---reinforcement being a primitive form, as in natural selection---or gaming, with scientific inquiry representing its most advanced form through hypothesis formulation and verification. All intelligent beings and systems in nature employ closed-loop mechanisms for learning at every level and scale. This ubiquity inspired early attempts to model intelligence with machines and computers, particularly the Cybernetics movement initiated by Norbert Wiener in the 1940s.
 
