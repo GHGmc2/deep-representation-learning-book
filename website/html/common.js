@@ -918,10 +918,22 @@
                 "div",
                 { className: "ai-chat-actions" },
                 h("button", {
+                  className: "ai-chat-feedback",
+                  type: "button",
+                  title: "Provide Feedback",
+                  text: "💬 Feedback",
+                }),
+                h("button", {
                   className: "ai-chat-clear",
                   type: "button",
                   title: "Clear conversation",
                   text: clearText,
+                }),
+                h("button", {
+                  className: "ai-chat-save",
+                  type: "button",
+                  title: "Save chat history",
+                  text: "Save",
                 }),
                 h("button", {
                   className: "ai-chat-close",
@@ -998,12 +1010,25 @@
             closeBtn.addEventListener("click", function () {
               document.body.classList.remove("ai-chat-open");
             });
+          var feedbackBtn = panel.querySelector(".ai-chat-feedback");
+          if (feedbackBtn)
+            feedbackBtn.addEventListener("click", function () {
+              if (window.showFeedbackNotice) {
+                window.showFeedbackNotice();
+              }
+            });
           var clearBtn = panel.querySelector(".ai-chat-clear");
           if (clearBtn)
             clearBtn.addEventListener("click", function () {
               var msgs = panel.querySelector("#ai-chat-messages");
               if (msgs) msgs.innerHTML = "";
+              chatState.messages = []; // Clear stored messages
               document.body.classList.remove("ai-chat-wide");
+            });
+          var saveBtn = panel.querySelector(".ai-chat-save");
+          if (saveBtn)
+            saveBtn.addEventListener("click", function () {
+              saveChatHistory();
             });
           var form = panel.querySelector("#ai-chat-form");
           if (form)
@@ -1223,6 +1248,15 @@
           if (!panel) return;
           var list = panel.querySelector("#ai-chat-messages");
           if (!list) return;
+          
+          // Store message in chatState for persistence
+          chatState.messages = chatState.messages || [];
+          chatState.messages.push({
+            role: role,
+            content: content,
+            timestamp: new Date().toISOString()
+          });
+          
           var item = document.createElement("div");
           item.className =
             "ai-chat-msg " + (role === "user" ? "from-user" : "from-assistant");
@@ -1705,6 +1739,59 @@
               removeTypingIndicator(typingEl);
               setSending(false);
             });
+        }
+
+        function saveChatHistory() {
+          try {
+            // Get messages from chatState
+            var messages = chatState.messages || [];
+            
+            if (messages.length === 0) {
+              alert("No chat history to save.");
+              return;
+            }
+            
+            // Create the chat history object
+            var chatHistory = {
+              title: "AI Chat History",
+              timestamp: new Date().toISOString(),
+              page: window.location.href,
+              messages: messages,
+              metadata: {
+                userAgent: navigator.userAgent,
+                totalMessages: messages.length
+              }
+            };
+            
+            // Convert to JSON
+            var jsonData = JSON.stringify(chatHistory, null, 2);
+            
+            // Create and trigger download
+            var blob = new Blob([jsonData], { type: "application/json" });
+            var url = URL.createObjectURL(blob);
+            var link = document.createElement("a");
+            link.href = url;
+            
+            // Generate filename with timestamp
+            var now = new Date();
+            var dateStr = now.getFullYear() + 
+              String(now.getMonth() + 1).padStart(2, '0') + 
+              String(now.getDate()).padStart(2, '0') + 
+              "_" + 
+              String(now.getHours()).padStart(2, '0') + 
+              String(now.getMinutes()).padStart(2, '0');
+            
+            link.download = "ai_chat_history_" + dateStr + ".json";
+            link.style.display = "none";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+          } catch (error) {
+            console.error("Error saving chat history:", error);
+            alert("Failed to save chat history. Please try again.");
+          }
         }
 
         function clearStoredSelection() {
@@ -2307,4 +2394,94 @@
     window.__reprocess_markdown_wrappers = tryReprocessMarkdownWrappers;
   })();
   // --- End markdown helpers ---
+
+  // Feedback notice functionality
+  window.showFeedbackNotice = function() {
+    // Remove existing feedback notice if any
+    var existing = document.getElementById("feedback-notice");
+    if (existing) {
+      existing.remove();
+    }
+
+    // Create feedback notice
+    var notice = document.createElement("div");
+    notice.id = "feedback-notice";
+    notice.className = "feedback-notice";
+    
+    var content = document.createElement("div");
+    content.className = "feedback-notice-content";
+    
+    var header = document.createElement("div");
+    header.className = "feedback-notice-header";
+    
+    var title = document.createElement("h2");
+    title.className = "feedback-notice-title";
+    title.textContent = "Feedback Guidelines";
+    
+    var closeBtn = document.createElement("button");
+    closeBtn.className = "feedback-notice-close";
+    closeBtn.innerHTML = "&times;";
+    closeBtn.title = "Close";
+    closeBtn.onclick = function() {
+      notice.remove();
+    };
+    
+    header.appendChild(title);
+    header.appendChild(closeBtn);
+    
+    var body = document.createElement("div");
+    body.className = "feedback-notice-body";
+    body.innerHTML = 
+      '<p>We value your feedback on the BookQA AI assistants and would love to hear about your experience!</p>' +
+      '<h3>🐛 Bug Reports</h3>' +
+      '<p>If you encounter any issues with the AI helpers, please report them on our GitHub repository:</p>' +
+      '<ul>' +
+      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues" target="_blank" rel="noopener noreferrer">Report a Bug</a></li>' +
+      '<li>Include the question you asked and the AI\'s response</li>' +
+      '<li>Describe the expected vs. actual behavior</li>' +
+      '</ul>' +
+      '<h3>💡 Feature Requests</h3>' +
+      '<p>Have ideas for improving the AI helpers? We\'d love to hear them:</p>' +
+      '<ul>' +
+      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/discussions" target="_blank" rel="noopener noreferrer">Start a Discussion</a></li>' +
+      '<li>Suggest new features or capabilities</li>' +
+      '<li>Share use cases that aren\'t well supported</li>' +
+      '</ul>' +
+      '<h3>🎯 Accuracy Feedback</h3>' +
+      '<p>Help us improve the quality of AI responses:</p>' +
+      '<ul>' +
+      '<li>Report factual errors or misleading information</li>' +
+      '<li>Share examples of particularly helpful responses</li>' +
+      '<li>Suggest areas where the AI could be more precise</li>' +
+      '</ul>' +
+      '<h3>📚 General Feedback</h3>' +
+      '<p>For broader feedback about the book or this website:</p>' +
+      '<ul>' +
+      '<li><a href="https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution" target="_blank" rel="noopener noreferrer">Contributing Guide</a></li>' +
+      '<li>Email the authors (contact information in the book)</li>' +
+      '</ul>' +
+      '<p><strong>Thank you for helping us improve the BookQA AI assistants!</strong></p>';
+    
+    content.appendChild(header);
+    content.appendChild(body);
+    notice.appendChild(content);
+    
+    // Close on background click
+    notice.onclick = function(e) {
+      if (e.target === notice) {
+        notice.remove();
+      }
+    };
+    
+    // Close on Escape key
+    var handleKeydown = function(e) {
+      if (e.key === "Escape") {
+        notice.remove();
+        document.removeEventListener("keydown", handleKeydown);
+      }
+    };
+    document.addEventListener("keydown", handleKeydown);
+    
+    document.body.appendChild(notice);
+  };
 })();

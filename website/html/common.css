@@ -729,6 +729,15 @@ body.ai-chat-open .ai-chat-panel {
 .ai-chat-actions button:hover {
   background: #f8fafc;
 }
+.ai-chat-feedback {
+  background: var(--accent) !important;
+  color: white !important;
+  border-color: var(--accent) !important;
+}
+.ai-chat-feedback:hover {
+  background: var(--accent-2) !important;
+  border-color: var(--accent-2) !important;
+}
 .ai-chat-context {
   border-bottom: 1px solid var(--border);
   padding: 8px 12px;
@@ -887,6 +896,106 @@ p a {
 }
 p a:hover {
   text-decoration: underline;
+}
+
+/* Feedback notice styles */
+.feedback-notice {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.feedback-notice-content {
+  background: var(--panel);
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feedback-notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.feedback-notice-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+
+.feedback-notice-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+  line-height: 1;
+}
+
+.feedback-notice-close:hover {
+  color: var(--text);
+}
+
+.feedback-notice-body {
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.feedback-notice-body h3 {
+  margin: 20px 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.feedback-notice-body p {
+  margin: 8px 0;
+}
+
+.feedback-notice-body ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.feedback-notice-body li {
+  margin: 4px 0;
+}
+
+.feedback-notice-body a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.feedback-notice-body a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 760px) {
+  .feedback-notice {
+    padding: 10px;
+  }
+  
+  .feedback-notice-content {
+    padding: 20px;
+  }
 }
 
 /* Ensure buttons styled as links are not underlined and lighten on hover */
