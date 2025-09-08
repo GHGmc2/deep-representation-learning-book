@@ -372,7 +372,7 @@ where \(*\) is the convolution operation, \(z\) is the input and \(h\) is the im
     \min_{h} \Ex[\epsilon[n]^{2}] = \Ex[\|x[n] - h[n]*z[n]\|_{2}^{2}].
     \label{eqn:wiener-mse}
 \end{equation}
-The optimal solution \(h[n]\) is called a (denoising) filter. Norbert Wiener---who also initiated the Cybernetics movement---studied this problem in the 1940s and derived an elegant closed-form solution known as the \textit{Wiener filter} \cite{Wiener-1942,Wiener-1949}. This result became one of the cornerstones of signal processing.
+The optimal solution \(h[n]\) is called a (denoising) filter. Norbert Wiener---who also initiated the Cybernetics movement---studied this problem in the 1940s and derived an elegant closed-form solution known as the \textit{Wiener filter} \cite{Wiener-1942,Wiener-1949}. This result, also known as least-variance estimation and filtering, became one of the cornerstones of signal processing. Interested readers may refer to \cite[Appendix B]{MaY2003} for a detailed derivation of this type of estimator.
 
 \paragraph{Kalman filter.} 
 The idea of denoising or filtering a dynamical system was later extended by Rudolph Kalman in the 1960s to a linear time-invariant system described by a finite-dimensional state-space model:
@@ -390,7 +390,7 @@ where \(\vw\) is (white) noise. The optimal causal\footnote{This means the estim
     \min \Ex[ \|\vx[n] - \vC\vz[n]\|_{2}^{2}]
     \label{eqn:kalman-mse}
 \end{equation}
-is given in closed form by the so-called \textit{Kalman filter} \cite{kalman1960new}. This result is a cornerstone of modern control theory because it enables estimation of a dynamical system's state from noisy observations. One can then introduce linear state feedback, for example \(\vu[n] = \vF \hat{\vz}[n]\), and render the closed-loop system fully autonomous, as shown in \Cref{eqn:recursive-closed-loop}.
+is given in closed form by the so-called \textit{Kalman filter} \cite{kalman1960new}. This result is a cornerstone of modern control theory because it enables estimation of a dynamical system's state from noisy observations. One can then introduce linear state feedback, for example \(\vu[n] = \vF \hat{\vz}[n]\), and render the closed-loop system fully autonomous, as shown in \Cref{eqn:recursive-closed-loop}.  Interested readers may refer to \cite[Appendix B]{MaY2003} for a detailed derivation of the Kalman filter.
 
 \paragraph{Identification of linear dynamical systems.}
 To derive the Kalman filter, the system parameters \(\vA, \vB, \vC\) are assumed to be known. If they are not given in advance, the problem becomes more challenging and is known as \textit{system identification}: how to \textit{learn} the parameters \(\vA, \vB, \vC\) from many samples of the input sequence \(\{\vu[n]\}\) and observation sequence \(\{\vx[n]\}\). This is a classic problem in systems theory. If the system is linear, the input and output sequences \(\{\vu[n], \vx[n]\}\) jointly lie on a certain low-dimensional subspace\footnote{which has the same dimension as the order of the state-space model \eqref{eqn:linear-state-space}.}. Hence, the identification problem is essentially equivalent to identifying this low-dimensional subspace \cite{OverscheeP1996,Liu-2009-CDC,Liu-2010-SIAM}.
@@ -535,7 +535,7 @@ As can be seen from the formula, the function \(\nabla \log p(\vx)\) plays a ver
 \end{equation}
 for which we only need to know the distribution \(p(\cdot)\) of \(\vx\), not the ground truth \(p_{o}(\cdot)\) for \(\vx_{o}\). An important implication of this result is that if we add Gaussian noise to any distribution, the denoising process can be done easily if we can somehow obtain the function \(\nabla \log p(\vx)\).
 
-Because this is such an important and useful result, it has been rediscovered and used in many different contexts and areas. For example, after Tweedie's formula \cite{Robbins1956AnEB}, it was rediscovered a few years later by \cite{Miyasawa61}. In the early 2000s, the function \(\nabla \log p(\vx)\) was rediscovered again in the context of learning a general distribution and was named the ``score function'' by Aapo Hyv\"{a}rinen \cite{hyvarinen05a}. Its connection to (empirical Bayesian) denoising was soon recognized by \cite{Vincent2011}.
+Because this is such an important and useful result, it has been rediscovered and used in many different contexts and areas. For example, after Tweedie's formula \cite{Robbins1956AnEB}, it was rediscovered a few years later by \cite{Miyasawa61} where it was termed ``empirical Bayesian denoising.'' In the early 2000s, the function \(\nabla \log p(\vx)\) was rediscovered again in the context of learning a general distribution and was named the ``score function'' by Aapo Hyv\"{a}rinen \cite{hyvarinen05a}. Its connection to (empirical Bayesian) denoising was soon recognized by \cite{Vincent2011}.
 Generalizations to other measurement distributions (beyond Gaussian noise) have been made by Eero Simoncelli's group \cite{Raphan10}. Today, the most direct application of Tweedie's formula and denoising is image generation via iterative denoising \cite{Kadkhodaie21a,ho2020denoising}.
 
 \begin{figure}
