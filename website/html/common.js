@@ -2400,4 +2400,90 @@
     window.__reprocess_markdown_wrappers = tryReprocessMarkdownWrappers;
   })();
   // --- End markdown helpers ---
+
+  // --- Begin feedback notice functionality ---
+  window.showFeedbackNotice = function() {
+    // Helper function to create elements with properties
+    function createElement(tag, props) {
+      var el = document.createElement(tag);
+      if (props) {
+        if (props.id) el.id = props.id;
+        if (props.className) el.className = props.className;
+        if (props.text) el.textContent = props.text;
+        if (props.html) el.innerHTML = props.html;
+        if (props.title) el.title = props.title;
+        if (props.onclick) el.onclick = props.onclick;
+      }
+      return el;
+    }
+
+    // Remove existing feedback notice if any
+    var existing = document.getElementById("feedback-notice");
+    if (existing) {
+      existing.remove();
+    }
+
+    // Load HTML content from disclaimer.html
+    fetch('disclaimer.html')
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error('Failed to load disclaimer content');
+        }
+        return response.text();
+      })
+      .then(function(htmlContent) {
+        // Create feedback notice
+        var notice = createElement("div", { id: "feedback-notice", className: "feedback-notice" });
+        var content = createElement("div", { className: "feedback-notice-content" });
+        var header = createElement("div", { className: "feedback-notice-header" });
+        var title = createElement("h2", { className: "feedback-notice-title", text: "Feedback Guidelines" });
+        var closeBtn = createElement("button", {
+          className: "feedback-notice-close",
+          title: "Close",
+          html: "&times;",
+          onclick: function() { notice.remove(); }
+        });
+        
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        
+        var body = createElement("div", { className: "feedback-notice-body" });
+        body.innerHTML = htmlContent;
+        
+        content.appendChild(header);
+        content.appendChild(body);
+        notice.appendChild(content);
+        
+        // Add to DOM
+        document.body.appendChild(notice);
+      })
+      .catch(function(error) {
+        console.error('Error loading disclaimer content:', error);
+        // Fallback to basic content
+        var notice = createElement("div", { id: "feedback-notice", className: "feedback-notice" });
+        var content = createElement("div", { className: "feedback-notice-content" });
+        var header = createElement("div", { className: "feedback-notice-header" });
+        var title = createElement("h2", { className: "feedback-notice-title", text: "Feedback Guidelines" });
+        var closeBtn = createElement("button", {
+          className: "feedback-notice-close",
+          title: "Close",
+          html: "&times;",
+          onclick: function() { notice.remove(); }
+        });
+        
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        
+        var body = createElement("div", { className: "feedback-notice-body" });
+        body.innerHTML = '<p>Error loading feedback guidelines. Please visit our GitHub repository for more information.</p>';
+        
+        content.appendChild(header);
+        content.appendChild(body);
+        notice.appendChild(content);
+        
+        // Add to DOM
+        document.body.appendChild(notice);
+      });
+  };
+  // --- End feedback notice functionality ---
 })();
