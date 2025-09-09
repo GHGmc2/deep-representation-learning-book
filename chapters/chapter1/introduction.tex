@@ -111,7 +111,7 @@ Astute readers will notice that the 1940s were truly magical: many fundamental i
 
 Although Wiener identified many key characteristics and mechanisms of (embodied) intelligence, he offered no clear recipe for integrating them into a complete autonomous intelligent system. From today's perspective, some of his views were incomplete or inaccurate. In particular, in the last chapter of the second edition of \textit{Cybernetics} \cite{Wiener-Cybernetics-1961}, he stressed the need to \textit{deal with nonlinearity} if machines are to emulate typical learning mechanisms in nature, yet he provided no concrete, effective solution for this difficult issue. In fairness, even the theory of linear systems was in its infancy at the time, and nonlinear systems seemed far less approachable.
 
-Nevertheless, we cannot help but marvel at Wiener's prescience. about the importance of nonlinearity. As this book will show, the answer came only recently: nonlinearity can be handled effectively through progressive linearization and transformation realized by deep networks and representations (see \Cref{ch:representation}). Moreover, we will demonstrate in this book how all the mechanisms listed above can be naturally integrated into a complete system which exhibits certain characteristics of an autonomous intelligent system (see \Cref{ch:auto-encoding}).
+Nevertheless, we cannot help but marvel at Wiener's prescience. about the importance of nonlinearity. As this book will show, the answer came only recently: nonlinearity can be handled effectively through progressive linearization and transformation realized by deep networks and representations (see \Cref{ch:representation}). Moreover, we will demonstrate in this book how all the mechanisms listed above can be naturally integrated into a complete system which exhibits certain characteristics of an autonomous intelligent system (see \Cref{ch:autoencoding}).
 
 \paragraph{Origin of artificial intelligence.}
 The subtitle of Wiener's \textit{Cybernetics}---\textit{Control and Communication in the Animal and the Machine}---reveals that 1940s research aimed primarily at emulating animal-level intelligence. As noted earlier, the agendas of that era were dominated by Wiener's Cybernetics movement.
@@ -641,7 +641,7 @@ In the late 1980s and 1990s, artificial neural networks were already being used 
 \end{equation}
 By enforcing consistency between the decoded data \(\hat{\vX}\) and the original \(\vX\)---for example, by minimizing a MSE-type reconstruction error\footnote{MSE-type errors are known to be problematic for imagery data with complex nonlinear structures. As we will soon discuss, much recent work in generative methods, including GANs, has focused on finding better surrogate distance functions between the original data \(\vX\) and the regenerated \(\hat{\vX}\).}:
 \begin{equation}
-    \min_{f,g} [\|\vX - \hat{\vX}\|_{2}^{2} = \|\vX - g(f(\vX))\|_{2}^{2}],
+    \min_{f,g} \|\vX - \hat{\vX}\|_{2}^{2}, \qquad \text{where} \quad \hat{\vX} = g(f(\vX)),
 \end{equation}
 an autoencoder can be learned directly from the data \(\vX\).
 
@@ -913,7 +913,7 @@ Generally speaking, both the encoder and decoder can be modeled and realized by 
    \min_{f, g} [\ell(\vX, \hat{\vX}) + \rho(\vZ)], \qquad \text{where} \quad \vZ = f(\vX), \quad \hat{\vX} = g(\vZ)
    \label{eqn:auto-encoding-objective}
 \end{equation}
-where \(\ell(\cdot, \cdot)\) is a distance function that promotes similarity between \(\vX\) and \(\hat{\vX}\)\footnote{Either sample-wise or distribution-wise, depending on the choice of \(\ell\).} and \(\rho(\vZ)\) is a measure that promotes parsimony and information richness of \(\vZ\). The classic principal component analysis (PCA) \cite{JolliffeI2002} is a typical example of a consistent auto-encoding, which we will study in great detail in \Cref{ch:classic}, as a precursor to more general low-dimensional structures. In \Cref{ch:auto-encoding}, we will study how to learn consistent auto-encoding for general (say nonlinear) low-dimensional distributions.  
+where \(\ell(\cdot, \cdot)\) is a distance function that promotes similarity between \(\vX\) and \(\hat{\vX}\)\footnote{Either sample-wise or distribution-wise, depending on the choice of \(\ell\).} and \(\rho(\vZ)\) is a measure that promotes parsimony and information richness of \(\vZ\). The classic principal component analysis (PCA) \cite{JolliffeI2002} is a typical example of a consistent auto-encoding, which we will study in great detail in \Cref{ch:classic}, as a precursor to more general low-dimensional structures. In \Cref{ch:autoencoding}, we will study how to learn consistent auto-encoding for general (say nonlinear) low-dimensional distributions.  
 
 
 \subsection{Learning Self-Consistent Representations}
@@ -952,7 +952,7 @@ In this book, we will systematically study all three frameworks, one after anoth
     \text{\textbf{open-ended}} \; \Longrightarrow \; 
     \text{\textbf{bi-directional}} \; \Longrightarrow \; \text{\textbf{closed-loop}},
 \end{equation}
-in \Cref{ch:representation}, \Cref{sec:consistent-representation} and \Cref{sec:self-consistency} of \Cref{ch:auto-encoding}, respectively
+in \Cref{ch:representation}, \Cref{sec:consistent-representation} and \Cref{sec:self-consistency} of \Cref{ch:autoencoding}, respectively
 
 In recent years, many theoretical frameworks have been proposed to help understand deep networks. However, most have failed to provide scalable solutions that match the performance of empirical methods on real-world data and tasks. Many theories offer little practical guidance for further empirical improvement. \Cref{ch:conditional-inference} and \Cref{ch:applications} will demonstrate how the framework presented in this book can bridge the gap between theory and practice. \Cref{ch:conditional-inference} will show how to use the learned distribution and its representation to conduct (Bayesian) inference for practical tasks involving (conditional) generation, estimation, and prediction. \Cref{ch:applications} will provide compelling experimental evidence that networks and systems designed from first principles can achieve competitive---and potentially superior---performance on tasks such as visual representation learning, image classification, image completion, segmentation, and text generation.
 
