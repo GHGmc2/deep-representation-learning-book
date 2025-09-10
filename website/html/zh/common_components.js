@@ -57,6 +57,8 @@
       clear: "清除",
       close: "关闭",
       send: "发送",
+      feedback: "反馈",
+      save: "保存",
       chatWithAI: "与AI聊天",
       includeSelection: "包含当前文本选择",
       selectionEmpty: "在页面中选择文本以将其作为上下文包含。",
@@ -65,6 +67,47 @@
       systemPrompt:
         "您是帮助《学习数据分布的深度表示》一书读者的AI助手。请清晰简洁地回答。如果相关，请指向当前页面的章节或标题。",
       askAITitle: "询问AI关于此页面",
+      tooltips: {
+        feedback: "提供反馈",
+        clear: "清除会话",
+        save: "保存聊天记录",
+        close: "关闭",
+      },
+      alerts: {
+        noChatHistory: "没有可保存的聊天记录。",
+        saveFailed: "保存聊天记录失败。请重试。",
+      },
+      feedbackNotice: {
+        title: "反馈指引",
+        bodyMd: `
+我们重视您对 BookQA AI 助手的反馈，希望了解您的使用体验！
+
+### 免责声明
+您的查询会在我们的本地服务器上匿名记录以便故障排除。为了保护您的隐私，请避免发送敏感信息。
+
+### 🐛 错误报告
+如果您在使用 AI 助手时遇到任何问题，请在我们的 GitHub 仓库中报告：
+
+- [报告错误](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues)
+- 包含您提出的问题和 AI 的回复
+- 描述预期与实际行为的差异
+
+### 💡 功能请求
+对改进 AI 助手有想法？我们很乐意听取您的建议：
+
+- [提出新的议题进行讨论](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues)
+- 建议新功能或能力
+- 分享尚未得到良好支持的使用案例
+
+### 📚 一般反馈
+对于关于本书或本网站的更广泛反馈：
+
+- [贡献指南](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution)
+- 给作者发邮件（联系信息见书中）
+
+**感谢您帮助我们改进 BookQA AI 助手！**
+        `,
+      },
     },
 
     // Sidebar sections
@@ -136,12 +179,14 @@
         "peng-wang": { desc: "作者，中文翻译。" },
         "yi-ma": { desc: "资深作者。" },
         "stephen-butterfill": {
-          desc: 'PRs：[#14](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14)',
+          desc: "PRs：[#14](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14)",
         },
         "kerui-min": { desc: "中文翻译。" },
-        "jan-cavel": { desc: "罗马尼亚语翻译. PRs：[#16](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/16)" },
+        "jan-cavel": {
+          desc: "罗马尼亚语翻译. PRs：[#16](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/16)",
+        },
         "kevin-murphy": {
-          desc: '大量反馈。Issues：[#3](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3)、[#4](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4)、[#5](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5)、[#8](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/8)、[#10](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10)、[#11](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11)、[#12](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12)、[#13](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13)',
+          desc: "大量反馈。Issues：[#3](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3)、[#4](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4)、[#5](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5)、[#8](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/8)、[#10](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10)、[#11](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11)、[#12](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12)、[#13](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13)",
         },
         "yaodong-yu": { desc: "为第四章提供初始文本。" },
         "tianzhe-chu": { desc: "AI 工具。" },

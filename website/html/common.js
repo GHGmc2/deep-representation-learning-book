@@ -897,6 +897,17 @@
           var closeText =
             (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.chat.close) ||
             "Close";
+          var feedbackText =
+            (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.chat.feedback) ||
+            "Feedback";
+          var tooltips =
+            (window.BOOK_COMPONENTS &&
+              window.BOOK_COMPONENTS.chat &&
+              window.BOOK_COMPONENTS.chat.tooltips) ||
+            null;
+          var saveText =
+            (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.chat.save) ||
+            "Save";
           var panel = h(
             "div",
             {
@@ -917,18 +928,47 @@
               h(
                 "div",
                 { className: "ai-chat-actions" },
-                h("button", {
-                  className: "ai-chat-clear",
-                  type: "button",
-                  title: "Clear conversation",
-                  text: clearText,
-                }),
-                h("button", {
-                  className: "ai-chat-close",
-                  type: "button",
-                  title: "Close",
-                  text: closeText,
-                })
+                h(
+                  "button",
+                  {
+                    className: "ai-chat-feedback",
+                    type: "button",
+                    title:
+                      (tooltips && tooltips.feedback) || "Provide Feedback",
+                  },
+                  h("span", { className: "btn-icon", html: "📝" }),
+                  h("span", { className: "btn-label", text: feedbackText })
+                ),
+                h(
+                  "button",
+                  {
+                    className: "ai-chat-clear",
+                    type: "button",
+                    title: (tooltips && tooltips.clear) || "Clear conversation",
+                  },
+                  h("span", { className: "btn-icon", html: "🧹" }),
+                  h("span", { className: "btn-label", text: clearText })
+                ),
+                h(
+                  "button",
+                  {
+                    className: "ai-chat-save",
+                    type: "button",
+                    title: (tooltips && tooltips.save) || "Save chat history",
+                  },
+                  h("span", { className: "btn-icon", html: "💾" }),
+                  h("span", { className: "btn-label", text: saveText })
+                ),
+                h(
+                  "button",
+                  {
+                    className: "ai-chat-close",
+                    type: "button",
+                    title: (tooltips && tooltips.close) || "Close",
+                  },
+                  h("span", { className: "btn-icon", html: "✕" }),
+                  h("span", { className: "btn-label", text: closeText })
+                )
               )
             ),
             h(
@@ -998,12 +1038,25 @@
             closeBtn.addEventListener("click", function () {
               document.body.classList.remove("ai-chat-open");
             });
+          var feedbackBtn = panel.querySelector(".ai-chat-feedback");
+          if (feedbackBtn)
+            feedbackBtn.addEventListener("click", function () {
+              if (window.showFeedbackNotice) {
+                window.showFeedbackNotice();
+              }
+            });
           var clearBtn = panel.querySelector(".ai-chat-clear");
           if (clearBtn)
             clearBtn.addEventListener("click", function () {
               var msgs = panel.querySelector("#ai-chat-messages");
               if (msgs) msgs.innerHTML = "";
+              chatState.messages = []; // Clear stored messages
               document.body.classList.remove("ai-chat-wide");
+            });
+          var saveBtn = panel.querySelector(".ai-chat-save");
+          if (saveBtn)
+            saveBtn.addEventListener("click", function () {
+              saveChatHistory();
             });
           var form = panel.querySelector("#ai-chat-form");
           if (form)
@@ -1223,6 +1276,15 @@
           if (!panel) return;
           var list = panel.querySelector("#ai-chat-messages");
           if (!list) return;
+
+          // Store message in chatState for persistence
+          chatState.messages = chatState.messages || [];
+          chatState.messages.push({
+            role: role,
+            content: content,
+            timestamp: new Date().toISOString(),
+          });
+
           var item = document.createElement("div");
           item.className =
             "ai-chat-msg " + (role === "user" ? "from-user" : "from-assistant");
@@ -1707,6 +1769,69 @@
             });
         }
 
+        function saveChatHistory() {
+          try {
+            // Get messages from chatState
+            var messages = chatState.messages || [];
+
+            var chatCfg =
+              (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.chat) || {};
+            var alerts = chatCfg.alerts || {};
+
+            if (messages.length === 0) {
+              alert(alerts.noChatHistory || "No chat history to save.");
+              return;
+            }
+
+            // Create the chat history object
+            var chatHistory = {
+              title: "AI Chat History",
+              timestamp: new Date().toISOString(),
+              page: window.location.href,
+              messages: messages,
+              metadata: {
+                userAgent: navigator.userAgent,
+                totalMessages: messages.length,
+              },
+            };
+
+            // Convert to JSON
+            var jsonData = JSON.stringify(chatHistory, null, 2);
+
+            // Create and trigger download
+            var blob = new Blob([jsonData], { type: "application/json" });
+            var url = URL.createObjectURL(blob);
+            var link = document.createElement("a");
+            link.href = url;
+
+            // Generate filename with timestamp
+            var now = new Date();
+            var dateStr =
+              now.getFullYear() +
+              String(now.getMonth() + 1).padStart(2, "0") +
+              String(now.getDate()).padStart(2, "0") +
+              "_" +
+              String(now.getHours()).padStart(2, "0") +
+              String(now.getMinutes()).padStart(2, "0");
+
+            link.download = "ai_chat_history_" + dateStr + ".json";
+            link.style.display = "none";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+          } catch (error) {
+            console.error("Error saving chat history:", error);
+            var chatCfg =
+              (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.chat) || {};
+            var alerts = chatCfg.alerts || {};
+            alert(
+              alerts.saveFailed ||
+                "Failed to save chat history. Please try again."
+            );
+          }
+        }
+
         function clearStoredSelection() {
           chatState.currentSelection = "";
           updateSelectionPreview();
@@ -2147,7 +2272,13 @@
     function basicEscapeHtml(s) {
       try {
         return (s || "").replace(/[&<>"']/g, function (c) {
-          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+          return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;",
+          }[c];
         });
       } catch (_) {
         return s || "";
@@ -2163,7 +2294,10 @@
         // Italic
         html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
         // Links
-        html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1<\/a>');
+        html = html.replace(
+          /\[([^\]]+)\]\(([^)]+)\)/g,
+          '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'
+        );
         if (!inline) {
           // Preserve single newlines as <br> minimally; leave paragraphs to caller
           html = html.replace(/\n/g, "<br/>");
@@ -2177,8 +2311,10 @@
     function convertMarkdown(md, inline) {
       try {
         if (window.marked) {
-          if (inline && window.marked.parseInline) return window.marked.parseInline(md || "");
-          if (!inline && window.marked.parse) return window.marked.parse(md || "");
+          if (inline && window.marked.parseInline)
+            return window.marked.parseInline(md || "");
+          if (!inline && window.marked.parse)
+            return window.marked.parse(md || "");
         }
       } catch (_) {}
       // Fallback minimal converter until marked loads
@@ -2307,4 +2443,92 @@
     window.__reprocess_markdown_wrappers = tryReprocessMarkdownWrappers;
   })();
   // --- End markdown helpers ---
+
+  // --- Begin feedback notice functionality ---
+  window.showFeedbackNotice = function () {
+    var existing = document.getElementById("feedback-notice");
+    if (existing) existing.remove();
+
+    var chatCfg = (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.chat) || {};
+    var fn = (chatCfg && chatCfg.feedbackNotice) || {};
+    var tips = (chatCfg && chatCfg.tooltips) || {};
+
+    var titleText = fn.title || "Feedback Guidelines";
+    var md = fn.bodyMd || "Please visit our GitHub repository for feedback.";
+
+    function el(tag, props) {
+      var node = document.createElement(tag);
+      if (props) {
+        if (props.id) node.id = props.id;
+        if (props.className) node.className = props.className;
+        if (props.text != null) node.textContent = props.text;
+        if (props.html != null) node.innerHTML = props.html;
+        if (props.title) node.title = props.title;
+        if (props.onclick) node.onclick = props.onclick;
+        // set any data-* or arbitrary attributes
+        Object.keys(props).forEach(function (k) {
+          if (
+            k === "id" ||
+            k === "className" ||
+            k === "text" ||
+            k === "html" ||
+            k === "title" ||
+            k === "onclick"
+          )
+            return;
+          try {
+            node.setAttribute(k, props[k]);
+          } catch (_) {}
+        });
+      }
+      for (var i = 2; i < arguments.length; i++) {
+        var c = arguments[i];
+        if (!c) continue;
+        if (Array.isArray(c)) {
+          for (var j = 0; j < c.length; j++) if (c[j]) node.appendChild(c[j]);
+        } else {
+          node.appendChild(c);
+        }
+      }
+      return node;
+    }
+
+    var mdWrapper = el("div", {
+      className: "md-block-text",
+      "data-md": md,
+      "data-md-mode": "block",
+    });
+
+    var notice = el(
+      "div",
+      { id: "feedback-notice", className: "feedback-notice" },
+      el(
+        "div",
+        { className: "feedback-notice-content" },
+        el(
+          "div",
+          { className: "feedback-notice-header" },
+          el("h2", { className: "feedback-notice-title", text: titleText }),
+          el("button", {
+            className: "feedback-notice-close",
+            title: tips.close || "Close",
+            html: "&times;",
+            onclick: function () {
+              var n = document.getElementById("feedback-notice");
+              if (n) n.remove();
+            },
+          })
+        ),
+        el("div", { className: "feedback-notice-body" }, mdWrapper)
+      )
+    );
+
+    document.body.appendChild(notice);
+    if (window.__reprocess_markdown_wrappers) {
+      try {
+        window.__reprocess_markdown_wrappers();
+      } catch (_) {}
+    }
+  };
+  // --- End feedback notice functionality ---
 })();

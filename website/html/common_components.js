@@ -73,6 +73,8 @@
       clear: "Clear",
       close: "Close",
       send: "Send",
+      feedback: "Feedback",
+      save: "Save",
       chatWithAI: "Ask AI",
       includeSelection: "Include current text selection",
       selectionEmpty: "Select text on the page to include it as context.",
@@ -81,6 +83,47 @@
       systemPrompt:
         "You are an AI assistant helping readers of the book Learning Deep Representations of Data Distributions. Answer clearly and concisely. If relevant, point to sections or headings from the current page.",
       askAITitle: "Ask AI about this page",
+      tooltips: {
+        feedback: "Provide Feedback",
+        clear: "Clear conversation",
+        save: "Save chat history",
+        close: "Close",
+      },
+      alerts: {
+        noChatHistory: "No chat history to save.",
+        saveFailed: "Failed to save chat history. Please try again.",
+      },
+      feedbackNotice: {
+        title: "Feedback Guidelines",
+        bodyMd: `
+We value your feedback on the BookQA AI assistants and would love to hear about your experience!
+
+### Disclaimer
+Your queries are anonymously logged on our local server for troubleshooting. In order to protect your privacy, please avoid sending sensitive information.
+
+### 🐛 Bug Reports
+If you encounter any issues with the AI helpers, please report them on our GitHub repository:
+
+- [Report a Bug](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues)
+- Include the question you asked and the AI's response
+- Describe the expected vs. actual behavior
+
+### 💡 Feature Requests
+Have ideas for improving the AI helpers? We'd love to hear them:
+
+- [Raise a new issue to discuss](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues)
+- Suggest new features or capabilities
+- Share use cases that aren't well supported
+
+### 📚 General Feedback
+For broader feedback about the book or this website:
+
+- [Contributing Guide](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution)
+- Email the authors (contact information in the book)
+
+**Thank you for helping us improve the BookQA AI assistants!**
+        `,
+      },
     },
 
     // Language options
@@ -161,7 +204,9 @@ This book would have not been possible without the financial support for these r
           desc: "PRs: [#14](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14)",
         },
         "kerui-min": { desc: "Chinese translation." },
-        "jan-cavel": { desc: "Romanian translation. PRs: [#16](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/16)" },
+        "jan-cavel": {
+          desc: "Romanian translation. PRs: [#16](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/16)",
+        },
         "kevin-murphy": {
           desc: "Extensive feedback. Issues: [#3](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3), [#4](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4), [#5](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5), [#8](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10), [#10](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10), [#11](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11), [#12](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12), [#13](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13)",
         },
@@ -198,8 +243,7 @@ The following are (unofficial) community translations of the book.
     aiHelpers: {
       title: "AI Helpers",
       intro: "We provide simple AI assistants tailored to this book.",
-      techDetails:
-        `
+      techDetails: `
 The BookQA series of models is designed to help readers understand the book's content. It can answer questions about the material and give clear explanations of the key concepts and theories. To build these models, we first use [EntiGraph](https://arxiv.org/pdf/2409.07431) to generate a rich set of book-related data by linking sampled entities from the text. We then continually pre-train [Qwen2.5-7B/32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) on this data using auto-regressive training. We also incorporate instruction-following data during training such that the model can learn new knowledge from the book without forgetting basic chatting skills. The BookQA 7B model currently powers the "Ask AI" button in the top bar of this website.
       `,
       sections: {
