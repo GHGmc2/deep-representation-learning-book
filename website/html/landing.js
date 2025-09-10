@@ -28,8 +28,8 @@
   function getVersionText() {
     try {
       var raw =
-        (window.get_text &&
-          window.get_text("landing.hero.cover.version")) || "";
+        (window.get_text && window.get_text("landing.hero.cover.version")) ||
+        "";
       if (Array.isArray(raw)) raw = raw.join(" ");
       var str = String(raw || "");
       var first = (str.split(/\r?\n/) || [""])[0] || "";
@@ -168,9 +168,9 @@
               window.get_text("landing.sections.about.title")) ||
               ""
           ),
-          ((window.get_text_block &&
+          (window.get_text_block &&
             window.get_text_block("landing.sections.about.content")) ||
-            null)
+            null
         ),
         React.createElement(
           "div",
@@ -182,11 +182,11 @@
               window.get_text("landing.sections.acknowledgements.title")) ||
               ""
           ),
-          ((window.get_text_block &&
+          (window.get_text_block &&
             window.get_text_block(
               "landing.sections.acknowledgements.content"
             )) ||
-            null)
+            null
         )
         // React.createElement('div', { className: 'section-card' },
         //   React.createElement('h3', null, 'Citation'),
