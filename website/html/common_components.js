@@ -232,7 +232,8 @@ This book would have not been possible without the financial support for these r
 The following are university courses related to or using material from the book.
 
 - The University of Hong Kong, DATA8014, Fall 2025
-  - Lecture slides: [1](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec01.pdf), [2](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec02.pdf), [3](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec03.pdf), [4](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec04.pdf), [5](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec05.pdf)
+  - Lecture slides: [1](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec01.pdf), [2](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec02.pdf), [3](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec03.pdf), [4](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec04.pdf), [5](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec05.pdf) [6](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec06.pdf)
+  - Lecture videos: [1.1](https://youtu.be/H6vt_OBO0dk), [1.2](https://youtu.be/vcpHffMi6NY), [1.3](https://youtu.be/7Q-SYdzeR0M), [2.1](https://youtu.be/ybxj5U1cUdM), [2.2](https://youtu.be/iJ3GNlWCc4k), [2.3](https://youtu.be/Giz1r7cajPY), [3.1](https://youtu.be/ctmN-8p7zI8), [3.2](https://youtu.be/NSwSh1quLqA), [4](https://youtu.be/XDt6SE3kD58), [5.1](https://youtu.be/P4Dw0IG2UL8), [5.2](https://youtu.be/thjqRBJc8Zw), [6.1](https://youtu.be/KWuRFK7JKk4), [6.2](https://youtu.be/TpnyTR9Y-m0)
 - University of Macau, CISC7402, Fall 2025
         `,
         tutorials: `
