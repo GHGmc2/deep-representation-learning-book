@@ -83,6 +83,25 @@
       systemPrompt:
         "You are an AI assistant helping readers of the book Learning Deep Representations of Data Distributions. Answer clearly and concisely. If relevant, point to sections or headings from the current page.",
       askAITitle: "Ask AI about this page",
+      modelPicker: {
+        title: "Select AI model",
+        options: [
+          {
+            id: "original",
+            text: "🤖 BookQA-7B",
+            description: "Original model",
+            backgroundColor: "#2196F3",
+            color: "white"
+          },
+          {
+            id: "rag",
+            text: "🧠 BookQA-7B+RAG", 
+            description: "RAG-enhanced model",
+            backgroundColor: "#4CAF50",
+            color: "white"
+          }
+        ]
+      },
       tooltips: {
         feedback: "Provide Feedback",
         clear: "Clear conversation",

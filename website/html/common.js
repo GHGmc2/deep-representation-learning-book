@@ -1003,32 +1003,43 @@
               )
             ),
             h("div", { className: "ai-chat-messages", id: "ai-chat-messages" }),
-            h(
-              "form",
-              { className: "ai-chat-compose", id: "ai-chat-form" },
-              h("textarea", {
-                className: "ai-chat-input",
-                id: "ai-chat-input",
-                rows: "3",
-                placeholder:
-                  (window.BOOK_COMPONENTS &&
-                    window.BOOK_COMPONENTS.chat.placeholder) ||
-                  'Ask a question about this page…\n\nYou can also ask about specific content by appending:\n@chapter (e.g., "@3"), @chapter.section (e.g., "@3.1"), @chapter.section.subsection (e.g., "@3.1.2")\n@appendix (e.g., "@A"), @appendix.section (e.g., "@A.1"), @appendix.section.subsection (e.g., "@A.1.2")',
-              }),
               h(
-                "div",
-                { className: "ai-chat-sendrow" },
-                h("button", {
-                  className: "ai-chat-send",
-                  id: "ai-chat-send",
-                  type: "submit",
-                  text:
+                "form",
+                { className: "ai-chat-compose", id: "ai-chat-form" },
+                h("textarea", {
+                  className: "ai-chat-input",
+                  id: "ai-chat-input",
+                  rows: "3",
+                  placeholder:
                     (window.BOOK_COMPONENTS &&
-                      window.BOOK_COMPONENTS.chat.send) ||
-                    "Send",
-                })
+                      window.BOOK_COMPONENTS.chat.placeholder) ||
+                    'Ask a question about this page…\n\nYou can also ask about specific content by appending:\n@chapter (e.g., "@3"), @chapter.section (e.g., "@3.1"), @chapter.section.subsection (e.g., "@3.1.2")\n@appendix (e.g., "@A"), @appendix.section (e.g., "@A.1"), @appendix.section.subsection (e.g., "@A.1.2")',
+                }),
+                h(
+                  "div",
+                  { className: "ai-chat-sendrow" },
+                  h("select", {
+                    className: "ai-chat-model-select",
+                    id: "ai-chat-model-select",
+                    title: BOOK_COMPONENTS.chat.modelPicker.title
+                  }, BOOK_COMPONENTS.chat.modelPicker.options.map(function(option) {
+                    return h("option", {
+                      value: option.id,
+                      text: option.text,
+                      selected: (option.id === "original" && !chatState.useRAG) || (option.id === "rag" && chatState.useRAG)
+                    });
+                  })),
+                  h("button", {
+                    className: "ai-chat-send",
+                    id: "ai-chat-send",
+                    type: "submit",
+                    text:
+                      (window.BOOK_COMPONENTS &&
+                        window.BOOK_COMPONENTS.chat.send) ||
+                      "Send",
+                  })
+                )
               )
-            )
           );
           document.body.appendChild(panel);
 
@@ -1058,6 +1069,12 @@
             saveBtn.addEventListener("click", function () {
               saveChatHistory();
             });
+          var modelSelect = panel.querySelector(".ai-chat-model-select");
+          if (modelSelect)
+            modelSelect.addEventListener("change", function () {
+              chatState.useRAG = this.value === "rag";
+              updateModelPicker();
+            });
           var form = panel.querySelector("#ai-chat-form");
           if (form)
             form.addEventListener("submit", function (e) {
@@ -1075,7 +1092,7 @@
             });
         }
 
-        var chatState = { messages: [], currentSelection: "", sending: false };
+        var chatState = { messages: [], currentSelection: "", sending: false, useRAG: false };
 
         // Open/close panel when chat button is clicked
         try {
@@ -1098,6 +1115,8 @@
                   if (ta) ta.focus();
                 } catch (_) {}
                 setTimeout(checkChatOverflow, 80);
+                // Initialize model picker state
+                setTimeout(updateModelPicker, 100);
               }
             });
           }
@@ -1328,8 +1347,10 @@
         function setSending(isSending) {
           var btn = document.getElementById("ai-chat-send");
           var input = document.getElementById("ai-chat-input");
+          var modelSelect = document.getElementById("ai-chat-model-select");
           if (btn) btn.disabled = !!isSending;
           if (input) input.disabled = !!isSending;
+          if (modelSelect) modelSelect.disabled = !!isSending;
           setTimeout(checkChatOverflow, 60);
         }
 
@@ -1385,6 +1406,54 @@
               return {
                 content:
                   "Error contacting chat API: " +
+                  (e && e.message ? e.message : String(e)),
+              };
+            });
+        }
+        
+        function requestRAG(messages) {
+          // Extract the user query from messages
+          var userQuery = "";
+          try {
+            // Find the last user message
+            for (var i = messages.length - 1; i >= 0; i--) {
+              if (messages[i].role === "user") {
+                userQuery = messages[i].content || "";
+                break;
+              }
+            }
+          } catch (_) {}
+          
+          if (!userQuery) {
+            return Promise.resolve({
+              content: "No user query found in messages.",
+            });
+          }
+          
+          var endpoint = "https://deep-representation-learning-book-proxy.tianzhechu2.workers.dev/query";
+          var body = {
+            query: userQuery,
+            mode: "hybrid" // Default mode, could be made configurable
+          };
+          var headers = { "Content-Type": "application/json" };
+          
+          return fetch(endpoint, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(body),
+          })
+            .then(function (r) {
+              return r.json();
+            })
+            .then(function (j) {
+              // The RAG API returns the response directly as a string or in a response field
+              var txt = (typeof j === "string" ? j : j.response || j.content || JSON.stringify(j));
+              return { content: txt || "No content in response." };
+            })
+            .catch(function (e) {
+              return {
+                content:
+                  "Error contacting RAG API: " +
                   (e && e.message ? e.message : String(e)),
               };
             });
@@ -1745,6 +1814,14 @@
             }
           });
         }
+        function updateModelPicker() {
+          var select = document.getElementById("ai-chat-model-select");
+          if (!select) return;
+          
+          var selectedValue = chatState.useRAG ? "rag" : "original";
+          select.value = selectedValue;
+        }
+
         function sendChatMessage() {
           var input = document.getElementById("ai-chat-input");
           if (!input) return;
@@ -1756,7 +1833,8 @@
           var typingEl = appendTypingIndicator();
           buildPayloadAsync(text)
             .then(function (payload) {
-              return requestAssistant(payload);
+              // Use the appropriate model based on chatState.useRAG
+              return chatState.useRAG ? requestRAG(payload) : requestAssistant(payload);
             })
             .then(function (res) {
               removeTypingIndicator(typingEl);

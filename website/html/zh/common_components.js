@@ -67,6 +67,25 @@
       systemPrompt:
         "您是帮助《学习数据分布的深度表示》一书读者的AI助手。请清晰简洁地回答。如果相关，请指向当前页面的章节或标题。",
       askAITitle: "询问AI关于此页面",
+      modelPicker: {
+        title: "选择AI模型",
+        options: [
+          {
+            id: "original",
+            text: "🤖 BookQA-7B",
+            description: "原始模型",
+            backgroundColor: "#2196F3",
+            color: "white"
+          },
+          {
+            id: "rag",
+            text: "🧠 BookQA-7B+RAG",
+            description: "RAG增强模型", 
+            backgroundColor: "#4CAF50",
+            color: "white"
+          }
+        ]
+      },
       tooltips: {
         feedback: "提供反馈",
         clear: "清除会话",
