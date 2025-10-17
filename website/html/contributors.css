@@ -89,13 +89,6 @@ body {
   margin-top: 18px;
 }
 
-.foot {
-  margin-top: 28px;
-  color: var(--muted);
-  font-size: 13px;
-  text-align: center;
-}
-
 /* Badges removed */
 
 @media (max-width: 760px) {

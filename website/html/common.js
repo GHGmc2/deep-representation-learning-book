@@ -2609,4 +2609,62 @@
     }
   };
   // --- End feedback notice functionality ---
+
+  // --- Begin universal footer injection ---
+  (function () {
+    function formatFooter(template, year) {
+      try {
+        return (template || "").replace("{year}", String(year));
+      } catch (_) {
+        return template || "";
+      }
+    }
+
+    function insertFooter() {
+      try {
+        // Check if footer already exists
+        if (document.querySelector(".book-footer[data-shared-ui]")) return;
+
+        var footerText =
+          (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.ui.footer) ||
+          "© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. All rights reserved.";
+        var year = new Date().getFullYear();
+        var formatted = formatFooter(footerText, year);
+
+        var footer = document.createElement("div");
+        footer.className = "book-footer";
+        footer.setAttribute("data-shared-ui", "1");
+        footer.textContent = formatted;
+
+        // Find appropriate insertion point
+        var targets = [
+          document.querySelector(".ltx_page_main"),
+          document.querySelector(".main"),
+          document.querySelector(".page"),
+          document.querySelector("main"),
+          document.body,
+        ];
+
+        for (var i = 0; i < targets.length; i++) {
+          var target = targets[i];
+          if (target) {
+            target.appendChild(footer);
+            return;
+          }
+        }
+      } catch (e) {}
+    }
+
+    function ready(fn) {
+      if (document.readyState === "loading")
+        document.addEventListener("DOMContentLoaded", fn);
+      else fn();
+    }
+
+    ready(function () {
+      // Insert footer after a small delay to ensure page structure is ready
+      setTimeout(insertFooter, 50);
+    });
+  })();
+  // --- End universal footer injection ---
 })();

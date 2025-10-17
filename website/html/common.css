@@ -1139,3 +1139,36 @@ p a:hover {
 }
 
 /* Language selector visible */
+
+/* Universal footer */
+.book-footer {
+  width: 100%;
+  padding: 16px 20px;
+  margin-top: 32px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  background: transparent;
+}
+
+/* Footer in pages with sidebar layout */
+.layout-with-sidebar .book-footer {
+  grid-column: 2; /* Place in content area, not sidebar */
+  margin-top: 32px;
+}
+
+/* Footer in main content areas */
+.ltx_page_main .book-footer,
+.page .book-footer,
+.main .book-footer {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Ensure footer doesn't affect sidebar on mobile */
+@media (max-width: 1024px) {
+  .layout-with-sidebar .book-footer {
+    grid-column: auto;
+  }
+}

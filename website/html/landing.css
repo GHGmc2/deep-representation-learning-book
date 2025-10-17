@@ -259,13 +259,6 @@ body {
   white-space: pre-line; /* honor \n in text */
 }
 
-.footer {
-  margin-top: 28px;
-  color: var(--muted);
-  font-size: 13px;
-  text-align: center;
-}
-
 .sections {
   display: grid;
   grid-template-columns: 1fr;

@@ -11,10 +11,6 @@
     );
   }
 
-  function formatFooter(template, year) {
-    return template.replace("{year}", year);
-  }
-
   // Badges removed. All labeling handled via localized descriptions in common_components.
 
   // People data per category.
@@ -200,14 +196,6 @@
         ),
         INFRA_CONTRIBUTORS.map((p) =>
           React.createElement(Card, { key: p.name, ...p })
-        )
-      ),
-      React.createElement(
-        "div",
-        { className: "foot" },
-        formatFooter(
-          (window.get_text && window.get_text("ui.footer")) || "",
-          new Date().getFullYear()
         )
       )
     );

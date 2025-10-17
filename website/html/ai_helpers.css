@@ -116,13 +116,6 @@ a:hover {
   margin-top: 18px;
 }
 
-.foot {
-  margin-top: 28px;
-  color: var(--muted);
-  font-size: 13px;
-  text-align: center;
-}
-
 @media (max-width: 760px) {
   .ai-helpers-grid {
     grid-template-columns: 1fr;

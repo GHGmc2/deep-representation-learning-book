@@ -1,10 +1,6 @@
 (function () {
   // Use global get_text from common.js
 
-  function formatFooter(template, year) {
-    return template.replace("{year}", year);
-  }
-
   const AI_ASSISTANTS = [
     {
       name: "BookQA-7B-Instruct",
@@ -97,14 +93,6 @@
         (window.get_text_block &&
           window.get_text_block("aiHelpers.techDetails", "tech-details")) ||
           null
-      ),
-      React.createElement(
-        "div",
-        { className: "foot" },
-        formatFooter(
-          (window.get_text && window.get_text("ui.footer")) || "",
-          new Date().getFullYear()
-        )
       )
     );
   }

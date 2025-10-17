@@ -1,10 +1,6 @@
 (function () {
   // Use global get_text from common.js
 
-  function formatFooter(template, year) {
-    return template.replace("{year}", year);
-  }
-
   function Section({ idKey }) {
     var title =
       (window.get_text && window.get_text("community.sections." + idKey)) || "";
@@ -39,15 +35,7 @@
       })(),
       React.createElement(Section, { idKey: "translations" }),
       React.createElement(Section, { idKey: "courses" }),
-      React.createElement(Section, { idKey: "tutorials" }),
-      React.createElement(
-        "div",
-        { className: "foot" },
-        formatFooter(
-          (window.get_text && window.get_text("ui.footer")) || "",
-          new Date().getFullYear()
-        )
-      )
+      React.createElement(Section, { idKey: "tutorials" })
     );
   }
 

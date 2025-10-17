@@ -2,10 +2,6 @@
 (function () {
   // Use global get_text from common.js
 
-  function formatFooter(template, year) {
-    return template.replace("{year}", year);
-  }
-
   function getLastUpdatedText() {
     try {
       var ui = (window.BOOK_COMPONENTS && window.BOOK_COMPONENTS.ui) || {};
@@ -192,14 +188,6 @@
         //   React.createElement('h3', null, 'Citation'),
         //   React.createElement('p', null, 'Placeholder: citation information and BibTeX entry will be provided here.')
         // )
-      ),
-      React.createElement(
-        "div",
-        { className: "footer" },
-        formatFooter(
-          (window.get_text && window.get_text("ui.footer")) || "",
-          new Date().getFullYear()
-        )
       )
     );
   }
