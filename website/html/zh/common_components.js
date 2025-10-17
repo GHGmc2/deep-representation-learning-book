@@ -1,98 +1,171 @@
 /* Chinese language components for common.js */
-(function(){
+(function () {
   window.BOOK_COMPONENTS = {
     // Navigation links
     nav: {
-      aiTools: 'AI 工具',
-      contributors: '贡献者',
-      howToContribute: '如何贡献？'
+      aiTools: "AI 工具",
+      aiHelpers: "AI 助手",
+      community: "社区",
+      contributors: "编者 / 参编者",
+      howToContribute: "如何贡献？",
     },
 
     // Table of Contents
     toc: {
-      preface: '前言',
-      chapter: '第',
-      appendix: '附录',
+      preface: "序言",
+      chapter: "第",
+      appendix: "附录",
       chapters: {
-        1: { title: '第一章', subtitle: '引言' },
-        2: { title: '第二章', subtitle: '学习线性和独立结构' },
-        3: { title: '第三章', subtitle: '通过有损压缩追求低维分布' },
-        4: { title: '第四章', subtitle: '从展开优化的深度表示' },
-        5: { title: '第五章', subtitle: '一致和自一致表示' },
-        6: { title: '第六章', subtitle: '低维分布的推理' },
-        7: { title: '第七章', subtitle: '学习真实世界数据的表示' },
-        8: { title: '第八章', subtitle: '智能的未来研究' }
+        1: { title: "第一章", subtitle: "概述" },
+        2: { title: "第二章", subtitle: "学习线性和独立结构" },
+        3: { title: "第三章", subtitle: "通过有损压缩追求低维分布" },
+        4: { title: "第四章", subtitle: "通过展开优化实现深度表示" },
+        5: { title: "第五章", subtitle: "一致性和自洽性表示" },
+        6: { title: "第六章", subtitle: "基于低维分布的推断" },
+        7: { title: "第七章", subtitle: "真实世界数据的表示学习" },
+        8: { title: "第八章", subtitle: "智能研究的未来" },
       },
       appendices: {
-        A: { title: '附录A', subtitle: '优化方法' },
-        B: { title: '附录B', subtitle: '熵、扩散、去噪和有损编码' }
-      }
+        A: { title: "附录A", subtitle: "优化方法" },
+        B: { title: "附录B", subtitle: "熵、扩散、去噪和有损编码" },
+      },
     },
 
     // UI Labels
     ui: {
-      bookTitle: '学习数据分布的深度表示',
-      langLabel: 'EN',
-      brandHref: 'index.html',
-      searchPlaceholder: '搜索页面…',
-      menu: '菜单',
-      github: 'GitHub'
+      bookTitle: "数据分布的深度表达学习",
+      langLabel: "ZH",
+      brandHref: "index.html",
+      searchPlaceholder: "搜索页面…",
+      menu: "菜单",
+      github: "GitHub",
+      dateLocale: "zh-CN",
+      lastUpdatedTemplate: "最后更新: {date}",
+      footer:
+        "© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. 保留所有权利。",
     },
 
     // Language options
     languages: {
-      en: 'English',
-      zh: '中文'
+      en: "English",
+      zh: "中文",
     },
 
     // AI Chat interface
     chat: {
-      title: '询问AI',
-      clear: '清除',
-      close: '关闭',
-      send: '发送',
-      chatWithAI: '与AI聊天',
-      includeSelection: '包含当前文本选择',
-      selectionEmpty: '在页面中选择文本以将其作为上下文包含。',
-      placeholder: '询问关于此页面的问题…\n\n您也可以通过添加以下内容来询问特定内容：\n@章节（例如"@3"）、@章节.小节（例如"@3.1"）、@章节.小节.子小节（例如"@3.1.2"）\n@附录（例如"@A"）、@附录.小节（例如"@A.1"）、@附录.小节.子小节（例如"@A.1.2"）',
-      systemPrompt: '您是帮助《学习数据分布的深度表示》一书读者的AI助手。请清晰简洁地回答。如果相关，请指向当前页面的章节或标题。',
-      askAITitle: '询问AI关于此页面'
+      title: "询问AI",
+      clear: "清除",
+      close: "关闭",
+      send: "发送",
+      feedback: "反馈",
+      save: "保存",
+      chatWithAI: "与AI聊天",
+      includeSelection: "包含当前文本选择",
+      selectionEmpty: "在页面中选择文本以将其作为上下文包含。",
+      placeholder:
+        '询问关于此页面的问题…\n\n您也可以通过添加以下内容来询问特定内容：\n@章节（例如"@3"）、@章节.小节（例如"@3.1"）、@章节.小节.子小节（例如"@3.1.2"）\n@附录（例如"@A"）、@附录.小节（例如"@A.1"）、@附录.小节.子小节（例如"@A.1.2"）',
+      systemPrompt:
+        "您是帮助《学习数据分布的深度表示》一书读者的AI助手。请清晰简洁地回答。如果相关，请指向当前页面的章节或标题。",
+      askAITitle: "询问AI关于此页面",
+      modelPicker: {
+        title: "选择AI模型",
+        options: [
+          {
+            id: "original",
+            text: "🤖 BookQA-7B",
+            description: "原始模型",
+            backgroundColor: "#2196F3",
+            color: "white"
+          },
+          {
+            id: "rag",
+            text: "🧠 BookQA-7B+RAG",
+            description: "RAG增强模型", 
+            backgroundColor: "#4CAF50",
+            color: "white"
+          }
+        ]
+      },
+      tooltips: {
+        feedback: "提供反馈",
+        clear: "清除会话",
+        save: "保存聊天记录",
+        close: "关闭",
+      },
+      alerts: {
+        noChatHistory: "没有可保存的聊天记录。",
+        saveFailed: "保存聊天记录失败。请重试。",
+      },
+      feedbackNotice: {
+        title: "反馈指引",
+        bodyMd: `
+我们重视您对 BookQA AI 助手的反馈，希望了解您的使用体验！
+
+### 免责声明
+您的查询会在我们的本地服务器上匿名记录以便故障排除。为了保护您的隐私，请避免发送敏感信息。
+
+### 🐛 错误报告
+如果您在使用 AI 助手时遇到任何问题，请在我们的 GitHub 仓库中报告：
+
+- [报告错误](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues)
+- 包含您提出的问题和 AI 的回复
+- 描述预期与实际行为的差异
+
+### 💡 功能请求
+对改进 AI 助手有想法？我们很乐意听取您的建议：
+
+- [提出新的议题进行讨论](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/issues)
+- 建议新功能或能力
+- 分享尚未得到良好支持的使用案例
+
+### 📚 一般反馈
+对于关于本书或本网站的更广泛反馈：
+
+- [贡献指南](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution)
+- 给作者发邮件（联系信息见书中）
+
+**感谢您帮助我们改进 BookQA AI 助手！**
+        `,
+      },
     },
 
     // Sidebar sections
     sidebar: {
-      search: '搜索',
-      navigation: '导航',
-      tableOfContents: '目录'
+      search: "搜索",
+      navigation: "导航",
+      tableOfContents: "目录",
     },
 
     // Landing page content
     landing: {
       hero: {
-        title: '学习数据分布的深度表示',
-        authors: 'Sam Buchanan · Druv Pai · Peng Wang · Yi Ma',
-        subtitle: '一本现代化的完全开源教科书，探索深度神经网络为什么以及如何学习高维真实世界数据的紧凑且信息密集的表示。',
+        title: "数据分布的深度表达学习",
+        authors: "Sam Buchanan · Druv Pai · Peng Wang · Yi Ma",
+        subtitle:
+          "一本完全开源的现代教科书，探讨深度神经网络为何以及如何从高维真实世界数据中学习紧凑且信息丰富的表示。",
         buttons: {
-          readHtml: '阅读本书 (HTML)',
-          readPdf: '阅读本书 (PDF)',
-          readPdfZh: '阅读本书 (PDF-ZH)',
-          github: 'GitHub 仓库'
+          readHtml: "阅读本书 (HTML)",
+          readPdf: "阅读本书 (PDF)",
+          readPdfZh: "阅读本书 (PDF-ZH)",
+          github: "GitHub 仓库",
         },
         cover: {
-          alt: '书籍封面：学习数据分布的深度表示',
-          title: '阅读本书',
-          version: '版本 1.0\n发布于 2025年8月18日'
-        }
+          alt: "书籍封面：学习数据分布的深度表示",
+          title: "阅读本书",
+          version: "版本 1.0\n发布于 2025年8月18日",
+        },
       },
       sections: {
         about: {
-          title: '关于本书',
-          paragraphs: [
-            '在当前深度学习，特别是"生成式人工智能"时代，人们在训练超大型生成模型方面投入了大量资源。迄今为止，这些模型一直是难以理解的"黑盒子"，因为它们的内部机制不透明，导致在可解释性、可靠性和可控性方面存在困难。自然而然地，这种缺乏理解的情况既带来了炒作，也带来了恐惧。',
-            '这本书试图"打开黑盒子"，通过表示学习的视角来理解大型深度网络的机制，表示学习是深度学习模型经验能力的一个主要因素——可以说是最重要的一个因素。本书的简要概述如下。第1章将总结贯穿全书的主线。第2、3、4、5章将通过优化和信息论来解释现代神经网络架构的设计原则，将架构开发过程（长期以来被描述为某种"炼金术"）简化为在引入基本原理后的本科水平线性代数和微积分练习。第6章和第7章将讨论这些原理的应用，以更范式化的方式解决问题，获得设计上高效、可解释且可控的新方法和模型，但功能不逊于——有时甚至超过——它们所类似的黑盒模型。第8章将讨论深度学习的潜在未来方向、表示学习的作用以及一些开放问题。',
-            '本书面向具有线性代数、概率论和机器学习背景的高年级本科生或研究生一年级学生。对于数学思维较强的学生，本书应该适合作为深度学习的第一门课程，但拥有一些深度学习的初步表面知识可能有助于更好地理解书中讨论的观点和技术。',
-            '由于本书的时效性，以及深度学习在未来几年可能具有的普遍性，我们决定让本书完全开源，并欢迎学科专家的贡献。源代码可在[GitHub](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book)上获取。在深度表示学习方面，肯定有许多我们在本书中没有涵盖的主题；如果您是专家并认为缺少某些内容，您可以[告诉我们](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book?tab=readme-ov-file#raising-an-issue)或[自己贡献](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution)。我们将努力为新贡献保持类似的质量标准，并在[贡献者页面](contributors.html)中认可贡献。'
-          ]
+          title: "关于本书",
+          content: `
+ 在当前深度学习，特别是"生成式人工智能"时代，人们在训练超大型生成模型方面投入了大量资源。迄今为止，这些模型一直是难以理解的"黑盒子"，因为它们的内部机制不透明，导致在可解释性、可靠性和可控性方面存在困难。自然而然地，这种缺乏理解的情况既带来了炒作，也带来了恐惧。
+
+ 这本书试图"打开黑盒子"，通过表示学习的视角来理解大型深度网络的机制，表示学习是深度学习模型经验能力的一个主要因素——可以说是最重要的一个因素。本书的简要概述如下。第1章将总结贯穿全书的主线。第2、3、4、5章将通过优化和信息论来解释现代神经网络架构的设计原则，将架构开发过程（长期以来被描述为某种"炼金术"）简化为在引入基本原理后的本科水平线性代数和微积分练习。第6章和第7章将讨论这些原理的应用，以更范式化的方式解决问题，获得设计上高效、可解释且可控的新方法和模型，但功能不逊于——有时甚至超过——它们所类似的黑盒模型。第8章将讨论深度学习的潜在未来方向、表示学习的作用以及一些开放问题。
+
+ 本书面向具有线性代数、概率论和机器学习背景的高年级本科生或研究生一年级学生。对于数学思维较强的学生，本书应该适合作为深度学习的第一门课程，但拥有一些深度学习的初步表面知识可能有助于更好地理解书中讨论的观点和技术。
+
+ 由于本书的时效性，以及深度学习在未来几年可能具有的普遍性，我们决定让本书完全开源，并欢迎学科专家的贡献。源代码可在[GitHub](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book)上获取。在深度表示学习方面，肯定有许多我们在本书中没有涵盖的主题；如果您是专家并认为缺少某些内容，您可以[告诉我们](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book?tab=readme-ov-file#raising-an-issue)或[自己贡献](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution)。我们将努力为新贡献保持类似的质量标准，并在[贡献者页面](contributors.html)中认可贡献。`,
         },
         acknowledgements: {
           title: '致谢',
@@ -112,48 +185,159 @@
 
     // Contributors page content
     contributors: {
-      title: '贡献者',
-      intro: '本书的核心作者和贡献者。',
+      title: "编者 / 参编者",
+      intro: "本书的核心作者和参编者。",
       sections: {
-        coreTeam: '核心编辑团队',
-        contributors: '贡献者'
+        authors: "作者",
+        editors: "编辑",
+        contentContributors: "内容贡献者",
+        infraContributors: "网站 / 基础设施 贡献者",
       },
-      badges: {
-        author: '作者',
-        leadEditor: '主编',
-        seniorAuthor: '资深作者',
-        website: '网站',
-        chineseTranslation: '中文翻译',
-        aiHelper: 'AI助手',
-        chapter4: '第四章'
+
+      people: {
+        "sam-buchanan": { desc: "主笔作者。" },
+        "druv-pai": { desc: "主笔作者。" },
+        "peng-wang": { desc: "作者，中文翻译。" },
+        "yi-ma": { desc: "资深作者。" },
+        "stephen-butterfill": {
+          desc: "PRs：[#14](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/14)",
+        },
+        "kerui-min": { desc: "中文翻译。" },
+        "jan-cavel": {
+          desc: "罗马尼亚语翻译. PRs：[#16](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/16)",
+        },
+        "kevin-murphy": {
+          desc: "大量反馈。Issues：[#3](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/3)、[#4](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/4)、[#5](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/5)、[#8](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/8)、[#10](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/10)、[#11](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/11)、[#12](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/12)、[#13](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/13)",
+        },
+        "yaodong-yu": { desc: "为第四章提供初始文本。" },
+        "tianzhe-chu": { desc: "AI 工具。" },
+        "ziyang-wu": { desc: "网站开发。" },
+        "jeroen-van-goey": { desc: "PRs：[#29](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book/pull/29)"},
       },
-      footer: '© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. 保留所有权利。'
-    }
+    },
+
+    // Community page content
+    community: {
+      title: "社区",
+      intro: "社区资源（建设中）。",
+      pending: "敬请期待。",
+      sections: {
+        tutorials: "教程",
+        translations: "社区翻译",
+        courses: "课程",
+      },
+      content: {
+        courses: `
+以下是与本书相关或使用了本书材料的高校课程：
+
+ - 香港大学，DATA8014，2025年秋季
+   - 讲座幻灯片：[1](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec01.pdf)、[2](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec02.pdf)、[3](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec03.pdf)、[4](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec04.pdf)、[5](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec05.pdf), [6](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/hku_data8014fa25_slides/lec06.pdf)
+   - 课程视频: [1.1](https://youtu.be/H6vt_OBO0dk), [1.2](https://youtu.be/vcpHffMi6NY), [1.3](https://youtu.be/7Q-SYdzeR0M), [2.1](https://youtu.be/ybxj5U1cUdM), [2.2](https://youtu.be/iJ3GNlWCc4k), [2.3](https://youtu.be/Giz1r7cajPY), [3.1](https://youtu.be/ctmN-8p7zI8), [3.2](https://youtu.be/NSwSh1quLqA), [4](https://youtu.be/XDt6SE3kD58), [5.1](https://youtu.be/P4Dw0IG2UL8), [5.2](https://youtu.be/thjqRBJc8Zw), [6.1](https://youtu.be/KWuRFK7JKk4), [6.2](https://youtu.be/TpnyTR9Y-m0)
+ - 澳门大学，CISC7402，2025年秋季
+
+如果您希望将您的课程列在此处，请到 GitHub 提交 issue，并附上课程名称、学校、学期、链接及简短描述。
+        `,
+        tutorials: `
+下面是一些与本书内容高度相关的教程或长篇讲座：
+- [（即将推出）ICCV 2025 教程：从高维数据学习低维模型](https://low-dim-models-tutorials.github.io/iccv2025-tutorial/)
+- [IAISS 2025 教程：从高维数据学习低维模型](https://2025.iaiss.cc/)
+  - 讲座幻灯片：[1](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec01.pdf)、[2](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec02.pdf)、[3](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec03.pdf)、[4](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec04.pdf)、[5](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec05.pdf)、[6](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec06.pdf)、[7](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec07.pdf)、[8](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec08.pdf)、[9](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec09.pdf)、[10](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec10.pdf)、[11](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec11.pdf)、[12](https://pub-8cdab817e1ea4a47805f543e0f3b71eb.r2.dev/iaiss2025_slides/lec12.pdf)
+- [CVPR 2024 教程：从高维数据学习低维模型](https://low-dim-models-tutorials.github.io/cvpr2024-tutorial/)
+  - 讲座幻灯片：[Dropbox](https://www.dropbox.com/scl/fo/7m57krmeordlohel4qxye/AKho1GYbOe0AbBlKNzm28Vk?rlkey=le2yuel4ipq50xhzxmyxxczxi&e=4&st=s8ndn2ix&dl=0)
+        `,
+        translations: `
+以下是（非官方）社区翻译版本：
+- [罗马尼亚语译本](../assets/book-main_ro.pdf)，由 [Piatra Institute](https://piatra.institute/) 的 Jan Cavel 贡献。
+        `,
+      },
+    },
+
+    // AI Helpers page content
+    aiHelpers: {
+      title: "AI 助手",
+      intro:
+        "本页提供面向本书的简洁 AI 助手。可试用下方 BookQA，更多即将推出。",
+      techDetails:
+        "BookQA 系列旨在帮助读者理解一本书的内容。它可以回答与材料相关的问题，并清晰解释关键概念与理论。为构建这些模型，我们首先使用 [EntiGraph](https://arxiv.org/pdf/2409.07431) 通过链接从文本中抽样的实体来生成丰富的与书籍相关的数据。随后，我们在这些数据上对 [Qwen2.5-7B/32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) 进行持续的自回归预训练。我们还在训练中加入了指令跟随数据，使模型在学习书中的新知识的同时，不会遗忘基本的对话能力。",
+      sections: {
+        aiAssistants: "AI 助手",
+        aiTools: "AI 工具",
+        customizedChatbots: "BookQA 系列",
+      },
+      // badges removed
+    },
   };
 
   // Helper functions to build navigation and TOC arrays
-  window.BOOK_COMPONENTS.buildNavLinks = function() {
+  window.BOOK_COMPONENTS.buildNavLinks = function () {
     return [
-      { label: this.nav.contributors, href: 'contributors.html' },
-      { label: this.nav.howToContribute, href: 'https://github.com/Ma-Lab-Berkeley/ldrdd-book#making-a-contribution', external: true }
+      { label: this.nav.contributors, href: "contributors.html" },
+      { label: this.nav.aiHelpers, href: "ai_helpers.html" },
+      {
+        label: this.nav.howToContribute,
+        href: "https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution",
+        external: true,
+      },
+      { label: this.nav.community, href: "community.html" },
     ];
   };
 
-  window.BOOK_COMPONENTS.buildTOC = function() {
+  window.BOOK_COMPONENTS.buildTOC = function () {
     return [
-      { label: this.toc.preface, href: 'Chx1.html' },
-      { label: this.toc.chapters[1].title, subtitle: this.toc.chapters[1].subtitle, href: 'Ch1.html' },
-      { label: this.toc.chapters[2].title, subtitle: this.toc.chapters[2].subtitle, href: 'Ch2.html' },
-      { label: this.toc.chapters[3].title, subtitle: this.toc.chapters[3].subtitle, href: 'Ch3.html' },
-      { label: this.toc.chapters[4].title, subtitle: this.toc.chapters[4].subtitle, href: 'Ch4.html' },
-      { label: this.toc.chapters[5].title, subtitle: this.toc.chapters[5].subtitle, href: 'Ch5.html' },
-      { label: this.toc.chapters[6].title, subtitle: this.toc.chapters[6].subtitle, href: 'Ch6.html' },
-      { label: this.toc.chapters[7].title, subtitle: this.toc.chapters[7].subtitle, href: 'Ch7.html' },
-      { label: this.toc.chapters[8].title, subtitle: this.toc.chapters[8].subtitle, href: 'Ch8.html' },
-      { label: this.toc.appendices.A.title, subtitle: this.toc.appendices.A.subtitle, href: 'A1.html' },
-      { label: this.toc.appendices.B.title, subtitle: this.toc.appendices.B.subtitle, href: 'A2.html' }
+      { label: this.toc.preface, href: "Chx1.html" },
+      {
+        label: this.toc.chapters[1].title,
+        subtitle: this.toc.chapters[1].subtitle,
+        href: "Ch1.html",
+      },
+      {
+        label: this.toc.chapters[2].title,
+        subtitle: this.toc.chapters[2].subtitle,
+        href: "Ch2.html",
+      },
+      {
+        label: this.toc.chapters[3].title,
+        subtitle: this.toc.chapters[3].subtitle,
+        href: "Ch3.html",
+      },
+      {
+        label: this.toc.chapters[4].title,
+        subtitle: this.toc.chapters[4].subtitle,
+        href: "Ch4.html",
+      },
+      {
+        label: this.toc.chapters[5].title,
+        subtitle: this.toc.chapters[5].subtitle,
+        href: "Ch5.html",
+      },
+      {
+        label: this.toc.chapters[6].title,
+        subtitle: this.toc.chapters[6].subtitle,
+        href: "Ch6.html",
+      },
+      {
+        label: this.toc.chapters[7].title,
+        subtitle: this.toc.chapters[7].subtitle,
+        href: "Ch7.html",
+      },
+      {
+        label: this.toc.chapters[8].title,
+        subtitle: this.toc.chapters[8].subtitle,
+        href: "Ch8.html",
+      },
+      {
+        label: this.toc.appendices.A.title,
+        subtitle: this.toc.appendices.A.subtitle,
+        href: "A1.html",
+      },
+      {
+        label: this.toc.appendices.B.title,
+        subtitle: this.toc.appendices.B.subtitle,
+        href: "A2.html",
+      },
     ];
   };
 
-  window.BOOK_COMPONENTS.coverImagePath = "../book-cover.png";
+  window.BOOK_COMPONENTS.coverImagePath = "../assets/book-cover.png";
+  window.BOOK_COMPONENTS.bookPdfPath = "../assets/book-main_zh.pdf";
 })();

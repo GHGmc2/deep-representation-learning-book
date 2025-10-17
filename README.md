@@ -108,6 +108,8 @@ git push -u origin my_new_branch
 
 **Please use English** as this maximizes the number of people who can attend to your contribution.
 
+Note: The [community page](https://ma-lab-berkeley.github.io/deep-representation-learning-book/community.html) contains many slides and other PDFs, which are hosted on [Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/). This is to limit the overall size of the repository, making it possible to clone and edit easily. If you want to upload a PDF resource, talk to [Druv](https://druvpai.github.io/).
+
 ### General Guidelines for Contributing
 
 - For code: please examine current code files and see the coding patterns.
@@ -121,9 +123,9 @@ Many thanks!
 @book{ldrdd2025,
   title={Learning Deep Representations of Data Distributions},
   author={Buchanan, Sam and Pai, Druv and Wang, Peng and Ma, Yi},
+  month=aug,
   year={2025},
   publisher={Online},
-  url={https://ma-lab-berkeley.github.io/deep-representation-learning-book/},
-  note={Available online}
+  note={\url{https://ma-lab-berkeley.github.io/deep-representation-learning-book/}.}
 }
 ```

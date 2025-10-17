@@ -1,14 +1,22 @@
+% Compile with:
+% > latexmk -lualatex -interaction=nonstopmode --shell-escape -f book-main_ro.tex
+
+
 \documentclass{book}
-\usepackage[UTF8]{ctex}
+% For LuaLaTeX - proper Unicode support for Romanian
+\usepackage{fontspec}
+\usepackage[romanian]{babel}
+
+% Set main font with proper Romanian support
+\setmainfont{Latin Modern Roman}
 
 \usepackage[margin=1in]{geometry}
 
 % Font packages
-\usepackage[utf8]{inputenc}
 \usepackage{bbold}
 \usepackage{pifont}
 
-% Math packages 
+% Math packages
 \usepackage{amsmath}
 \usepackage{amssymb}
 
@@ -73,10 +81,10 @@ natbib=true,
     citecolor={blue!80!black},
 }
 \usepackage{cleveref}
-\crefname{assumption}{assumption}{assumptions}
-\Crefname{assumption}{Assumption}{Assumptions}
-\crefname{exercise}{exercise}{exercises}
-\Crefname{exercise}{Exercise}{Exercises}
+\crefname{assumption}{ipoteză}{ipoteze}
+\Crefname{assumption}{Ipoteza}{Ipotezele}
+\crefname{exercise}{exercițiu}{exerciții}
+\Crefname{exercise}{Exercițiul}{Exercițiile}
 
 \hyphenation{line-break line-breaks docu-ment triangle cambridge amsthdoc
   cambridgemods baseline-skip author authors cambridgestyle en-vir-on-ment polar}
@@ -116,45 +124,61 @@ natbib=true,
 \postdate{\end{center}}
 
 % Customize vertical spacing
-\setlength{\droptitle}{-5em}
+\setlength{\droptitle}{-8em}
+
+% Add a rule under the title
+\renewcommand{\maketitlehooka}{%
+  \vspace{1em}%
+  \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}%
+  \vspace{1.5em}%
+}
+
+% Add space after author block
+\renewcommand{\maketitlehookb}{%
+  \vspace{2em}%
+}
+
+% Add space before date
+\renewcommand{\maketitlehookc}{%
+  \vspace{2em}%
+}
 
 % Add footnote content below date
 \renewcommand{\maketitlehookd}{%
-  \vspace{8em}\footnotesize $^*$\,These authors contributed equally.
+  \vspace{6em}\footnotesize $^*$\,Acești autori au contribuit în mod egal.
 }
 
 \begin{document}
 
- 
-\title{数据分布的深度表达学习 \vspace{0.1in}\\ 
-\makebox[\textwidth][c]{Learning Deep Representations of Data Distributions}}
+\title{Învățarea Reprezentărilor Profunde\\ ale Distribuțiilor de Date}
 
 \author{\vspace{0.5cm}
-\textbf{Sam Buchanan}$^*$, Toyota Technological Institute at Chicago \vspace{3mm}\\
-    \textbf{Druv Pai}$^*$, University of California, Berkeley \vspace{3mm} \\
-    \textbf{Peng Wang}, University of Michigan \& 
-    University of Macau  \vspace{3mm} \\
-    \textbf{Yi Ma},   University of California, Berkeley \& University of Hong Kong
+\textbf{Sam Buchanan}$^*$, Institutul Tehnologic Toyota din Chicago \vspace{3mm}\\
+    \textbf{Druv Pai}$^*$, Universitatea din California, Berkeley \vspace{3mm} \\
+    \textbf{Peng Wang}, Universitatea din Michigan \&
+    Universitatea din Macau  \vspace{3mm} \\
+    \textbf{Yi Ma},   Universitatea din California, Berkeley \& Universitatea din Hong Kong
 	\vspace{8cm}\\
 	\footnotesize
-	This manuscript is prepared for a course on the principles of deep learning
-  and intelligence in general, to be taught by the authors at the respective
-  institutions. This pre-publication version is free to view and download for
-  personal use only, and is not for redistribution, re-sale or use in derivative
-  works.\\  Copyright \Pisymbol{psy}{227} 2025 Sam Buchanan, Druv Pai, Peng Wang, Yi Ma
+	Acest manuscris este pregătit pentru un curs despre principiile învățării profunde
+  și inteligenței în general, care urmează să fie predat de autori la instituțiile
+  respective. Această versiune pre-publicare este liberă pentru vizualizare și descărcare doar
+  pentru uz personal și nu este destinată redistribuirii, revânzării sau utilizării în lucrări
+  derivate.\\ Drepturi de autor \Pisymbol{psy}{227} 2025 Sam Buchanan, Druv Pai, Peng Wang, Yi
+  Ma
 	%\footnotesize Copyright \Pisymbol{psy}{227}2020 Reserved \\ No
 	%parts of this draft may be reproduced or distributed without written permission
 	%from the authors.\\
 }
 
-\date{\large 2025年8月18日}
-% \date{\large \today}
+\date{\large 18 august 2025}
 
 \frontmatter
 \titlepage
 \thispagestyle{empty}
 \maketitle
-% \cleardoublepage
+
+\cleardoublepage
 
 % \input{dedication.tex}
 % \cleardoublepage
@@ -165,22 +189,23 @@ natbib=true,
 % \input{chapters/Foreword/foreword.tex}
 % \cleardoublepage
 
-\addcontentsline{toc}{chapter}{序言}
-\subfile{chapters/preface/preface_zh.tex}
-\cleardoublepage
-
-\addcontentsline{toc}{chapter}{开源声明}
-\subfile{chapters/declaration/declaration_zh.tex}
-\cleardoublepage
-
-\addcontentsline{toc}{chapter}{致谢}
-\subfile{chapters/acknowledgment/acknowledgment_zh.tex}
-\cleardoublepage
-
-% \addcontentsline{toc}{chapter}{人工智能对本书的支持}
-% \subfile{chapters/acknowledgment/AI_zh.tex}
+% \addcontentsline{toc}{chapter}{Notation}
+% \input{chapters/notation.tex}
 % \cleardoublepage
-% \caphter*{Acknowledgements}
+
+\addcontentsline{toc}{chapter}{Prefață}
+\subfile{chapters/preface/preface_ro.tex}
+\cleardoublepage
+
+\addcontentsline{toc}{chapter}{Declarație Open Source}
+\subfile{chapters/declaration/declaration_ro.tex}
+\cleardoublepage
+
+\addcontentsline{toc}{chapter}{Mulțumiri}
+\subfile{chapters/acknowledgment/acknowledgment_ro.tex}
+\cleardoublepage
+
+% \chapter*{Acknowledgements}
 % %\addcontentsline{toc}{chapter}{Acknowledgements}
  % \addcontentsline{toc}{chapter}{\numberline{}Acknowledgements}
 % \input{chapters/Acknowledgement/acknowledgement.tex}
@@ -193,66 +218,43 @@ natbib=true,
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
+
 \mainmatter
 
-\subfile{chapters/chapter1/introduction_zh}
+\subfile{chapters/chapter1/introduction_ro}
 
-\subfile{chapters/chapter2/classic-models_zh_v2}
+\subfile{chapters/chapter2/classic-models_ro}
 
-\subfile{chapters/chapter3/compression-principle_zh}
+\subfile{chapters/chapter3/compression-principle_ro}
 
-\subfile{chapters/chapter4/deep-networks_zh}
+\subfile{chapters/chapter4/deep-networks_ro}
 
-\subfile{chapters/chapter5/consistent_zh}
-%\subfile{chapters/Chapter5-old/auto-encoding} 
+\subfile{chapters/chapter5/consistent_ro}
 
-\subfile{chapters/chapter6/conditional_zh}
+\subfile{chapters/chapter6/conditional_ro}
 
-%\subfile{chapters/Chapter6-old/closed-loop}
+\subfile{chapters/chapter7/applications_ro}
 
-\subfile{chapters/chapter7/applications_zh}
+\subfile{chapters/chapter8/future_ro}
 
-\subfile{chapters/chapter8/future_zh}
+\newpage
 
 \appendix
+%\part*{Appendices}
+\addcontentsline{toc}{chapter}{Anexe}
 
-\part*{Appendices}
-\addcontentsline{toc}{chapter}{Appendices}
+\subfile{chapters/appendixA/optimization_ro}
 
-\subfile{chapters/appendixA/optimization_zh}
+\subfile{chapters/appendixB/entropy_ro}
 
-\subfile{chapters/appendixB/entropy_zh}
-
-% \endappendix
 
 \backmatter
-
 %insert a blank line to the toc list
-\addtocontents{toc}{\vspace{\baselineskip}}
-%  \theendnotes
+%\addtocontents{toc}{\vspace{\baselineskip}}
 
-% bibliography style files
-% if you are using harvard, the style is specified with the \usepackage command
-%\bibliographystyle{vancouver}% uncomment for vancouver style
-%\bibliographystyle{apalike}
-%\bibliographystyle{numeric}
-% \bibliographystyle{alpha}
-%\bibliographystyle{IEEEtran} % uncomment for IEEE style
-% \renewcommand{\refname}{Bibliography}% if you prefer this heading
-
-% \bibliography{book-references.bib}
+\addcontentsline{toc}{chapter}{Bibliografie}
 \printbibliography
 \cleardoublepage
 
-%list of symbols
-%\input{notation.tex}
-%\markbothsame{\nomname}
-\cleardoublepage
-
-%index
-%\markbothsame{Index}
-\phantomsection
-%\addcontentsline{toc}{chapter}{\indexname}
-%\printindex
 
 \end{document}
