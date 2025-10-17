@@ -168,17 +168,19 @@
  由于本书的时效性，以及深度学习在未来几年可能具有的普遍性，我们决定让本书完全开源，并欢迎学科专家的贡献。源代码可在[GitHub](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book)上获取。在深度表示学习方面，肯定有许多我们在本书中没有涵盖的主题；如果您是专家并认为缺少某些内容，您可以[告诉我们](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book?tab=readme-ov-file#raising-an-issue)或[自己贡献](https://github.com/Ma-Lab-Berkeley/deep-representation-learning-book#making-a-contribution)。我们将努力为新贡献保持类似的质量标准，并在[贡献者页面](contributors.html)中认可贡献。`,
         },
         acknowledgements: {
-          title: "致谢",
-          content: `
- 本书主要基于过去八年中所得的研究成果。感谢加州大学伯克利分校（2018）和香港大学（2023）慷慨地提供启动经费，使马毅在过去八年能够投身并专注于这一令人振奋的新研究方向。在这些年里，围绕该研究方向，马毅及其在伯克利的团队获得了以下研究项目的资助：
-
- - 由 Simons Foundation 和 National Science Foundation (DMS grant #2031899）共同资助的多个大学联合开展的 THEORINET project for the Foundations of Deep Learning 项目；
- - 由 Office of Naval Research (grant N00014-22-1-2102) 资助的 Closed-Loop Data Transcription via Minimaxing Rate Reduction 项目；
- - 由 National Science Foundation (CISE grant #2402951) 资助的 Principled Approaches to Deep Learning for Low-dimensional Structures 项目。
-
- 如果没有这些研究项目的资金支持，本书将无法完成。作者从参与这些项目的同事和学生的研究成果中获得了巨大的启发。`,
-        },
+          title: '致谢',
+          paragraphs: [
+            '本书主要基于过去八年中开发的研究成果。感谢加州大学伯克利分校（2018年）和香港大学（2023年）的慷慨资助，马毅教授得以在过去八年中开始并专注于这个令人兴奋的新研究方向。在这些年中，与此研究方向相关的，马毅教授和他在伯克利的研究团队得到了以下研究资助的支持：',
+            '没有这些研究项目的财政支持，本书就不可能完成。作者们从参与这些项目的同事和学生的研究成果中获得了巨大的启发。'
+          ],
+          grants: [
+            '多大学*THEORINET*深度学习基础项目，由西蒙斯基金会和美国国家科学基金会联合资助（DMS资助 #2031899）',
+            '通过最小化率缩减的*闭环数据转录*项目，由海军研究办公室资助（资助号 N00014-22-1-2102）；',
+            '针对低维结构的*深度学习原理方法*项目，由美国国家科学基金会资助（CISE资助 #2402951）。'
+          ]
+        }
       },
+      footer: '© {year} Sam Buchanan, Druv Pai, Peng Wang, and Yi Ma. 保留所有权利。'
     },
 
     // Contributors page content
